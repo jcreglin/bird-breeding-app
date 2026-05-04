@@ -5,309 +5,557 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bird Breeding App</title>
   <style>
-    :root { color-scheme: light dark; }
+    :root { color-scheme: light; }
     body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
-    header { background: #1e3a8a; color: white; padding: 16px 20px; }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 20px; }
-    .card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 16px; }
+    header { background: #1d4ed8; color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+    main { padding: 20px; max-width: 1200px; margin: 0 auto; }
+    .card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 10px rgba(0,0,0,.06); margin-bottom: 16px; }
     .grid { display: grid; gap: 16px; }
-    .stats { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-    button { background: #2563eb; color: white; border: 0; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
-    button.secondary { background: #64748b; }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+    input, select, button, textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; box-sizing: border-box; }
+    button { background: #2563eb; color: white; border: none; cursor: pointer; font-weight: 600; }
+    button.secondary { background: #6b7280; }
     button.danger { background: #dc2626; }
-    input, select, textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; margin-top: 6px; }
-    label { display: block; margin-bottom: 10px; font-size: 14px; }
-    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .inline { display: flex; gap: 10px; align-items: center; }
+    .inline > * { flex: 1; }
     .hidden { display: none; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    th, td { padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: left; }
-    .muted { color: #64748b; }
-    .pill { display: inline-block; background: #dbeafe; color: #1d4ed8; padding: 4px 8px; border-radius: 999px; font-size: 12px; }
-    .auth { max-width: 480px; margin: 40px auto; }
-    .row { display: flex; gap: 8px; align-items: center; }
-    .between { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-    @media (max-width: 800px) { .two, .three { grid-template-columns: 1fr; } }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px; border-bottom: 1px solid #e5e7eb; text-align: left; font-size: 14px; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .tab { width: auto; padding: 10px 14px; background: #e5e7eb; color: #111827; }
+    .tab.active { background: #2563eb; color: white; }
+    .stat { font-size: 28px; font-weight: 700; }
+    .muted { color: #6b7280; font-size: 13px; }
+    .pill { display:inline-block; padding:4px 8px; border-radius:999px; background:#dbeafe; color:#1d4ed8; font-size:12px; }
+    .message { padding: 10px 12px; border-radius: 8px; margin-bottom: 12px; }
+    .success { background: #dcfce7; color: #166534; }
+    .error { background: #fee2e2; color: #991b1b; }
+    @media (max-width: 720px) { .inline { flex-direction: column; } }
   </style>
 </head>
 <body>
   <header>
-    <div class="wrap between">
-      <div>
-        <h1 style="margin:0;font-size:24px;">Bird Breeding App</h1>
-        <div class="muted" style="color:#cbd5e1;">Breeding, flock, pairs, clutches, COI</div>
-      </div>
-      <button id="logoutBtn" class="secondary hidden">Logout</button>
+    <div>
+      <strong>Bird Breeding SaaS</strong>
+      <div id="userSummary" class="muted"></div>
     </div>
+    <button id="logoutBtn" class="secondary hidden" style="width:auto;">Logout</button>
   </header>
 
-  <div class="wrap">
-    <section id="authSection" class="auth card">
-      <h2 id="authTitle">Login</h2>
-      <div class="two">
-        <label id="nameWrap" class="hidden">Name<input id="name" /></label>
-        <label>Email<input id="email" type="email" /></label>
-      </div>
-      <label>Password<input id="password" type="password" /></label>
-      <div class="row">
-        <button id="authBtn">Login</button>
-        <button id="toggleAuth" class="secondary">Need an account?</button>
-      </div>
-      <p id="authMsg" class="muted"></p>
-    </section>
+  <main>
+    <div id="message"></div>
 
-    <section id="appSection" class="hidden">
+    <section id="authView" class="grid grid-2">
       <div class="card">
-        <div class="between">
-          <div>
-            <h2 style="margin:0;">Dashboard</h2>
-            <div id="welcome" class="muted"></div>
-          </div>
-          <div><span id="tierBadge" class="pill"></span></div>
+        <h2>Login</h2>
+        <div class="grid">
+          <input id="loginEmail" placeholder="Email" />
+          <input id="loginPassword" type="password" placeholder="Password" />
+          <button onclick="login()">Login</button>
         </div>
       </div>
+      <div class="card">
+        <h2>Register</h2>
+        <div class="grid">
+          <input id="registerName" placeholder="Name" />
+          <input id="registerEmail" placeholder="Email" />
+          <input id="registerPassword" type="password" placeholder="Password" />
+          <button onclick="register()">Create Account</button>
+        </div>
+      </div>
+    </section>
 
-      <div id="stats" class="grid stats"></div>
-
+    <section id="appView" class="hidden">
       <div class="tabs">
-        <button onclick="showTab('flock')">Flock</button>
-        <button onclick="showTab('pairs')">Pairs</button>
-        <button onclick="showTab('breeding')">Breeding</button>
-        <button onclick="showTab('genetics')">Genetics</button>
+        <button class="tab active" onclick="showTab('dashboard', event)">Dashboard</button>
+        <button class="tab" onclick="showTab('birds', event)">Flock</button>
+        <button class="tab" onclick="showTab('pairs', event)">Pairs</button>
+        <button class="tab" onclick="showTab('breeding', event)">Breeding</button>
+        <button class="tab" onclick="showTab('genetics', event)">Genetics</button>
+        <button class="tab" onclick="showTab('subscription', event)">Subscription</button>
       </div>
 
-      <section id="tab-flock" class="card tab">
-        <h3>Birds</h3>
-        <form id="birdForm" class="three">
-          <label>Name<input name="name" required /></label>
-          <label>Species<input name="species" /></label>
-          <label>Band Number<input name="band_number" /></label>
-          <label>Gender<select name="gender"><option value="unknown">Unknown</option><option value="male">Male</option><option value="female">Female</option></select></label>
-          <label>DOB<input name="dob" type="date" /></label>
-          <label>Mutation<input name="mutation" /></label>
-          <label>Color<input name="color" /></label>
-          <label>Sire<select name="sire_id" id="birdSire"><option value="">None</option></select></label>
-          <label>Dam<select name="dam_id" id="birdDam"><option value="">None</option></select></label>
-          <label style="grid-column:1/-1;">Notes<textarea name="notes"></textarea></label>
-          <div><button type="submit">Add Bird</button></div>
-        </form>
+      <section id="tab-dashboard" class="tab-panel">
+        <div class="grid grid-4" id="statsGrid"></div>
+      </section>
+
+      <section id="tab-birds" class="tab-panel hidden">
         <div class="card">
-          <table><thead><tr><th>Name</th><th>Species</th><th>Band</th><th>Gender</th><th>Mutation</th><th>Actions</th></tr></thead><tbody id="birdsTable"></tbody></table>
+          <h3>Add / Edit Bird</h3>
+          <div class="grid grid-2">
+            <input type="hidden" id="birdId" />
+            <input id="birdName" placeholder="Name" />
+            <input id="birdSpecies" placeholder="Species" />
+            <input id="birdBand" placeholder="Band number" />
+            <select id="birdGender"><option value="unknown">Unknown</option><option value="male">Male</option><option value="female">Female</option></select>
+            <input id="birdDob" type="date" />
+            <input id="birdMutation" placeholder="Mutation" />
+            <input id="birdColor" placeholder="Color" />
+            <input id="birdPhoto" placeholder="Photo URL" />
+            <select id="birdSire"></select>
+            <select id="birdDam"></select>
+            <select id="birdStatus"><option value="active">Active</option><option value="sold">Sold</option><option value="deceased">Deceased</option></select>
+          </div>
+          <div class="inline" style="margin-top:12px;">
+            <button onclick="saveBird()">Save Bird</button>
+            <button class="secondary" onclick="resetBirdForm()">Clear</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Bird List</h3>
+          <table>
+            <thead><tr><th>Name</th><th>Species</th><th>Mutation</th><th>Parents</th><th>Status</th><th></th></tr></thead>
+            <tbody id="birdsTable"></tbody>
+          </table>
         </div>
       </section>
 
-      <section id="tab-pairs" class="card tab hidden">
-        <h3>Pairs</h3>
-        <form id="pairForm" class="two">
-          <label>Sire<select name="sire_id" id="pairSire" required></select></label>
-          <label>Dam<select name="dam_id" id="pairDam" required></select></label>
-          <label>Pair Date<input name="pair_date" type="date" /></label>
-          <label>Notes<input name="notes" /></label>
-          <div><button type="submit">Add Pair</button></div>
-        </form>
+      <section id="tab-pairs" class="tab-panel hidden">
         <div class="card">
-          <table><thead><tr><th>Sire</th><th>Dam</th><th>Pair Date</th><th>Actions</th></tr></thead><tbody id="pairsTable"></tbody></table>
+          <h3>Create Pair</h3>
+          <div class="grid grid-2">
+            <select id="pairSire"></select>
+            <select id="pairDam"></select>
+            <input id="pairDate" type="date" />
+            <select id="pairStatus"><option value="active">Active</option><option value="retired">Retired</option></select>
+          </div>
+          <div style="margin-top:12px;"><button onclick="savePair()">Save Pair</button></div>
+        </div>
+        <div class="card">
+          <h3>Pairs</h3>
+          <table>
+            <thead><tr><th>Pair</th><th>Date</th><th>Status</th><th></th></tr></thead>
+            <tbody id="pairsTable"></tbody>
+          </table>
         </div>
       </section>
 
-      <section id="tab-breeding" class="card tab hidden">
-        <h3>Clutches</h3>
-        <form id="clutchForm" class="two">
-          <label>Pair<select name="pair_id" id="clutchPair" required></select></label>
-          <label>Lay Date<input name="lay_date" type="date" /></label>
-          <label>Expected Hatch Date<input name="hatch_date" type="date" /></label>
-          <label>Clutch Size<input name="clutch_size" type="number" min="0" /></label>
-          <label style="grid-column:1/-1;">Notes<input name="notes" /></label>
-          <div><button type="submit">Add Clutch</button></div>
-        </form>
+      <section id="tab-breeding" class="tab-panel hidden">
         <div class="card">
-          <table><thead><tr><th>Pair</th><th>Lay Date</th><th>Hatch Date</th><th>Clutch Size</th></tr></thead><tbody id="clutchesTable"></tbody></table>
+          <h3>Add Clutch</h3>
+          <div class="grid grid-2">
+            <select id="clutchPair"></select>
+            <input id="clutchLayDate" type="date" />
+            <input id="clutchHatchDate" type="date" />
+          </div>
+          <div style="margin-top:12px;"><button onclick="saveClutch()">Save Clutch</button></div>
+        </div>
+        <div class="card">
+          <h3>Add Egg</h3>
+          <div class="grid grid-2">
+            <select id="eggClutch"></select>
+            <input id="eggNumber" type="number" placeholder="Egg number" />
+            <select id="eggOutcome"><option value="pending">Pending</option><option value="hatched">Hatched</option><option value="infertile">Infertile</option><option value="addled">Addled</option><option value="dead">Dead in shell</option></select>
+          </div>
+          <div style="margin-top:12px;"><button onclick="saveEgg()">Save Egg</button></div>
+        </div>
+        <div class="card">
+          <h3>Breeding Calendar</h3>
+          <table>
+            <thead><tr><th>Date</th><th>Type</th><th>Title</th><th>Extra</th></tr></thead>
+            <tbody id="calendarTable"></tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>Clutches</h3>
+          <table>
+            <thead><tr><th>Pair</th><th>Lay Date</th><th>Hatch Date</th><th>Eggs</th></tr></thead>
+            <tbody id="clutchesTable"></tbody>
+          </table>
         </div>
       </section>
 
-      <section id="tab-genetics" class="card tab hidden">
-        <h3>COI Calculator</h3>
-        <div class="two">
-          <label>Bird<select id="coiBird"></select></label>
-          <div style="display:flex;align-items:end;"><button onclick="runCoi()">Calculate COI</button></div>
+      <section id="tab-genetics" class="tab-panel hidden">
+        <div class="card">
+          <h3>Genetics Predictor</h3>
+          <div class="grid grid-2">
+            <select id="genSire"></select>
+            <select id="genDam"></select>
+          </div>
+          <div style="margin-top:12px;"><button onclick="runGenetics()">Predict Offspring</button></div>
+          <div id="geneticsResult" style="margin-top:12px;"></div>
         </div>
-        <div id="coiResult" class="card muted">Select a bird to calculate COI.</div>
+        <div class="card">
+          <h3>COI Calculator</h3>
+          <div class="grid grid-2">
+            <select id="coiBird"></select>
+            <button onclick="runCoi()">Calculate COI</button>
+          </div>
+          <div id="coiResult" style="margin-top:12px;"></div>
+        </div>
+      </section>
+
+      <section id="tab-subscription" class="tab-panel hidden">
+        <div class="card">
+          <h3>Tier Management</h3>
+          <div id="subscriptionInfo"></div>
+          <div class="grid grid-2" style="margin-top:12px;">
+            <select id="tierSelect">
+              <option value="Free">Free</option>
+              <option value="Hobby">Hobby</option>
+              <option value="Breeder">Breeder</option>
+              <option value="Pro">Pro</option>
+            </select>
+            <button onclick="changeTier()">Change Tier</button>
+          </div>
+          <div style="margin-top:12px;"><button class="secondary" onclick="stripeStub()">Run Stripe Stub</button></div>
+        </div>
       </section>
     </section>
-  </div>
+  </main>
 
   <script>
-    const api = (path, opts = {}) => fetch(path, {
-      ...opts,
-      headers: {
-        'Content-Type': 'application/json',
-        ...(localStorage.token ? { Authorization: 'Bearer ' + localStorage.token } : {}),
-        ...(opts.headers || {})
-      }
-    }).then(async r => {
-      const data = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error(data.error || 'Request failed');
-      return data;
-    });
-
-    let isRegister = false;
+    let token = localStorage.getItem('birdapp_token') || '';
+    let currentUser = null;
     let birds = [];
     let pairs = [];
+    let clutches = [];
 
-    const authSection = document.getElementById('authSection');
-    const appSection = document.getElementById('appSection');
-    const authTitle = document.getElementById('authTitle');
-    const nameWrap = document.getElementById('nameWrap');
-    const authBtn = document.getElementById('authBtn');
-    const toggleAuth = document.getElementById('toggleAuth');
-    const authMsg = document.getElementById('authMsg');
-    const logoutBtn = document.getElementById('logoutBtn');
+    const messageEl = document.getElementById('message');
+    const el = (id) => document.getElementById(id);
 
-    toggleAuth.onclick = () => {
-      isRegister = !isRegister;
-      authTitle.textContent = isRegister ? 'Register' : 'Login';
-      authBtn.textContent = isRegister ? 'Create Account' : 'Login';
-      toggleAuth.textContent = isRegister ? 'Already have an account?' : 'Need an account?';
-      nameWrap.classList.toggle('hidden', !isRegister);
-      authMsg.textContent = '';
-    };
+    function showMessage(text, type = 'success') {
+      messageEl.innerHTML = `<div class="message ${type}">${text}</div>`;
+      setTimeout(() => messageEl.innerHTML = '', 4000);
+    }
 
-    authBtn.onclick = async () => {
+    async function api(path, options = {}) {
+      const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
+      if (token) headers.Authorization = `Bearer ${token}`;
+      const response = await fetch(path, { ...options, headers });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || 'Request failed');
+      return data;
+    }
+
+    function setAuthState(isLoggedIn) {
+      document.getElementById('authView').classList.toggle('hidden', isLoggedIn);
+      document.getElementById('appView').classList.toggle('hidden', !isLoggedIn);
+      document.getElementById('logoutBtn').classList.toggle('hidden', !isLoggedIn);
+    }
+
+    async function register() {
       try {
-        const payload = { email: email.value, password: password.value, name: name.value };
-        const data = await api(isRegister ? '/api/register' : '/api/login', { method: 'POST', body: JSON.stringify(payload) });
-        localStorage.token = data.token;
-        localStorage.user = JSON.stringify(data.user);
-        await initApp();
-      } catch (e) { authMsg.textContent = e.message; }
-    };
-
-    logoutBtn.onclick = () => {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      authSection.classList.remove('hidden');
-      appSection.classList.add('hidden');
-      logoutBtn.classList.add('hidden');
-    };
-
-    function showTab(name) {
-      document.querySelectorAll('.tab').forEach(el => el.classList.add('hidden'));
-      document.getElementById('tab-' + name).classList.remove('hidden');
+        const data = await api('/api/register', { method: 'POST', body: JSON.stringify({
+          name: el('registerName').value,
+          email: el('registerEmail').value,
+          password: el('registerPassword').value
+        })});
+        finishAuth(data);
+      } catch (e) { showMessage(e.message, 'error'); }
     }
 
-    function statCard(label, value) {
-      return `<div class="card"><div class="muted">${label}</div><div style="font-size:28px;font-weight:700;">${value}</div></div>`;
+    async function login() {
+      try {
+        const data = await api('/api/login', { method: 'POST', body: JSON.stringify({
+          email: el('loginEmail').value,
+          password: el('loginPassword').value
+        })});
+        finishAuth(data);
+      } catch (e) { showMessage(e.message, 'error'); }
     }
 
-    function fillBirdSelects() {
-      const male = birds.filter(b => b.gender === 'male');
-      const female = birds.filter(b => b.gender === 'female');
-      const all = birds;
-      const options = list => `<option value="">None</option>` + list.map(b => `<option value="${b.id}">${b.name}${b.band_number ? ' (' + b.band_number + ')' : ''}</option>`).join('');
-      birdSire.innerHTML = options(all);
-      birdDam.innerHTML = options(all);
-      pairSire.innerHTML = male.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
-      pairDam.innerHTML = female.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
-      coiBird.innerHTML = all.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+    function finishAuth(data) {
+      token = data.token;
+      currentUser = data.user;
+      localStorage.setItem('birdapp_token', token);
+      setAuthState(true);
+      refreshAll();
+      showMessage('Signed in');
+    }
+
+    document.getElementById('logoutBtn').onclick = () => {
+      token = '';
+      currentUser = null;
+      localStorage.removeItem('birdapp_token');
+      setAuthState(false);
+      document.getElementById('userSummary').textContent = '';
+    };
+
+    function showTab(name, event) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+      if (event) event.target.classList.add('active');
+      document.getElementById(`tab-${name}`).classList.remove('hidden');
+    }
+
+    function optionMarkup(list, labelFn, includeBlank = true) {
+      return `${includeBlank ? '<option value="">None</option>' : ''}` + list.map(item => `<option value="${item.id}">${labelFn(item)}</option>`).join('');
+    }
+
+    function syncSelectors() {
+      const males = birds.filter(b => b.gender === 'male');
+      const females = birds.filter(b => b.gender === 'female');
+      birdSire.innerHTML = optionMarkup(males, b => `${b.name} (${b.band_number || 'no band'})`);
+      birdDam.innerHTML = optionMarkup(females, b => `${b.name} (${b.band_number || 'no band'})`);
+      pairSire.innerHTML = optionMarkup(males, b => b.name, false);
+      pairDam.innerHTML = optionMarkup(females, b => b.name, false);
+      genSire.innerHTML = optionMarkup(males, b => b.name, false);
+      genDam.innerHTML = optionMarkup(females, b => b.name, false);
+      coiBird.innerHTML = optionMarkup(birds, b => b.name, false);
+      clutchPair.innerHTML = optionMarkup(pairs, p => `${p.sire_name} x ${p.dam_name}`, false);
+      eggClutch.innerHTML = optionMarkup(clutches, c => `${c.sire_name} x ${c.dam_name} (${c.lay_date || 'no lay date'})`, false);
+    }
+
+    function renderBirds() {
+      birdsTable.innerHTML = birds.map(b => `
+        <tr>
+          <td>${b.name}</td>
+          <td>${b.species || ''}</td>
+          <td>${b.mutation || ''}</td>
+          <td>${b.sire_name || '-'} / ${b.dam_name || '-'}</td>
+          <td><span class="pill">${b.status}</span></td>
+          <td>
+            <button style="width:auto;" onclick='editBirdById(${b.id})'>Edit</button>
+            <button style="width:auto;" class="danger" onclick='deleteBird(${b.id})'>Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function editBirdById(id) {
+      const b = birds.find(x => x.id === id);
+      if (!b) return;
+      birdId.value = b.id;
+      birdName.value = b.name || '';
+      birdSpecies.value = b.species || '';
+      birdBand.value = b.band_number || '';
+      birdGender.value = b.gender || 'unknown';
+      birdDob.value = b.dob || '';
+      birdMutation.value = b.mutation || '';
+      birdColor.value = b.color || '';
+      birdPhoto.value = b.photo_url || '';
+      birdSire.value = b.sire_id || '';
+      birdDam.value = b.dam_id || '';
+      birdStatus.value = b.status || 'active';
+      showMessage(`Editing ${b.name}`);
+    }
+
+    function resetBirdForm() {
+      birdId.value = '';
+      birdName.value = '';
+      birdSpecies.value = '';
+      birdBand.value = '';
+      birdGender.value = 'unknown';
+      birdDob.value = '';
+      birdMutation.value = '';
+      birdColor.value = '';
+      birdPhoto.value = '';
+      birdSire.value = '';
+      birdDam.value = '';
+      birdStatus.value = 'active';
+    }
+
+    async function saveBird() {
+      try {
+        const payload = {
+          name: birdName.value,
+          species: birdSpecies.value,
+          band_number: birdBand.value,
+          gender: birdGender.value,
+          dob: birdDob.value,
+          mutation: birdMutation.value,
+          color: birdColor.value,
+          photo_url: birdPhoto.value,
+          sire_id: birdSire.value || null,
+          dam_id: birdDam.value || null,
+          status: birdStatus.value
+        };
+        if (birdId.value) await api(`/api/birds/${birdId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
+        else await api('/api/birds', { method: 'POST', body: JSON.stringify(payload) });
+        resetBirdForm();
+        await loadBirds();
+        await loadStats();
+        showMessage('Bird saved');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function deleteBird(id) {
+      if (!confirm('Delete this bird?')) return;
+      try {
+        await api(`/api/birds/${id}`, { method: 'DELETE' });
+        await refreshAll();
+        showMessage('Bird deleted');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    function renderPairs() {
+      pairsTable.innerHTML = pairs.map(p => `
+        <tr>
+          <td>${p.sire_name} x ${p.dam_name}</td>
+          <td>${p.pair_date || ''}</td>
+          <td>${p.status}</td>
+          <td><button class="danger" style="width:auto;" onclick="deletePair(${p.id})">Delete</button></td>
+        </tr>
+      `).join('');
+    }
+
+    async function savePair() {
+      try {
+        await api('/api/pairs', { method: 'POST', body: JSON.stringify({
+          sire_id: pairSire.value,
+          dam_id: pairDam.value,
+          pair_date: pairDate.value,
+          status: pairStatus.value
+        })});
+        await loadPairs();
+        await loadStats();
+        showMessage('Pair saved');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function deletePair(id) {
+      if (!confirm('Delete this pair?')) return;
+      try {
+        await api(`/api/pairs/${id}`, { method: 'DELETE' });
+        await refreshAll();
+        showMessage('Pair deleted');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    function renderClutches() {
+      clutchesTable.innerHTML = clutches.map(c => `
+        <tr>
+          <td>${c.sire_name} x ${c.dam_name}</td>
+          <td>${c.lay_date || ''}</td>
+          <td>${c.hatch_date || ''}</td>
+          <td>${c.egg_count}</td>
+        </tr>
+      `).join('');
+    }
+
+    async function saveClutch() {
+      try {
+        await api('/api/clutches', { method: 'POST', body: JSON.stringify({
+          pair_id: clutchPair.value,
+          lay_date: clutchLayDate.value,
+          hatch_date: clutchHatchDate.value
+        })});
+        await loadClutches();
+        await loadCalendar();
+        await loadStats();
+        showMessage('Clutch saved');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function saveEgg() {
+      try {
+        await api('/api/eggs', { method: 'POST', body: JSON.stringify({
+          clutch_id: eggClutch.value,
+          egg_number: eggNumber.value,
+          outcome: eggOutcome.value
+        })});
+        eggNumber.value = '';
+        await loadClutches();
+        await loadStats();
+        showMessage('Egg saved');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function runGenetics() {
+      try {
+        const data = await api(`/api/genetics/predict?sire_id=${genSire.value}&dam_id=${genDam.value}`);
+        geneticsResult.innerHTML = `<div class="message success"><strong>${data.summary}</strong><br>Mutations: ${data.likelyMutations.join(', ') || 'None'}<br>Colors: ${data.likelyColors.join(', ') || 'Unknown'}</div>`;
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function runCoi() {
+      try {
+        const data = await api(`/api/coi/${coiBird.value}`);
+        coiResult.innerHTML = `<div class="message success"><strong>COI: ${data.coi}%</strong><br>Common ancestors: ${data.commonAncestors.length ? data.commonAncestors.map(a => a.name).join(', ') : 'None detected in recent generations'}</div>`;
+      } catch (e) { showMessage(e.message, 'error'); }
     }
 
     async function loadStats() {
       const stats = await api('/api/stats');
-      document.getElementById('stats').innerHTML = [
-        statCard('Birds', `${stats.totalBirds}/${stats.birdLimit === null || stats.birdLimit === Infinity ? '∞' : stats.birdLimit}`),
-        statCard('Males', stats.maleBirds),
-        statCard('Females', stats.femaleBirds),
-        statCard('Active Pairs', stats.activePairs),
-        statCard('Clutches', stats.totalClutches)
-      ].join('');
-      tierBadge.textContent = `Tier: ${stats.tier}`;
+      statsGrid.innerHTML = [
+        ['Birds', `${stats.totalBirds} / ${stats.birdLimit === null || !isFinite(stats.birdLimit) ? '∞' : stats.birdLimit}`],
+        ['Males', stats.maleBirds],
+        ['Females', stats.femaleBirds],
+        ['Active Pairs', stats.activePairs],
+        ['Clutches', stats.totalClutches],
+        ['Eggs', stats.eggsTracked]
+      ].map(([label, value]) => `<div class="card"><div class="muted">${label}</div><div class="stat">${value}</div></div>`).join('');
     }
 
     async function loadBirds() {
       birds = await api('/api/birds');
-      fillBirdSelects();
-      birdsTable.innerHTML = birds.map(b => `
-        <tr>
-          <td>${b.name}</td><td>${b.species || ''}</td><td>${b.band_number || ''}</td><td>${b.gender || ''}</td><td>${b.mutation || ''}</td>
-          <td><button class="danger" onclick="deleteBird(${b.id})">Delete</button></td>
-        </tr>`).join('');
+      renderBirds();
+      syncSelectors();
     }
 
     async function loadPairs() {
       pairs = await api('/api/pairs');
-      clutchPair.innerHTML = pairs.map(p => `<option value="${p.id}">${p.sire_name} × ${p.dam_name}</option>`).join('');
-      pairsTable.innerHTML = pairs.map(p => `
-        <tr><td>${p.sire_name}</td><td>${p.dam_name}</td><td>${p.pair_date || ''}</td><td><button class="danger" onclick="deletePair(${p.id})">Delete</button></td></tr>
-      `).join('');
+      renderPairs();
+      syncSelectors();
     }
 
     async function loadClutches() {
-      const clutches = await api('/api/clutches');
-      clutchesTable.innerHTML = clutches.map(c => `
-        <tr><td>${c.sire_name} × ${c.dam_name}</td><td>${c.lay_date || ''}</td><td>${c.hatch_date || ''}</td><td>${c.clutch_size || 0}</td></tr>
-      `).join('');
+      clutches = await api('/api/clutches');
+      renderClutches();
+      syncSelectors();
     }
 
-    async function deleteBird(id) {
-      await api('/api/birds/' + id, { method: 'DELETE' });
-      await refreshAll();
+    async function loadCalendar() {
+      const items = await api('/api/calendar');
+      calendarTable.innerHTML = items.map(i => `<tr><td>${i.event_date || ''}</td><td>${i.type}</td><td>${i.title}</td><td>${i.extra || i.status || ''}</td></tr>`).join('');
     }
 
-    async function deletePair(id) {
-      await api('/api/pairs/' + id, { method: 'DELETE' });
-      await refreshAll();
+    async function loadSubscription() {
+      const data = await api('/api/subscriptions');
+      currentUser = data.user;
+      subscriptionInfo.innerHTML = `
+        <div class="message success">
+          Tier: <strong>${data.user.subscription_tier}</strong><br>
+          Bird limit: <strong>${Number.isFinite(data.user.bird_limit) ? data.user.bird_limit : 'Unlimited'}</strong><br>
+          Status: <strong>${data.subscription.status}</strong>
+        </div>`;
+      tierSelect.value = data.user.subscription_tier;
+      document.getElementById('userSummary').textContent = `${currentUser.name} · ${currentUser.subscription_tier}`;
     }
 
-    async function runCoi() {
-      const id = coiBird.value;
-      if (!id) return;
-      const data = await api('/api/coi/' + id);
-      coiResult.innerHTML = `<strong>COI:</strong> ${data.coi}%<br><span class="muted">Common ancestors found: ${data.commonAncestors}</span>`;
+    async function changeTier() {
+      try {
+        const data = await api('/api/subscriptions/change-tier', { method: 'POST', body: JSON.stringify({ tier: tierSelect.value }) });
+        currentUser = data.user;
+        await loadSubscription();
+        await loadStats();
+        showMessage('Tier updated');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function stripeStub() {
+      try {
+        const data = await api('/api/subscriptions/stripe-checkout', { method: 'POST', body: JSON.stringify({ tier: tierSelect.value }) });
+        showMessage(`${data.message} Session: ${data.fakeCheckoutSessionId}`);
+      } catch (e) { showMessage(e.message, 'error'); }
     }
 
     async function refreshAll() {
+      await loadSubscription();
       await loadStats();
       await loadBirds();
       await loadPairs();
       await loadClutches();
+      await loadCalendar();
+      resetBirdForm();
     }
 
-    birdForm.onsubmit = async (e) => {
-      e.preventDefault();
-      const form = Object.fromEntries(new FormData(e.target).entries());
-      await api('/api/birds', { method: 'POST', body: JSON.stringify(form) });
-      e.target.reset();
-      await refreshAll();
-    };
-
-    pairForm.onsubmit = async (e) => {
-      e.preventDefault();
-      const form = Object.fromEntries(new FormData(e.target).entries());
-      await api('/api/pairs', { method: 'POST', body: JSON.stringify(form) });
-      e.target.reset();
-      await refreshAll();
-    };
-
-    clutchForm.onsubmit = async (e) => {
-      e.preventDefault();
-      const form = Object.fromEntries(new FormData(e.target).entries());
-      await api('/api/clutches', { method: 'POST', body: JSON.stringify(form) });
-      e.target.reset();
-      await refreshAll();
-    };
-
-    async function initApp() {
-      authSection.classList.add('hidden');
-      appSection.classList.remove('hidden');
-      logoutBtn.classList.remove('hidden');
-      const user = JSON.parse(localStorage.user || '{}');
-      welcome.textContent = user.email || '';
-      await refreshAll();
-      showTab('flock');
+    async function boot() {
+      if (!token) return setAuthState(false);
+      try {
+        currentUser = await api('/api/me');
+        setAuthState(true);
+        await refreshAll();
+      } catch {
+        token = '';
+        localStorage.removeItem('birdapp_token');
+        setAuthState(false);
+      }
     }
 
-    if (localStorage.token) initApp().catch(() => logoutBtn.onclick());
+    boot();
   </script>
 </body>
 </html>
