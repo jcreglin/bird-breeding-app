@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bird Breeding App</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
+    header { background: #1e3a8a; color: white; padding: 16px 20px; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 20px; }
+    .card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 16px; }
+    .grid { display: grid; gap: 16px; }
+    .stats { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    button { background: #2563eb; color: white; border: 0; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
+    button.secondary { background: #64748b; }
+    button.danger { background: #dc2626; }
+    input, select, textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; margin-top: 6px; }
+    label { display: block; margin-bottom: 10px; font-size: 14px; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .hidden { display: none; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: left; }
+    .muted { color: #64748b; }
+    .pill { display: inline-block; background: #dbeafe; color: #1d4ed8; padding: 4px 8px; border-radius: 999px; font-size: 12px; }
+    .auth { max-width: 480px; margin: 40px auto; }
+    .row { display: flex; gap: 8px; align-items: center; }
+    .between { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    @media (max-width: 800px) { .two, .three { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap between">
+      <div>
+        <h1 style="margin:0;font-size:24px;">Bird Breeding App</h1>
+        <div class="muted" style="color:#cbd5e1;">Breeding, flock, pairs, clutches, COI</div>
+      </div>
+      <button id="logoutBtn" class="secondary hidden">Logout</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section id="authSection" class="auth card">
+      <h2 id="authTitle">Login</h2>
+      <div class="two">
+        <label id="nameWrap" class="hidden">Name<input id="name" /></label>
+        <label>Email<input id="email" type="email" /></label>
+      </div>
+      <label>Password<input id="password" type="password" /></label>
+      <div class="row">
+        <button id="authBtn">Login</button>
+        <button id="toggleAuth" class="secondary">Need an account?</button>
+      </div>
+      <p id="authMsg" class="muted"></p>
+    </section>
+
+    <section id="appSection" class="hidden">
+      <div class="card">
+        <div class="between">
+          <div>
+            <h2 style="margin:0;">Dashboard</h2>
+            <div id="welcome" class="muted"></div>
+          </div>
+          <div><span id="tierBadge" class="pill"></span></div>
+        </div>
+      </div>
+
+      <div id="stats" class="grid stats"></div>
+
+      <div class="tabs">
+        <button onclick="showTab('flock')">Flock</button>
+        <button onclick="showTab('pairs')">Pairs</button>
+        <button onclick="showTab('breeding')">Breeding</button>
+        <button onclick="showTab('genetics')">Genetics</button>
+      </div>
+
+      <section id="tab-flock" class="card tab">
+        <h3>Birds</h3>
+        <form id="birdForm" class="three">
+          <label>Name<input name="name" required /></label>
+          <label>Species<input name="species" /></label>
+          <label>Band Number<input name="band_number" /></label>
+          <label>Gender<select name="gender"><option value="unknown">Unknown</option><option value="male">Male</option><option value="female">Female</option></select></label>
+          <label>DOB<input name="dob" type="date" /></label>
+          <label>Mutation<input name="mutation" /></label>
+          <label>Color<input name="color" /></label>
+          <label>Sire<select name="sire_id" id="birdSire"><option value="">None</option></select></label>
+          <label>Dam<select name="dam_id" id="birdDam"><option value="">None</option></select></label>
+          <label style="grid-column:1/-1;">Notes<textarea name="notes"></textarea></label>
+          <div><button type="submit">Add Bird</button></div>
+        </form>
+        <div class="card">
+          <table><thead><tr><th>Name</th><th>Species</th><th>Band</th><th>Gender</th><th>Mutation</th><th>Actions</th></tr></thead><tbody id="birdsTable"></tbody></table>
+        </div>
+      </section>
+
+      <section id="tab-pairs" class="card tab hidden">
+        <h3>Pairs</h3>
+        <form id="pairForm" class="two">
+          <label>Sire<select name="sire_id" id="pairSire" required></select></label>
+          <label>Dam<select name="dam_id" id="pairDam" required></select></label>
+          <label>Pair Date<input name="pair_date" type="date" /></label>
+          <label>Notes<input name="notes" /></label>
+          <div><button type="submit">Add Pair</button></div>
+        </form>
+        <div class="card">
+          <table><thead><tr><th>Sire</th><th>Dam</th><th>Pair Date</th><th>Actions</th></tr></thead><tbody id="pairsTable"></tbody></table>
+        </div>
+      </section>
+
+      <section id="tab-breeding" class="card tab hidden">
+        <h3>Clutches</h3>
+        <form id="clutchForm" class="two">
+          <label>Pair<select name="pair_id" id="clutchPair" required></select></label>
+          <label>Lay Date<input name="lay_date" type="date" /></label>
+          <label>Expected Hatch Date<input name="hatch_date" type="date" /></label>
+          <label>Clutch Size<input name="clutch_size" type="number" min="0" /></label>
+          <label style="grid-column:1/-1;">Notes<input name="notes" /></label>
+          <div><button type="submit">Add Clutch</button></div>
+        </form>
+        <div class="card">
+          <table><thead><tr><th>Pair</th><th>Lay Date</th><th>Hatch Date</th><th>Clutch Size</th></tr></thead><tbody id="clutchesTable"></tbody></table>
+        </div>
+      </section>
+
+      <section id="tab-genetics" class="card tab hidden">
+        <h3>COI Calculator</h3>
+        <div class="two">
+          <label>Bird<select id="coiBird"></select></label>
+          <div style="display:flex;align-items:end;"><button onclick="runCoi()">Calculate COI</button></div>
+        </div>
+        <div id="coiResult" class="card muted">Select a bird to calculate COI.</div>
+      </section>
+    </section>
+  </div>
+
+  <script>
+    const api = (path, opts = {}) => fetch(path, {
+      ...opts,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(localStorage.token ? { Authorization: 'Bearer ' + localStorage.token } : {}),
+        ...(opts.headers || {})
+      }
+    }).then(async r => {
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data.error || 'Request failed');
+      return data;
+    });
+
+    let isRegister = false;
+    let birds = [];
+    let pairs = [];
+
+    const authSection = document.getElementById('authSection');
+    const appSection = document.getElementById('appSection');
+    const authTitle = document.getElementById('authTitle');
+    const nameWrap = document.getElementById('nameWrap');
+    const authBtn = document.getElementById('authBtn');
+    const toggleAuth = document.getElementById('toggleAuth');
+    const authMsg = document.getElementById('authMsg');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    toggleAuth.onclick = () => {
+      isRegister = !isRegister;
+      authTitle.textContent = isRegister ? 'Register' : 'Login';
+      authBtn.textContent = isRegister ? 'Create Account' : 'Login';
+      toggleAuth.textContent = isRegister ? 'Already have an account?' : 'Need an account?';
+      nameWrap.classList.toggle('hidden', !isRegister);
+      authMsg.textContent = '';
+    };
+
+    authBtn.onclick = async () => {
+      try {
+        const payload = { email: email.value, password: password.value, name: name.value };
+        const data = await api(isRegister ? '/api/register' : '/api/login', { method: 'POST', body: JSON.stringify(payload) });
+        localStorage.token = data.token;
+        localStorage.user = JSON.stringify(data.user);
+        await initApp();
+      } catch (e) { authMsg.textContent = e.message; }
+    };
+
+    logoutBtn.onclick = () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      authSection.classList.remove('hidden');
+      appSection.classList.add('hidden');
+      logoutBtn.classList.add('hidden');
+    };
+
+    function showTab(name) {
+      document.querySelectorAll('.tab').forEach(el => el.classList.add('hidden'));
+      document.getElementById('tab-' + name).classList.remove('hidden');
+    }
+
+    function statCard(label, value) {
+      return `<div class="card"><div class="muted">${label}</div><div style="font-size:28px;font-weight:700;">${value}</div></div>`;
+    }
+
+    function fillBirdSelects() {
+      const male = birds.filter(b => b.gender === 'male');
+      const female = birds.filter(b => b.gender === 'female');
+      const all = birds;
+      const options = list => `<option value="">None</option>` + list.map(b => `<option value="${b.id}">${b.name}${b.band_number ? ' (' + b.band_number + ')' : ''}</option>`).join('');
+      birdSire.innerHTML = options(all);
+      birdDam.innerHTML = options(all);
+      pairSire.innerHTML = male.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+      pairDam.innerHTML = female.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+      coiBird.innerHTML = all.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
+    }
+
+    async function loadStats() {
+      const stats = await api('/api/stats');
+      document.getElementById('stats').innerHTML = [
+        statCard('Birds', `${stats.totalBirds}/${stats.birdLimit === null || stats.birdLimit === Infinity ? '∞' : stats.birdLimit}`),
+        statCard('Males', stats.maleBirds),
+        statCard('Females', stats.femaleBirds),
+        statCard('Active Pairs', stats.activePairs),
+        statCard('Clutches', stats.totalClutches)
+      ].join('');
+      tierBadge.textContent = `Tier: ${stats.tier}`;
+    }
+
+    async function loadBirds() {
+      birds = await api('/api/birds');
+      fillBirdSelects();
+      birdsTable.innerHTML = birds.map(b => `
+        <tr>
+          <td>${b.name}</td><td>${b.species || ''}</td><td>${b.band_number || ''}</td><td>${b.gender || ''}</td><td>${b.mutation || ''}</td>
+          <td><button class="danger" onclick="deleteBird(${b.id})">Delete</button></td>
+        </tr>`).join('');
+    }
+
+    async function loadPairs() {
+      pairs = await api('/api/pairs');
+      clutchPair.innerHTML = pairs.map(p => `<option value="${p.id}">${p.sire_name} × ${p.dam_name}</option>`).join('');
+      pairsTable.innerHTML = pairs.map(p => `
+        <tr><td>${p.sire_name}</td><td>${p.dam_name}</td><td>${p.pair_date || ''}</td><td><button class="danger" onclick="deletePair(${p.id})">Delete</button></td></tr>
+      `).join('');
+    }
+
+    async function loadClutches() {
+      const clutches = await api('/api/clutches');
+      clutchesTable.innerHTML = clutches.map(c => `
+        <tr><td>${c.sire_name} × ${c.dam_name}</td><td>${c.lay_date || ''}</td><td>${c.hatch_date || ''}</td><td>${c.clutch_size || 0}</td></tr>
+      `).join('');
+    }
+
+    async function deleteBird(id) {
+      await api('/api/birds/' + id, { method: 'DELETE' });
+      await refreshAll();
+    }
+
+    async function deletePair(id) {
+      await api('/api/pairs/' + id, { method: 'DELETE' });
+      await refreshAll();
+    }
+
+    async function runCoi() {
+      const id = coiBird.value;
+      if (!id) return;
+      const data = await api('/api/coi/' + id);
+      coiResult.innerHTML = `<strong>COI:</strong> ${data.coi}%<br><span class="muted">Common ancestors found: ${data.commonAncestors}</span>`;
+    }
+
+    async function refreshAll() {
+      await loadStats();
+      await loadBirds();
+      await loadPairs();
+      await loadClutches();
+    }
+
+    birdForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const form = Object.fromEntries(new FormData(e.target).entries());
+      await api('/api/birds', { method: 'POST', body: JSON.stringify(form) });
+      e.target.reset();
+      await refreshAll();
+    };
+
+    pairForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const form = Object.fromEntries(new FormData(e.target).entries());
+      await api('/api/pairs', { method: 'POST', body: JSON.stringify(form) });
+      e.target.reset();
+      await refreshAll();
+    };
+
+    clutchForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const form = Object.fromEntries(new FormData(e.target).entries());
+      await api('/api/clutches', { method: 'POST', body: JSON.stringify(form) });
+      e.target.reset();
+      await refreshAll();
+    };
+
+    async function initApp() {
+      authSection.classList.add('hidden');
+      appSection.classList.remove('hidden');
+      logoutBtn.classList.remove('hidden');
+      const user = JSON.parse(localStorage.user || '{}');
+      welcome.textContent = user.email || '';
+      await refreshAll();
+      showTab('flock');
+    }
+
+    if (localStorage.token) initApp().catch(() => logoutBtn.onclick());
+  </script>
+</body>
+</html>

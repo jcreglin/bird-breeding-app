@@ -1,0 +1,7 @@
+node_modules/
+.env
+birds.db
+birds.db-shm
+birds.db-wal
+npm-debug.log*
+.DS_Store
