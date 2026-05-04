@@ -1,0 +1,6028 @@
+Connect
+Database
+DateCreate
+DateUpdate
+Flags
+ForeignName
+LvExtra
+LvModule
+LvProp
+Name
+Owner
+ParentId
+RmtInfoLong
+RmtInfoShort
+Type
+ParentIdName	
+FInheritable
+ObjectId
+ObjectId
+Attribute
+Expression
+Flag
+LvExtra
+Name1
+Name2
+ObjectId
+Order
+"ObjectIdAttribute
+ccolumn
+grbit
+icolumn
+szColumn
+szObject$szReferencedColumn$szReferencedObject
+szRelationship
+szObject$szReferencedObject
+szRelationship
+Expenditures
+FFF::
+Expenditures
+FFF:::::::8 
+Expenditures
+FFF:::::::8 
+Expenditures
+FFF::::::
+~TMPCLP503191
+THH<<<<<<<: 
+Expenditures
+FFF:::::::8 
+ExaminationArchive
+RRRFFFFFFFD 
+Examination
+DDD88888886 
+DBTemplates
+DDD88888886 
+ContactTemp
+DDD88888886 
+Contacts
+>>>22222220 
+Calendar
+>>>22222220 
+BreedingResultsTemp
+TTTHHHHHHHF 
+BreedingResultsArchive
+ZZZNNNNNNNL 
+BreedingResults
+LLL@@@@@@@> 
+BreedingPairsArchive
+VVVJJJJJJJH 
+Boarding
+>>>22222220 
+BloodWorkDefault
+NNNBBBBBBB@ 
+BloodWorkArchive
+NNNBBBBBBB@ 
+BloodWork
+@@@44444442 
+BirdCareCmpl
+FFF:::::::8 
+Barcode
+<<<0000000. 
+Ailment
+<<<0000000. 
+Accounts
+>>>22222220 
+Admin
+8,,,,,,,,,* 
+Test Query
+66666666664 
+UserDefined
+88888888886 
+SummaryInfo
+DDD88888886 
+AccessLayout
+KeepLocal
+zz:::::::8 
+SysRel
+.........., 
+Scripts
+0000000000. 
+Reports
+0000000000. 
+Modules
+0000000000. 
+Forms
+,,,,,,,,,,* 
+DataAccessPages
+@@@@@@@@@@> 
+MSysRelationships
+DDDDDDDDDDB 
+MSysQueries
+88888888886 
+MSysACEs
+22222222220 
+MSysObjects
+88888888886 
+Relationships
+<<<<<<<<<<: 
+Databases
+44444444442 
+Tables
+.........., 
+Select
+Index
+Designation
+Type
+Balance
+Credit Line
+Expiration Date Institution Name
+Street
+City
+State/Prov
+Postal Code
+Index
+Postal Code
+Select
+Index
+Ailment
+Description
+Index
+Select
+Symptoms:  burns
+Treatment: Burns caused by heat should be treated with cold water or ice for 10 - 15 minutes.  Ensure the rest of the bird's body stays warm so that shock does not set in.  Dry the area by dabbing gently to prevent skin damage.  If the burn is 
+Symptoms: difficulty breathing, coughing, sneezing, clicking sounds, nasal discharge, loss of voice, death
+Description:  Air sac mites can be found in small passerines (canaries and finches).  There are some cases where small psittacine have been affected.  The air sac mite attacks the lungs, body cavity and kidneys.
+The mite can be transmitted to other birds through contact, drinking water, food and from adult birds feeding young.
+Treatment:  The infected birds are placed in an enclosed area which is dusted with 4% malathion powder for at least 5 minutes.  Repeat this treatment weekl
+Symptoms:  anemia
+Description:  The red mite ia a very resistant parasite that frequently affects canaries, finches and other small passerines.  The mite will feed at night and then hide during the day in cracks and cage corners.  If infestation is suspected and parasites cannot be found, the cage can be covered with a white cloth overnight and examined for mites the following morning.  The mites will appear as dark red or black moving spots across the white cloth.
+Treatment:  The use of dichlo
+Symptoms:  crop ruptured
+Treatment:  A crop rupture whether by environmental factors or by feeding tube should be treated surgically.  Immobiliz
+Symptoms:  no egg production
+Some factors to consider when dealing with an infertile pair of birds are as follows:
+1.)  The ovary may be non-functional because the bird is really a male, too old, too young or ovary is diseased.
+2.)  The nest is unsuitable.
+3.)  The paired birds are incompatible.
+Symptoms:  acute death, lethargy, regurgitation, diarrhea with distinctive orange coloration, increased thurst
+Description:  Pacheco's disease is a herpesvirus infection.  This disease is transmitted by contact, aerosol transmission and droppings.  Signs of the disease will vary among species.  The smaller psittacines (lovebirds, amazons, cockatoos) often die acutely after showing minimal signs of the illness.  The larger psittacines (especially macaws) will become visibly ill for days.  Some birds may recover from the disease but it is usually a rapid fatal infection.  Survivers of the disease can contuinue to be carriers of the viru
+Symptoms:  high mortalit
+Symptoms:  death
+Description:  This disease is caused by Toxoplasma gondii.  The bird normally dies before any clinical symptoms appear
+Symptoms:  sudden death (small birds), feathers ruffled, depression, decreased appetite, greenish or grayish diarrhea, soiled vent, weight loss, ocular discharge, nasal discharge, difficulty breathing, shivering
+Description:  Chlamydiosis (Psittacosis) is a generalized infection affecting both birds and humans caused by Chlamydia psittaci.  The disease is transmitted by ingesting or inhaling chlamydiae contained in feces, nasal secretions or lacrimal secretions of infected birds.  Chlamydiae can survive for several months in dried feces.  If the infected bird is not stressed, then the disease may remain latent or only show mild symptoms.  Carriers of the disease can be clinically normal.  When affected birds become stressed they will excrete chlamydiae through feces and lacrimal/nasal secretion.  The incubation period of the disease will vary fro 5 to 98 days. 
+There are four different forms of the disease.  The peracute form of the disease will cause sudden death or death within a short period of time without obvious signs.  The acute form of the disease shows all the signs and may result in death within one to two weeks.  The subacute form of the disease will show a variety of clinical signs that may disappear then reappear after a few days.  The chronic form of the disease is characterized by severe pectoral muscle wasting, leg and wing weakness, fluffing of the feathers, and lack of feathering around the eyes from previous bouts of conjunctivitis and blepharitis (inflamation of eyelids).
+To properly isolate C. psittaci will require laboratory work on a euthanized infected bird.  Culturing of specimens from live birds is unreliable.
+Treatment:  Sick birds should be well isolated and kept uncrowded and warm in freshly cleaned holding cages.  Cages should be kept clean throughout treatment.  For sick parrots, especially those that refuse to eat, suggested treatment is intramuscular injections of oxytetracycline (100 mg/ml) at 1 mg/10-30 g body weight either daily for 5 days or every secon
+d day for a total of six to eight injections.  For small psittacines, intramuscular injections of oxytetracycline at 1 mg/20-30 mg body weight is suggested, but injection volumes must be small (e.g., 0.05 ml), taking care to avoid the subpectoral venous sinuses.
+The following method is an alternative for treating infected birds:
+1.)  For 45 days, the only source of water is a Terramycin solution ( 1 tablespoon of Terramycin to 1 gallon of water).  All calcium (cuttle bones) is removed during this treatment since it willbind with the antibiotic and render it useless.
+2.)  On days 15, 30 and 45, thoroughly disinfect the treatment area with a 1:100 clorox bleach solution.
+3.)  If the species is suceptible to yeast infections, then after the 45 days of Terramycin water treatment, treat the water with a Mycolex-7 solution (1 inch squeezed out ribbon of Mycolex-7 {feminine yeast creme - but not the 1 or 3 day treatment} to 1 gallon of water) for three days.  The stability of the Mycolex-7 solution is short lived and will need to be made fresh every 12 hours.
+Symptoms:  diarSymptoms:  weight loss, blood-flecked diarrhea, death
+Description:  The Gigantobilharzia par
+Symptoms:  inflammation of oil gland
+Description:  A bird's oil gland is located at the base of the tail on the upper side.  Its main function is to provide the bird with oil for preening their feathers.  The gland opening can become clogged resulting in inflammation from a build 
+Symptoms:  beak locked shut, lethargy, eyes protruding, head swollen, dry skin, weight loss, death
+Description:  The Bordetella avium bacteria has been isolated from various species of caged birds but appears to only show symptoms in young cockatiels.  Cockatiel parents carrying the bacteria will pass it to their young during feeding.  The bacteria in the young will attack the lining of the respiratory system. During this attack, the bacteria will produce toxins which are believed to damage mandible muscles and thus create the locked beak condition.  Death soon follows.
+Treatment:  There is no treatment for the young who have contracted the disease.  Some aviaries have reported success in erradicating the carrier condition in their flock with the following treatment.
+1.) For the first 10 days, the only drinking water source is Tylan 50 (Tylosin injectable) solution (8 cc of Tylan 50 mixed to one gallon of water)
+2.) Also during the first 10 days of treatment a Garcin Pig Pump (Gentamicin Sulfate Veterinary) solution ( 1 cc Garcin to 1 pint of water) was used as an airborne treatment.  Either spray the bird in the face twice daily so that they breath in the vapor through the nasal openings or enclose the area and use a vaporizer for at least 20 minutes three times a day.
+3.) After the ten day treatment is complete, mix a 1 inch squeezed out ribbon of Mycolex-7 (femanine yeast creme - but not the 1 or 3 day treatment) to 1 gallon of water.  A blender should be used to obtain the mixture.  The stability of this mixture is short and needs to be made fresh every 12 hours.  This mixture is the only drinking water source for the next three days.  The purpose of this mixture is to kill any yeast infections that may develop during the antibiotic treatment.
+4.)  Chlamydiosis (Psittacosis) typically accompanies B. avium.  If Chlamydiosis is suspected then following the treatment of step 3, treat the birds for Chlamydiosis.
+Symptoms:  difficulty breathing, anorexia, emaciation, diarrhea, uncoordinated muscle movement, frequent neck stretching
+Description:  This disease is a fungus that infects the respiratory tract of birds and on occasion the peritoneum and abdominal organs.  Most suceptible are debilitated, weak and overcrowded birds.  Symptoms of the disease are initially confined to the respiratory system with the bird displaying gasping, labored and rapid breathing.  As the disease progresses diarrhea, ataxia (inability to coordinate voluntary m
+Select
+Index
+Item ID
+Cost
+Description
+Barcode Number
+PrimaryKey
+Select
+Index
+Task ID
+Cage/Bird ID
+Periodicity Task Description
+Estimated Hours
+Actual Hours
+Last Completed
+Next Date
+Status
+Comments
+Reference&Materials and Parts
+Address Type
+First Name
+Last Name
+Business Name
+Street
+City
+State
+Phone
+e-mail
+Schedule Window
+ToNumber
+NewIndex
+PrimaryKey
+Task_No
+Select
+Index
+Task ID
+Cage/Bird ID Task Description
+Periodicity
+Estimated Hours
+Actual Hours
+Index Date
+Completion Date
+Comments
+Reference&Materials and Parts
+Address Type
+Business Name
+First Name
+Last Name
+Street
+City
+State
+Phone
+e-mail
+ToNumber
+index
+NewIndex
+PrimaryKey
+Task_No
+Select
+Index
+Unique ID
+Date
+Glucose (mg/dL)
+AST (U/L)
+ALT (U/L)
+Gamma (U/L)
+Alk Ptse (U/L)
+CK (U/L)
+LDH (U/L)&Cholesterol (mg/dL) T Protein (m/dL)&Phosphorous (mg/dL)
+Calcium (mg/dL)
+Sodium (mmol/L)$Potassium (mmol/L)"Chloride (mmol/L)(Bicarbonate (mmol/L)"Uric Acid (mg/dL)$Anion Gap (mmol/L)
+Bile Acid
+Billirubin<White Blood Cell Ct (x10^3/ul)
+Hematocrit (%)
+Thrombocyte Est
+Heterophils
+Lymphocytes
+Monocytes
+Morphology.Banded Heterophils Abso(Heterophil Absolute#(Lymphocyte Absolute#0Act Lymphocyte Absolute#$Monocyte Absolute#(Eosinophil Absolute#$Basophil Absolute#
+Basophils
+Eosinophils
+Notes
+ToNumber
+Index
+Unique ID
+Select
+Index
+Unique ID
+Date
+Glucose (mg/dL)
+AST (U/L)
+ALT (U/L)
+Gamma (U/L)
+Alk Ptse (U/L)
+CK (U/L)
+LDH (U/L)&Cholesterol (mg/dL) T Protein (m/dL)&Phosphorous (mg/dL)
+Calcium (mg/dL)
+Sodium (mmol/L)$Potassium (mmol/L)"Chloride (mmol/L)(Bicarbonate (mmol/L)"Uric Acid (mg/dL)$Anion Gap (mmol/L)
+Bile Acid
+Billirubin<White Blood Cell Ct (x10^3/ul)
+Hematocrit (%)
+Thrombocyte Est
+Heterophils
+Lymphocytes
+Monocytes
+Morphology.Banded Heterophils Abso(Heterophil Absolute#(Lymphocyte Absolute#0Act Lymphocyte Absolute#$Monocyte Absolute#(Eosinophil Absolute#$Basophil Absolute#
+Basophils
+Eosinophils
+Notes
+ToNumber
+Index
+Unique ID
+Select
+Index
+SpeciesID
+Glucose (mg/dL)
+AST (U/L)
+ALT (U/L)
+Gamma (U/L)
+Alk Ptse (U/L)
+CK (U/L)
+LDH (U/L)&Cholesterol (mg/dL) T Protein (m/dL)&Phosphorous (mg/dL)
+Calcium (mg/dL)
+Sodium (mmol/L)$Potassium (mmol/L)"Chloride (mmol/L)(Bicarbonate (mmol/L)"Uric Acid (mg/dL)$Anion Gap (mmol/L)
+Bile Acid
+Billirubin<White Blood Cell Ct (x10^3/ul)
+Hematocrit (%)
+Thrombocyte Est
+Heterophils
+Lymphocytes
+Monocytes
+Morphology.Banded Heterophils Abso(Heterophil Absolute#(Lymphocyte Absolute#0Act Lymphocyte Absolute#$Monocyte Absolute#(Eosinophil Absolute#$Basophil Absolute#
+Basophils
+Eosinophils
+ToNumber
+Index
+SpeciesID
+:  inf
+Select
+Index
+Date in
+Date to go Home
+Client Name
+First Name
+Last Name
+Home Phone
+Work Phone
+Cell Phone
+Street
+City
+State
+Zip$Emergency Phone #1$Emergency Phone #2
+Birds Name
+Species
+Location
+Weight
+Vet Check Date
+CS Date
+SA Date
+Poly Date
+Exam
+Poly
+Groom Beak
+Groom Wing
+Groom Nails
+Vet Exam
+Vet S/A
+Vet C/S
+Vet Poly
+Comments
+Toys
+Carrier
+Food2Food/Special Instructions
+Person Name
+Beak
+Eyes
+Nares
+Ears(Head & Face Feathers"Head & Face Other Head & Face None(Head & Face Comments
+Chest
+Abdomen
+Vent
+Back
+Body Feathers
+Body Other
+Body None
+Body Comments
+Nails
+Toes
+Skin&Feet & Leg Function&Feet & Leg Feathers Feet & Leg Other
+Feet & Leg None&Feet & Leg Comments
+Underside
+Wings Function Wings Feathering
+Wings Other
+Wings None
+Wings Comments"Medical Treatment
+Cost
+Completed
+Status
+ToNumber
+Index
+Select
+Index
+Clutch Number
+Species
+Male Unique ID
+Male Name
+Male Band No
+Male Genotype
+Male Phenotype Female Unique ID
+Female Name
+Female Band No
+Female Genotype Female Phenotype
+Cage Number
+Date Set-up
+Comments
+Nest Box
+Breeding Status
+Number of Eggs
+Species Number
+Colors
+Incubation Date
+ToNumber
+Clutch_Number
+Index
+NewIndex
+PrimaryKey
+Select
+Index
+Clutch Number
+Species
+Male Unique ID
+Male Name
+Male Band No
+Male Genotype
+Male Phenotype Female Unique ID
+Female Name
+Female Band No
+Female Genotype Female Phenotype
+Cage Number
+Date Set-up
+Comments
+Nest Box
+Breeding Status
+Number of Eggs
+Species Number
+Colors
+ToNumber
+Clutch_Number
+Index
+NewIndex
+PrimaryKey
+Select
+Index
+Species
+Egg #
+Clutch Number
+Laid Date
+Status
+Hatch Date
+Unique ID
+Name
+Band No
+Sex$Genetic Appearance
+Submitted&Expected Hatch Date
+Male Parent ID"Male Parent Color Female Parent ID&Female Parent Color
+Banding Date
+Foster
+Fledging Date
+Genotype
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+Birth Problems
+Nest Problems$Illness/Treatments
+Notes
+Death Date
+File Name
+Handfed Actual Band Date$Actual Fledge Date
+Breeding Line
+ToNumber
+Clutch Number
+NewIndex
+PrimaryKey
+OrderB
+Select
+Index
+Species
+Egg #
+Clutch Number
+Laid Date
+Status
+Hatch Date
+Unique ID
+Name
+Band No
+Sex$Genetic Appearance
+Submitted&Expected Hatch Date
+Male Parent ID"Male Parent Color Female Parent ID&Female Parent Color
+Banding Date
+Foster
+Fledging Date
+Genotype
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+Birth Problems
+Nest Problems$Illness/Treatments
+Notes
+Death Date
+File Name
+Handfed Actual Band Date$Actual Fledge Date
+Breeding Line
+ToNumber
+Clutch Number
+NewIndex
+PrimaryKey
+Select
+Index
+Species
+Egg #
+Clutch Number
+Laid Date
+Status
+Hatch Date
+Unique ID
+Name
+Band No
+Sex$Genetic Appearance
+Submitted&Expected Hatch Date
+Male Parent ID"Male Parent Color Female Parent ID&Female Parent Color
+Banding Date
+Foster
+Fledging Date
+Date Set-up
+Genotype
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+Birth Problems
+Nest Problems$Illness/Treatments
+Notes
+Death Date
+File Name
+Handfed Actual Band Date$Actual Fledge Date
+Breeding Line
+ToNumber
+NewIndex
+PrimaryKey
+Select
+Index
+Date
+Schedule Item
+Notes
+Index
+NewIndex
+Select
+Index
+Full Name
+Last Name
+First Name
+Home Address
+Home City
+Home State
+Home Zip
+Home Phone
+Home FAX"Home Mobile Phone
+Home e-mail
+Home Web
+Business Name Business Address
+Business City
+Business State
+Business Zip
+Business Phone
+Business FAX*Business Mobile Phone
+Business e-mail
+Business Web
+Comments
+Association
+ToNumber
+Company Name
+Full Name
+Index
+NewIndex
+PrimaryKey
+Select
+Index
+Full Name
+Last Name
+First Name
+Home Address
+Home City
+Home State
+Home Zip
+Home Phone
+Home FAX"Home Mobile Phone
+Home e-mail
+Home Web
+Business Name Business Address
+Business City
+Business State
+Business Zip
+Business Phone
+Business FAX*Business Mobile Phone
+Business e-mail
+Business Web
+Comments
+Association
+ToNumber
+Company Name
+Full Name
+Index
+NewIndex
+PrimaryKey
+Select
+Index
+Name
+Street
+City
+State
+Index
+Select
+Index
+Name
+FlockFields
+AilmentFields
+BirdCareFields$BirdCareCmplFields
+BreedingFields
+ContactsFields$ExpendituresFields
+InternetFields
+InvoiceFields
+OffspringFields
+ProductsFields
+ProjectsFields(ProjectResultsFields
+ReferenceFields
+ServicesFields
+ShowFields
+SpeciesFields
+Index
+PrimaryKey
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Index
+Select
+Status
+Clutch Number
+Species
+Unique ID
+Name
+Egg #
+Laid Date
+Short Date	
+Hatch Date
+Short Date	
+Submitted
+&Expected Hatch Date
+Short Date	
+Male Parent ID	
+"Male Parent Color	
+ Female Parent ID	
+&Female Parent Color	
+Banding Date	
+Foster	
+Fledging Date	
+ToNumber	
+Band No
+$Genetic Appearance
+Genotype
+upgrade 2.8	
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+Birth Problems
+Nest Problems
+OffspringRecordsArchive
+Test Query
+Create report in Design view
+Create data access page in Design view
+AllowZeroLength
+Required
+DefaultValue
+Filter*
+Select	
+Name	
+Orientation	
+TopMargin	
+BottomMargin	
+LeftMargin	
+RightMargin	
+PictureHeight	
+PictureWidth	
+DrillDown	
+Contacts	
+False7
+Invoices	
+False1
+Flock	
+False9
+Offspring	
+False7
+Breeding	
+False
+Examination
+Test Query
+Create report in Design view
+Create data access page in Design view
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+Format
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+InputMask
+Caption
+DefaultValue
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Index
+Select
+Status
+Clutch Number
+Species
+Unique ID
+Name
+Egg #
+Laid Date
+Short Date	
+Hatch Date
+Short Date	
+Submitted
+&Expected Hatch Date
+Short Date	
+Male Parent ID	
+"Male Parent Color	
+ Female Parent ID	
+&Female Parent Color	
+Banding Date	
+Foster	
+Fledging Date	
+ToNumber	
+Date Set-up
+Band No
+$Genetic Appearance
+Genotype
+upgrade 2.8	
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+Birth Problems
+Nest
+Problems
+$Illness/Treatments
+Notes
+Death Date
+File Name
+Handfed
+ Actual Band Date
+$Actual Fledge Date
+BreedingResultsTemp
+Test Query
+Create report in Design view
+Create data access page in Design view
+$Illness/Treatments
+Notes
+Death Date
+File Name
+Handfed
+ Actual Band Date
+$Actual Fledge Date
+Breeding Line
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+Format
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+InputMask
+Caption
+DefaultValue
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Index
+Select
+Status
+Clutch Number
+Species
+Unique ID
+Name
+Egg #
+Laid Date
+Short Date	
+Hatch Date
+Short Date	
+Submitted
+&Expected Hatch Date
+Short Date	
+Male Parent ID	
+"Male Parent Color	
+ Female Parent ID	
+&Female Parent Color	
+Banding Date	
+Foster	
+Fledging Date	
+ToNumber	
+Band No
+$Genetic Appearance
+Genotype
+upgrade 2.8	
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+Birth Problems
+Nest Problems
+$Illness/Treatments
+Notes
+Death Date
+File Name
+Handfed
+ Actual Band Date
+$Actual Fledge Date
+Breeding Line
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+Format
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+InputMask
+Caption
+DefaultValue
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Index
+Select
+Status
+Clutch Number
+Species
+Unique ID
+Name
+Egg #
+Laid Date
+Short Date	
+Hatch Date
+Short Date	
+Submitted
+&Expected Hatch Date
+Short Date	
+Male Parent ID	
+"Male Parent Color	
+ Female Parent ID	
+&Female Parent Color	
+Banding Date	
+Foster	
+Fledging Date	
+ToNumber	
+Date Set-up
+Band No
+$Genetic Appearance
+Genotype
+upgrade 2.8	
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+Birth Problems
+Nest
+Problems
+$Illness/Treatments
+Notes
+Death Date
+File Name
+Handfed
+ Actual Band Date
+$Actual Fledge Date
+Breeding Line
+Comments
+Cause of Death
+Phenotype
+Index
+Genotype
+Unique ID
+Clutch Number
+(Male Parent Genotype
+,Female Parent Genotype
+Sold to MI
+"Sold to Last Name
+*Sold to Business Name
+Type Address
+Species
+Select
+Male Parent ID
+ Male Parent Name
+ Female Parent ID
+$Female Parent Name
+Sale Price
+*$#,##0.00;($#,##0.00)	
+X10	
+ToNumber	
+Band Number
+&Male Parent Band No
+*Female Parent Band No
+*Male Parent Phenotype
+.Female Parent Phenotype
+Sold to e-mail
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+RowSourceType
+RowSource
+BoundColumn
+ColumnCount
+ColumnHeads
+ColumnWidths
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression
+Sellers Address	
+Sellers City	
+*Purchasers First Name
+$Purchasers Address
+Purchasers City
+$Acquisition Method
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight
+$Sellers First Name
+ Sellers Zip Code
+Sellers Phone
+Sellers FAX
+ Purchasers State
+&Purchasers Zip Code
+ Purchasers Phone
+Purchasers Fax
+Sellers State
+Table/Query
+Clutch Number
+Name
+Cage Number
+Breeding Status
+Hatch Date
+Short Date	
+Receipt Date
+Short Date	
+Sold Date
+Short Date	
+Death Date
+Short Date	
+Birth Problems
+Nest Problems
+$Illness/Treatments
+"Breeding Problems
+Comments
+Death Cause
+Phenotype
+Index
+Species
+Genotype
+Unique ID
+"Sellers Last Name
+(Purchasers Last Name
+Sellers MI
+*Sellers Business Name
+Purchasers MI
+0Purchasers Business Name
+(Sellers Type Address
+.Purchasers Type Address
+Select
+Estimated Value
+*$#,##0.00;($#,##0.00)	
+Cost
+*$#,##0.00;($#,##0.00)	
+Purchase Pric
+*$#,##0.00;($#,##0.00)	
+X10	
+Show Quality	
+Lost Date	
+Sell	
+ General Comments	
+Band Number
+Sellers e-mail
+"Purchasers e-mail
+Field 1
+Field 2
+Field 3
+Field 4
+Field 5
+ToNumber
+Parent Raised
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+Breeding Line
+Index
+NewIndex
+PrimaryKey
+ToNumber
+Index
+NewIndex
+PrimaryKey
+temsArchive
+ffffffffffd 
+WeightResults
+HHH<<<<<<<: 
+WeightExpected
+JJJ>>>>>>>< 
+Tree
+666*******( 
+SpecieTerms
+DDD88888886 
+Species
+<<<0000000. 
+ShowAwards
+BBB66666664 
+Services
+>>>22222220 
+Routines
+>>>22222220 
+ResultsReport
+HHH<<<<<<<: 
+ReferencesArchive
+PPPDDDDDDDB 
+Projects
+>>>22222220 
+ProjectFields
+HHH<<<<<<<: 
+Products
+>>>22222220 
+PicturesArchive
+LLL@@@@@@@> 
+Pictures
+>>>22222220 
+Orders
+:::......., 
+Options
+<<<0000000. 
+OffspringRecordsArchive
+\\\PPPPPPPN 
+OffspringRecords
+NNNBBBBBBB@ 
+NestboxTemp
+DDD88888886 
+MSysIMEXSpecs
+<<<<<<<<<<: 
+MSysIMEXColumns
+@@@@@@@@@@> 
+MSysCmdbars
+88888888886 
+MSysAccessStorage
+DDDDDDDDDDB 
+444(((((((& 
+Location
+>>>22222220 
+Invoices
+>>>22222220 
+InvoiceItemsTemp
+NNNBBBBBBB@ 
+InvoiceItemsArchive
+TTTHHHHHHHF 
+InvoiceItems
+FFF:::::::8 
+InternetArchive
+LLL@@@@@@@> 
+IncubationArchive
+PPPDDDDDDDB 
+Incubation
+BBB66666664 
+FlockMembersArchive
+TTTHHHHHHHF 
+FlockMembers
+FFF:::::::8 
+ExpendituresArchive
+TTTHHHHHHHF 
+Breeding Line
+ToNumber
+Index
+NewIndex
+PrimaryKey
+MSysRelationships///
+umber
+Index
+NewIndex
+PrimaryKey
+OrderByOn
+AllowZeroLength
+Required
+ColumnWidth
+ColumnOrder
+ColumnHidden
+DisplayControl
+RowSourceType
+BoundColumn
+ColumnCount
+ColumnHeads
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+InputMask
+Caption
+DefaultValue
+RowSource
+ColumnWidths
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Sellers Address	
+Sellers City	
+*Purchasers First Name
+$Purchasers Address
+Purchasers City
+$Acquisition Method
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight
+$Sellers First Name
+ Sellers Zip Code
+Sellers Phone
+Sellers FAX
+ Purchasers State
+&Purchasers Zip Code
+ Purchasers Phone
+Purchasers Fax
+Sellers State
+Table/Query
+Clutch Number
+Name
+Cage Number
+Breeding Status
+Hatch Date
+Short Date	
+Receipt Date
+Short Date	
+Sold Date
+Short Date	
+Death Date
+Short Date	
+Birth Problems
+Nest Problems
+$Illness/Treatments
+"Breeding Problems
+Comments
+Death Cause
+Phenotype
+Index
+Species
+Genotype
+Unique ID
+Sellers MI
+"Sellers Last Name
+*Sellers Business Name
+Purchasers MI
+(Purchasers Last Name
+0Purchasers Business Name
+(Sellers Type Address
+.Purchasers Type Address
+Select
+Estimated Value
+*$#,##0.00;($#,##0.00)	
+Cost
+*$#,##0.00;($#,##0.00)	
+Purchase Pric
+Select
+Index
+Flock ID
+Date
+Eyes/Ears
+Beak/Oral
+Ab/Cloaca
+Feet/Legs
+Serum Chemistry
+Vitamin D
+Polyoma
+Pachecos
+Other
+Cloacal Culture
+Body Score
+Weight"Feather Condition
+Examiner
+Exam Notes
+ToNumber
+Flock Index
+Index
+Select
+Select
+Index
+Flock ID
+Date
+Eyes/Ears
+Beak/Oral
+Ab/Cloaca
+Feet/Legs
+Serum Chemistry
+Vitamin D
+Polyoma
+Pachecos
+Other
+Cloacal Culture
+Body Score
+Weight"Feather Condition
+Examiner
+Exam Notes
+ToNumber
+Flock Index
+Index
+Select
+Select
+Index
+Category
+Date
+Description
+Cost
+Check No
+Receipt No
+Paid To
+Remarks
+Item ID
+Account
+Posted
+ToNumber
+NewIndex
+PrimaryKey	
+Select
+Index
+Category
+Date
+Description
+Cost
+Check No
+Receipt No
+Paid To
+Remarks
+Item ID
+Account
+Posted
+ToNumber
+NewIndex
+PrimaryKey	
+MSysAccessStorageSTGREL
+PPPPPPPPPPN
+MSysAccessStorageSTGREL
+PPPPPPPPPPN 
+InvoicesInvoiceItems
+JJJJJJJJJJH 
+InvoicesArchiveInvoiceItemsArchive
+ffffffffffd 
+WeightResults
+HHH<<<<<<<: 
+WeightExpected
+JJJ>>>>>>>< 
+Tree
+666*******( 
+SpecieTerms
+DDD88888886 
+Species
+<<<0000000. 
+ShowAwards
+BBB66666664 
+Services
+>>>22222220 
+Routines
+>>>22222220 
+ResultsReport
+HHH<<<<<<<: 
+ReferencesArchive
+PPPDDDDDDDB 
+Projects
+>>>22222220 
+ProjectFields
+HHH<<<<<<<: 
+Products
+>>>22222220 
+PicturesArchive
+LLL@@@@@@@> 
+Pictures
+>>>22222220 
+Orders
+:::......., 
+Options
+<<<0000000. 
+OffspringRecordsArchive
+\\\PPPPPPPN 
+OffspringRecords
+NNNBBBBBBB@ 
+NestboxTemp
+DDD88888886 
+MSysIMEXSpecs
+<<<<<<<<<<: 
+MSysIMEXColumns
+@@@@@@@@@@> 
+MSysCmdbars
+88888888886 
+MSysAccessStorage
+DDDDDDDDDDB 
+444(((((((& 
+Location
+>>>22222220 
+Invoices
+>>>22222220 
+InvoiceItemsTemp
+NNNBBBBBBB@ 
+InvoiceItemsArchive
+TTTHHHHHHHF 
+InvoiceItems
+FFF:::::::8 
+InternetArchive
+LLL@@@@@@@> 
+IncubationArchive
+PPPDDDDDDDB 
+Incubation
+BBB66666664 
+FlockMembersArchive
+TTTHHHHHHHF 
+FlockMembers
+FFF:::::::8 
+ExpendituresArchive
+TTTHHHHHHHF 
+Select
+Index
+Species
+Unique ID
+Name
+Band Number
+Cage Number
+Phenotype
+Genotype
+Breeding Status
+Clutch Number$Acquisition Method
+Hatch Date
+Birth Problems
+Nest Problems$Illness/Treatments
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight"Breeding Problems
+Comments
+Estimated Value(Sellers Type Address$Sellers First Name
+Sellers MI"Sellers Last Name*Sellers Business Name
+Receipt Date
+Cost
+Sellers Address
+Sellers City
+Sellers State Sellers Zip Code
+Sellers Phone
+Sellers FAX
+Sellers e-mail
+Sold Date.Purchasers Type Address*Purchasers First Name
+Purchasers MI(Purchasers Last Name0Purchasers Business Name$Purchasers Address
+Purchasers City Purchasers State&Purchasers Zip Code Purchasers Phone
+Purchasers Fax"Purchasers e-mail
+Purchase Price
+Death Date
+Death Cause
+Show Quality
+Lost Date
+Sell General Comments
+Parent Raised
+Field 1
+Field 2
+Field 3
+Field 4
+Field 5
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Rema
+0CB0PropData
+IEA1
+Select
+Index
+Species
+Unique ID
+Name
+Band Number
+Cage Number
+Phenotype
+Genotype
+Breeding Status
+Clutch Number$Acquisition Method
+Hatch Date
+Birth Problems
+Nest Problems$Illness/Treatments
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight"Breeding Problems
+Comments
+Estimated Value(Sellers Type Address$Sellers First Name
+Sellers MI"Sellers Last Name*Sellers Business Name
+Receipt Date
+Cost
+Sellers Address
+Sellers City
+Sellers State Sellers Zip Code
+Sellers Phone
+Sellers FAX
+Sellers e-mail
+Sold Date.Purchasers Type Address*Purchasers First Name
+Purchasers MI(Purchasers Last Name0Purchasers Business Name$Purchasers Address
+Purchasers City Purchasers State&Purchasers Zip Code Purchasers Phone
+Purchasers Fax"Purchasers e-mail
+Purchase Price
+Death Date
+Death Cause
+Show Quality
+Lost Date General Comments
+Parent Raised
+Field 1
+Field 2
+Field 3
+Field 4
+Field 5
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+Breeding Line
+Select
+Index
+Egg ID
+Clutch Number
+Male Unique ID Female Unique ID Male Band Number$Female Band Number
+Species
+Date
+Time
+Weight
+Temperature
+Humidity Incubator Number
+Fertile
+Hatched
+Comments
+Date Laid
+ToNumber
+Index
+Select
+Index
+Egg ID
+Clutch Number
+Male Unique ID Female Unique ID Male Band Number$Female Band Number
+Species
+Date
+Time
+Weight
+Temperature
+Humidity Incubator Number
+Fertile
+Hatched
+Comments
+Date Laid
+ToNumber
+Index
+Select
+Index
+Internet Site
+Title
+Contents
+Page1 Address"Page1 Information
+Page2 Address"Page2 Information
+Page3 Address"Page3 Information
+Page4 Address"Page4 Information
+Page5 Address"Page5 Information
+Page6 Address"Page6 Information
+e-mail
+ToNumber
+Index
+Internet Site
+NewIndex
+PrimaryKey
+Select
+Index
+Internet Site
+Title
+Contents
+Page1 Address"Page1 Information
+Page2 Address"Page2 Information
+Page3 Address"Page3 Information
+Page4 Address"Page4 Information
+Page5 Address"Page5 Information
+Page6 Address"Page6 Information
+e-mail
+ToNumber
+Index
+Internet Site
+NewIndex
+PrimaryKey
+Select
+Index
+Invoice Number
+Item ID Item Description
+Quantity
+Unit Price
+Extended Price
+ToNumber
+Invoice Number
+Item ID
+NewIndex
+PrimaryKey
+Select
+Index
+Invoice Number
+Item ID Item Description
+Quantity
+Unit Price
+Extended Price
+ToNumber
+Invoice Number
+Item ID
+NewIndex
+PrimaryKey
+Select
+Index
+Invoice Number
+Item ID Item Description
+Quantity
+Unit Price
+Extended Price
+Original Index
+Invoice Index
+Item ID
+NewIndex
+PrimaryKey
+Select
+Index
+Invoice Number
+Invoice Date
+First Name
+Last Name
+Business Name
+Type Address
+Street
+City
+State
+Phone
+e-mail
+SubTotal*Shipping and Handling
+Tax Rate
+Total
+Payment
+Balance
+Payment Method
+CC Name
+CC Type
+CC Number
+CC Exp Date
+Comments
+ToNumber
+Invoice Number
+NewIndex
+PrimaryKey
+Select
+Index
+Invoice Number
+Invoice Date
+First Name
+Last Name
+Business Name
+Type Address
+Street
+City
+State
+Phone
+e-mail
+SubTotal*Shipping and Handling
+Tax Rate
+Total
+Payment
+Balance
+Payment Method
+CC Name
+CC Type
+CC Number
+CC Exp Date
+Comments
+ToNumber
+Invoice Number
+NewIndex
+PrimaryKey
+Select
+Index
+Location
+ToNumber
+Index
+Index
+DateTime
+FileName
+FilePath
+DateTime
+FileName
+Index
+PrimaryKey
+DateCreate
+DateUpdate
+Name
+ParentId
+Type
+Id.MSysAccessStorageSTGREL
+ParentIdId
+ParentIdName
+PropData
+PROJECT
+840"
+PROJECTwm
+>:6$
+_VBA_PROJECT
+B>:"
+0,("
+AcessVBAData
+NJF.
+DataAccessPages
+CustomGroups
+MSysDb
+DirData
+PLH8
+Blob
+Databases
+PropData
+PLH8
+Scripts
+Reports
+Modules
+Cmdbars
+Test Query
+DirData
+XTP@
+BlobDelta
+TypeInfo
+:62"
+PropData
+PLH8
+Blob
+2.*"
+Forms
+VBAProject
+MSysAccessStorage_SCRATCH
+MSysAccessStorage_ROOT
+BDAO
+VBID
+*\G{000204EF-0000-0000-C000-000000000046}#4.0#9#C:\PROGRA~1\COMMON~1\MICROS~1\VBA\VBA6\VBE6.DLL#Visual Basic For Applications
+*\G{4AFFC9A0-5F99-101B-AF4E-00AA003F0F07}#9.0#0#C:\Program Files\Microsoft Office\Office10\MSACC.OLB#Microsoft Access 10.0 Object Library
+*\G{00025E01-0000-0000-C000-000000000046}#5.0#0#C:\PROGRAM FILES\COMMON FILES\MICROSOFT SHARED\DAO\DAO350.DLL#Microsoft DAO 3.51 Object Library
+*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\System32\stdole2.tlb#OLE Automation
+*\G{0002E157-0000-0000-C000-000000000046}#5.3#0#C:\Program Files\Common Files\Microsoft Shared\VBA\VBA6\VBE6EXT.OLB#Microsoft Visual Basic for Applications Extensibility 5.3
+*\G{0002E550-0000-0000-C000-000000000046}#1.0#0#C:\Program Files\Common Files\Microsoft Shared\Web Components\10\OWC10.DLL#Microsoft Office XP Web Components
+LValue
+ObjectGuid
+ObjectName
+Property
+Value
+Id$ObjectGuidProperty$ObjectNameProperty
+ayCont
+Grptbcd
+TbName
+TbIndex
+Attributes
+DataType
+FieldName
+IndexType
+SkipColumn
+SpecID
+Start
+Width
+Index1
+PrimaryKey
+DateDelim"DateFourDigitYear DateLeadingZeros
+DateOrder
+DecimalPoint
+FieldSeparator
+FileType
+SpecID
+SpecName
+SpecType
+StartRow
+TextDelim
+TimeDelim
+PrimaryKey
+Select
+Index
+Clutch Number
+Date Set-up
+Cage Number
+Male Phenotype
+Male Band No Female Phenotype
+Female Band No
+Round 1 Number&Round 1 Number Laid
+Round 1 Fertile
+Round 1 Clear
+Round 1 DIS$Round 1 First Laid,Round 1 Number Hatched
+Round 2 Number&Round 2 Number Laid
+Round 2 Fertile
+Round 2 Clear
+Round 2 DIS$Round 2 First Laid,Round 2 Number Hatched
+Round 3 Number&Round 3 Number Laid
+Round 3 Fertile
+Round 3 Clear
+Round 3 DIS$Round 3 First Laid,Round 3 Number Hatched
+1Laid
+1Hatched
+1BandNo
+2Laid
+2Hatched
+2BandNo
+3Laid
+3Hatched
+3BandNo
+4Laid
+4Hatched
+4BandNo
+5Laid
+5Hatched
+5BandNo
+6Laid
+6Hatched
+6BandNo
+7Laid
+7Hatched
+7BandNo
+8Laid
+8Hatched
+8BandNo
+9Laid
+9Hatched
+9BandNo
+10Laid
+10Hatched
+10BandNo
+11Laid
+11Hatched
+11BandNo
+12Laid
+12Hatched
+12BandNo
+13Laid
+13Hatched
+13BandNo
+14Laid
+14Hatched
+14BandNo
+15Laid
+15Hatched
+15BandNo
+16Laid
+16Hatched
+16BandNo
+17Laid
+17Hatched
+17BandNo
+Clutch Number
+Index
+PrimaryKey	
+Select
+Index
+Species
+Unique ID
+Name
+Band Number
+Cage Number
+Clutch Number
+Hatch Date
+Phenotype
+Genotype
+Handfed
+Committed
+Committed To
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight
+Male Parent ID Male Parent Name&Male Parent Band No(Male Parent Genotype*Male Parent Phenotype Female Parent ID$Female Parent Name*Female Parent Band No,Female Parent Genotype.Female Parent Phenotype
+Birth Problems
+Nest Problems$Illness/Treatments
+Comments
+Final Status
+Date of Status
+Type Address$Sold to First Name
+Sold to MI"Sold to Last Name*Sold to Business Name
+Sold to Address
+Sold to City
+Sold to State Sold to Zip Code
+Sold to Phone
+Sold to FAX
+Sold to e-mail
+Sale Price
+Date of Death
+Cause of Death
+Submitted1
+File Name
+Signature Title
+Maturity Date
+Banding Date
+Fledging Date
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+Breeding Line
+ToNumber
+Index
+NewIndex
+PrimaryKey
+Select
+Index
+Species
+Unique ID
+Name
+Band Number
+Cage Number
+Clutch Number
+Hatch Date
+Phenotype
+Genotype
+Handfed
+Committed
+Committed To
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight
+Male Parent ID Male Parent Name&Male Parent Band No(Male Parent Genotype*Male Parent Phenotype Female Parent ID$Female Parent Name*Female Parent Band No,Female Parent Genotype.Female Parent Phenotype
+Birth Problems
+Nest Problems$Illness/Treatments
+Comments
+Final Status
+Date of Status
+Type Address$Sold to First Name
+Sold to MI"Sold to Last Name*Sold to Business Name
+Sold to Address
+Sold to City
+Sold to State Sold to Zip Code
+Sold to Phone
+Sold to FAX
+Sold to e-mail
+Sale Price
+Date of Death
+Cause of Death
+Submitted1
+Maturity Date
+Banding Date
+Fledging Date
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+Breeding Line
+ToNumber
+Index
+NewIndex
+PrimaryKey
+Male
+Female
+Name
+Street
+City
+State
+Phone
+e-mail
+Closing
+Signature Title
+Backup Location
+Backup Type
+Last Location
+Backup Date
+Time
+Last Date
+InvUpdate
+Name1
+Type1
+Name2
+Type2
+Name3
+Type3
+Name4
+Type4
+Name5
+Type5
+XP DB
+Contract Name
+Contract Filing
+PrimaryKey
+Select
+Index
+Order ID
+Date
+Name
+Street
+City
+State/Prov
+Postal Code
+Phone
+e-mail
+Item ID Item Description
+Quantity"Availability Date
+Deposit
+Completed
+Comments
+ToNumber
+Index
+Select
+Index
+File Name
+Unique ID
+Name
+Band Number
+File Path
+Report Default
+Date
+ToNumber
+File Name
+Index
+NewIndex
+PrimaryKey
+Select
+Index
+File Name
+Unique ID
+Name
+Band Number
+File Path
+Report Default
+Date
+ToNumber
+Index
+NewIndex
+Photo ID
+PrimaryKey
+Select
+Index
+Item ID
+Category
+Description
+Cost
+Qty On Hand
+Last Updated
+Notes
+Barcode Number Desired Quantity
+ToNumber
+Index
+Select
+Select
+Index
+Project
+Date
+Field2
+Field3
+Field4
+Field5
+Field6
+Field7
+Field8
+Field9
+Field10
+Field11
+Field12
+Field13
+Field14
+Field15
+Field16
+Field17
+Field18
+Field19
+Field20
+Field21
+Field22
+Field23
+Field24
+Field25
+Field26
+Field27
+Field28
+Field29
+Field30
+Field31
+Field32
+Field33
+Field34
+Field35
+Field36
+Field37
+Field38
+Field39
+Field40
+Field41
+Field42
+Field43
+Field44
+Field45
+Field46
+Field47
+Field48
+Field49
+Field50
+Field51
+Field52
+Field53
+Field54
+Field55
+Field56
+Field57
+Field58
+Field59
+Field60
+ToNumber
+Index
+Project
+Select
+Select
+Index
+Project
+Species
+Unique ID
+Band Number
+Cage Number
+Date
+Field2
+Field3
+Field4
+Field5
+Field6
+Field7
+Field8
+Field9
+Field10
+Field11
+Field12
+Field13
+Field14
+Field15
+Field16
+Field17
+Field18
+Field19
+Field20
+Field21
+Field22
+Field23
+Field24
+Field25
+Field26
+Field27
+Field28
+Field29
+Field30
+Field31
+Field32
+Field33
+Field34
+Field35
+Field36
+Field37
+Field38
+Field39
+Field40
+Field41
+Field42
+Field43
+Field44
+Field45
+Field46
+Field47
+Field48
+Field49
+Field50
+Field51
+Field52
+Field53
+Field54
+Field55
+Field56
+Field57
+Field58
+Field59
+Field60
+ToNumber
+Index
+Select	
+Select
+Index
+Title
+Author
+Topic
+Magazine Name
+Magazine Issue
+Magazine Pages Publication Name"Publication Issue"Publication Pages
+Text Book Name"Text Book Edition
+Text Book Pages
+Comments
+File Name
+ToNumber
+Index
+NewIndex
+PrimaryKey
+Title
+Select
+Index
+Title
+Author
+Topic
+Magazine Name
+Magazine Issue
+Magazine Pages Publication Name"Publication Issue"Publication Pages
+Text Book Name"Text Book Edition
+Text Book Pages
+Comments
+File Name
+ToNumber
+Index
+NewIndex
+PrimaryKey
+Title
+Index
+Species
+Egg #
+Clutch Number
+Select
+NewIndex
+PrimaryKey
+Select
+Index
+Event
+Time
+Duration
+Days
+Exclusions
+ToNumber
+Index
+Select
+Select
+Index
+Service ID
+Category
+Description
+Cost
+Last Updated
+Notes
+ToNumber
+Index
+Select
+Select
+Index
+Species
+Unique ID
+Name
+Band No
+Color
+Division
+Section
+Class
+Placed
+Points
+Judge Name
+Date
+Club Name
+Show Location
+Comments
+Rating #1
+Rating #2
+Rating #3
+Rating #4
+Rating #5
+Rating #6
+Rating #7
+Rating #8
+Rating #9
+Rating #10
+Rating #11
+Rating #12
+Rating #13
+Rating #14
+Rating #15
+Rating #16
+Rating #17
+ToNumber
+Index1
+NewIndex
+PrimaryKey
+Select
+Index
+Species
+Unique ID
+Name
+Band No
+Color
+Division
+Section
+Class
+Placed
+Points
+Judge Name
+Date
+Club Name
+Show Location
+Comments
+Rating #1
+Rating #2
+Rating #3
+Rating #4
+Rating #5
+Rating #6
+Rating #7
+Rating #8
+Rating #9
+Rating #10
+Rating #11
+Rating #12
+Rating #13
+Rating #14
+Rating #15
+Rating #16
+Rating #17
+ToNumber
+Index
+NewIndex
+PrimaryKey
+Select
+Index
+Species"Incubation Period(Recessive Variety #1&Recessive Symbol #1(Recessive Variety #2&Recessive Symbol #2(Recessive Variety #3&Recessive Symbol #3(Recessive Variety #4&Recessive Symbol #4(Recessive Variety #5&Recessive Symbol #5(Recessive Variety #6&Recessive Symbol #6(Recessive Variety #7&Recessive Symbol #7(Recessive Variety #8&Recessive Symbol #8(Recessive Variety #9&Recessive Symbol #9*Recessive Variety #10(Recessive Symbol #10*Recessive Variety #11(Recessive Symbol #11*Recessive Variety #12(Recessive Symbol #12*Recessive Variety #13(Recessive Symbol #130Part Dominant Var
+{kXJ-""i
+{mYYYYYYYYYK///////////////////////////""i
+qTD2""i
+`R.""i
+xjVH6""i
+tfRD2""i
+ugSE3""i
+{`P7""i
+fU3""i
+{kRB/""i
+s\K2""i
+rYYYYYYYYYYYYYYYYYYYYYYYYYK7""i>
+|nZL:""i
+Red Head,  Purple
+~pXH5""i
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}lVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVH6""i>
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxgQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQC/""i>
+~pXJ2""i
+m]:""i
+eT4""i
+|lYK3""i
+t\L4""i
+}oWI7""i
+u\\\\\\\\\\\\\\\\\\\\\\\\\N<""i>
+q[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[J6""i>
+mPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPB0""i>
+|lQC1""i
+tWI1""i
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvhVF3""i
+w_O3""i
+{```````````````````````````````````O2""i>
+pZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZL4""i>
+xjXG3""i
+|kWI7""i
+}bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbT8""i>
+s```````````````````````````````````````````````O;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;""i
+s`````````````````````````````````````````````````````````````````````````````````````````````R@""i>
+wfI;)""i
+ziSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSE3""i>
+tcOA/""i
+t^^^^^^^^^P9999999999999999999999999999999999999""i
+r_____________________________________________________________________________________________N1""i>
+|jWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWI1""i>
+~kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkZ;""i>
+vdQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQC1111111111111111111111111111111111111""i
+o[M;""i
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~p^M9""i
+yhTF4""i
+w\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\L0""i>
+~mWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWI7""i>
+p]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]O7""i>
+rZL4""i
+~p\N6""i
+vbR6""i
+l[<""i
+weRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRD2""i>
+{gV5""i
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzlZI5""i
+x_________________________N:""i>
+oYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYK9""i>
+s[M5""i
+{iVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVH6""i>
+n[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[M2222222222222222222222222222222222222""i
+q^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^M99999999999999999999999999999999999999999999999""i
+|||||||||||||||||||||||||||||||||||||||||||||||kWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWI7""i>
+~lYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYK9""i>
+|||||||||||||||||||||||||||||||||||||||||||||||kWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWI7""i>
+xfSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSB...............................................""i
+yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyhTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTD1""i>
+ykWI1""i
+}oWI7""i
+vdQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQC1""i>
+zhUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUD00000000000000000000000000000000000000000000000""i
+r_____________________________________________________________________________________________Q?""i>
+~lYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYH44444444444444444444444444444444444444444444444""i
+|jWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWI7""i>
+rWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWI7""i>
+wdddddddddddddddddddddddddddddddddddddddddddddddS66666666666666666666666666666666666666666666666""i
+weRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRD2""i>
+}jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjZ77777777777777777777777777777777777777777777777""i
+sXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXJ8""i>
+xhUE1""i
+oaN@.""i
+p]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]L88888888888888888888888888888888888888888888888""i
+p]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]L88888888888888888888888888888888888888888888888""i
+|jWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWF22222222222222222222222222222222222222222222222""i
+}kXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXJ8""i>
+}kXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXJ8""i>
+ety #1.Part Dominant Symbol #10Part Dominant Variety #2.Part Dominant Symbol #20Part Dominant Variety #3.Part Dominant Symbol #30Part Dominant Variety #4.Part Dominant Symbol #40Part Dominant Variety #5.Part Dominant Symbol #50Full Dominant Variety #1.Full Dominant Symbol #10Full Dominant Variety #2.Full Dominant Symbol #20Full Dominant Variety #3.Full Dominant Symbol #30Full Dominant Variety #4.Full Dominant Symbol #40Full Dominant Variety #5.Full Dominant Symbol #5*Sex Linked Variety #1(Sex Linked Symbol #1*Sex Linked Variety #2(Sex Linked Symbol #2*Sex Linked Variety #3(Sex Linked Symbol #3*Sex Linked Variety #4(Sex Linked Symbol #4,Sex Linked Variety #5a*Sex Linked Symbol #5a,Sex Linked Variety #5b*Sex Linked Symbol #5b,Sex Linked Variety #5c*Sex Linked Symbol #5c,Sex Linked Variety #5d*Sex Linked Symbol #5d,Sex Linked Variety #6a*Sex Linked Symbol #6a,Sex Linked Variety #6b*Sex Linked Symbol #6b,Sex Linked Variety #6c*Sex Linked Symbol #6c,Sex Linked Variety #6d*Sex Linked Symbol #6d,Multiple #1 Variety #1*Multiple #1 Symbol #1,Multiple #1 Variety #2*Multiple #1 Symbol #2,Multiple #1 Variety #3*Multiple #1 Symbol #3,Multiple #1 Variety #4*Multiple #1 Symbol #4,Multiple #2 Variety #1*Multiple #2 Symbol #1,Multiple #2 Variety #2*Multiple #2 Symbol #2,Multiple #2 Variety #3*Multiple #2 Symbol #3,Multiple #2 Variety #4*Multiple #2 Symbol #4,Multiple #3 Variety #1*Multiple #3 Symbol #1,Multiple #3 Variety #2*Multiple #3 Symbol #2,Multiple #3 Variety #3*Multiple #3 Symbol #3,Multiple #3 Variety #4*Multiple #3 Symbol #4
+Recessive Term$Full Dominant Term$Part Dominant Term
+Wild Type Term
+Sex1Dominant
+Sex2Dominant
+Sex3Dominant
+Sex4Dominant
+Banding Period
+Species Number
+Fledging Period
+Maturity Period
+Other Name
+ToNumber
+NewIndex
+PrimaryKey
+Species
+Select
+Index
+Species
+Term1A
+Term1B
+Replace1
+Term2A
+Term2B
+Replace2
+Term3A
+Term3B
+Replace3
+Term4A
+Term4B
+Replace4
+Term5A
+Term5B
+Replace5
+Term6A
+Term6B
+Replace6
+Term7A
+Term7B
+Replace7
+Term8A
+Term8B
+Replace8
+Term9A
+Term9B
+Replace9
+Term10A
+Term10B
+Replace10
+Term11A
+Term11B
+Replace11
+Term12A
+Term12B
+Replace12
+Term13A
+Term13B
+Replace13
+Term14A
+Term14B
+Replace14
+Term15A
+Term15B
+Replace15
+Term16A
+Term16B
+Replace16
+Term17A
+Term17B
+Replace17
+Term18A
+Term18B
+Replace18
+Term19A
+Term19B
+Replace19
+Term20A
+Term20B
+Replace20 Show Standard #1 Show Standard #2 Show Standard #3 Show Standard #4 Show Standard #5 Show Standard #6 Show Standard #7 Show Standard #8 Show Standard #9"Show Standard #10"Show Standard #11"Show Standard #12"Show Standard #13"Show Standard #14"Show Standard #15"Show Standard #16"Show Standard #17
+PrimaryKey
+Species
+u]]?''
+qP=+
+n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\J4
+llP77
+ppQ::
+Aqua (Dutch Blue)
+gUC1
+u^E,
+xaH/
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}jjQ99
+mmT<<
+|iiP88
+xeeL44
+yffM55
+p^L:                                                             
+jXF4
+}dR@.
+~eSA/
+iWE3
+jXF4
+|cQ?-
+fTB0
+n\J8
+hVD2
+~eSA/
+gUC1
+gUC1
+fTB0
+hVD2
+gUC1
+kYG5
+gUC1
+hVD2
+kYG5
+hVD2
+}dR@.
+lZH6
+o]K9
+tbP>$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+v]K9'
+gUC1
+|cQ?-
+m[I7
+~eSA/
+kYG5
+hVD2
+jXF4
+jXF4
+p^L:                                                             
+~eSA/
+o]K9
+~eSA/
+o]K9
+m[I7
+~eSA/
+fTB0
+iWE3
+iWE3
+n\J8
+m[I7
+iWE3
+jXF4
+fTB0
+kYG5
+kYG5
+lZH6
+m[I7
+kYG5
+m[I7
+kYG5
+{bP>,
+~eSA/
+~eSA/
+kYG5
+fTB0
+lZH6
+lZH6
+}dR@.
+saO=#############################################################
+hVD2
+kYG5
+kYG5
+jXF4
+fTB0
+~eSA/
+{bP>,
+lZH6
+lZH6
+TestFl
+TestFl
+TestFl
+TestFlockM
+TestFlockMembersV
+TestFlockMembersV
+TestFlockMembersV
+TestFlockMembersV
+TestFlockMembersV
+TestFlockMembersV
+TestFlockMembersV
+TestFlockMembersV
+TestFlockMembersV
+TestFlockMembersV
+TestFlockMembersV
+*$#,##0.00;($#,##0.00)	
+X10	
+Show Quality	
+Lost Date	
+ General Comments	
+Band Number
+Sellers e-mail
+"Purchasers e-mail
+Field 1
+Field 2
+Field 3
+Field 4
+Field 5
+ToNumber
+Parent Raised
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+Breeding Line
+ique I
+F5ID
+F5Name
+F5BandNo
+F4MaleID
+F4MaleName
+F4MaleBandNo
+F4FemaleID
+F4FemaleName
+F4FemaleBandNo
+F3MMID
+F3MMName
+F3MMBandNo
+F3FMID
+F3FMName
+F3FMBandNo
+F3MFID
+F3MFName
+F3MFBandNo
+F3FFID
+F3FFName
+F3FFBandNo
+F2MMMID
+F2MMMName
+F2MMMBandNo
+F2FMMID
+F2FMMName
+F2FMMBandNo
+F2MFMID
+F2MFMName
+F2MFMBandNo
+F2FFMID
+F2FFMName
+F2FFMBandNo
+F2MMFID
+F2MMFName
+F2MMFBandNo
+F2FMFID
+F2FMFName
+F2FMFBandNo
+F2MFFID
+F2MFFName
+F2MFFBandNo
+F2FFFID
+F2FFFName
+F2FFFBandNo
+F1MMMMID
+Select
+Index(WeightExpected Index
+Unique ID
+Date
+Weight
+Expected Weight
+6-7am
+7-8am
+8-9am
+9-10am
+10-11am
+11-12am
+12-1pm
+1-2pm
+2-3pm
+3-4pm
+4-5pm
+5-6pm
+6-7pm
+7-8pm
+8-9pm
+9-10pm
+10-11pm
+11-12pm
+12-1am
+Total
+Comments
+Completed
+ToNumber
+Index
+Unique ID(WeightExpected Index
+MSysAccessStorageSTGRELMSysAccessStorageParentIdMSysAccessStorageId
+InvoicesInvoiceItemsInvoiceItemsInvoice NumberInvoicesInvoice Number
+zjN6
+InvoicesArchiveInvoiceItemsArchiveInvoiceItemsArchiveInvoice NumberInvoicesArchiveInvoice Number
+ODBCTimeout
+MaxRecords
+RecordLocks
+RecordsetType
+Filter
+OrderBy
+OrderByOn1
+AllowZeroLength
+Required*
+Select	
+Location	
+ToNumber	
+OrderByOn
+AllowZeroLength
+Required
+ColumnWidth
+ColumnOrde
+ODBCTimeout
+MaxRecords
+RecordLocks
+RecordsetType
+Filter
+OrderBy
+OrderByOn1
+AllowZeroLength
+Required*
+Select	
+Location	
+ToNumber	
+OrderByOn
+AllowZeroLength
+Required
+ColumnWidth
+ColumnOrder
+ColumnHidden
+DisplayControl
+Select	
+Ailment	
+Description	
+Index
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Orientation
+Filter
+OrderBy
+OrderByOn
+DefaultView
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+IMEMode
+IMESentenceMode$UnicodeCompression
+DecimalPlacesp
+Select	
+Designation	
+Type	
+Balance	
+Credit Line	
+Expiration Date	
+ Institution Name	
+Street	
+City	
+State/Prov	
+Postal Code	
+Index
+Title
+Author
+Company
+Subject
+Manager
+Bird Tracker
+Al Mason$
+Cabin Software(
+ Avian Management
+Al Mason
+~TMPCLP450671
+HHH<<<<<<<: 
+~TMPCLP423331
+HHH<<<<<<<
+~TMPCLP150031
+HHH<<<<<<<: 
+ShowAwardsArchive
+PPPDDDDDDDB 
+References
+BBB66666664 
+MSysAccessXML
+KeepLocal
+T|||<<<<<<<: 
+InvoicesArchive
+LLL@@@@@@@> 
+Internet
+>>>22222220 
+ContactsArchive
+LLL@@@@@@@> 
+BreedingPairs
+HHH<<<<<<<: 
+BirdCare
+>>>22222220 
+MSysDb
+:::......., 
+ValidationRule
+ValidationText
+Orientation
+Filter
+OrderBy
+OrderByOn
+DefaultView
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+Required
+AllowZeroLength
+DisplayControl
+IMEMode
+IMESentenceMode$UnicodeCompression
+DecimalPlaces'
+Select
+Index
+Item ID
+Cost
+*$#,##0.00;($#,##0.00)	
+Description
+Barcode Number
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+Phone
+Estimated Hours
+Actual Hours
+Periodicity
+Status
+Schedule Window
+ Task Description
+Last Completed
+Short Date	
+Next Date
+Short Date	
+Comments
+Reference
+&Materials and Parts
+Index
+First Name
+Last Name
+Business Name
+Street
+City
+Address Type
+State
+Task ID
+Cage/Bird ID
+Select
+ToNumber	
+e-mail
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DecimalPlaces
+Phone
+Estimated Hours
+Actual Hours
+Periodicity
+ Task Description
+Completion Date
+Short Date	
+Comments
+Reference
+&Materials and Parts
+Index
+First Name
+Address Type
+Last Name
+Street
+City
+State
+Business Name
+Index Date
+Task ID
+Cage/Bird ID
+Select
+e-mail	
+ToNumber	
+AllowZeroLength
+Required*
+Select	
+Unique ID	
+Date	
+Glucose (mg/dL)	
+AST (U/L)	
+ALT (U/L)	
+Gamma (U/L)	
+Alk Ptse (U/L)	
+CK (U/L)	
+LDH (U/L)	
+&Cholesterol (mg/dL)	
+ T Protein (m/dL)	
+&Phosphorous (mg/dL)	
+Calcium (mg/dL)	
+Sodium (mmol/L)	
+$Potassium (mmol/L)	
+"Chloride (mmol/L)	
+(Bicarbonate (mmol/L)	
+"Uric Acid (mg/dL)	
+$Anion Gap (mmol/L)	
+Bile Acid	
+Billirubin	
+<White Blood Cell Ct (x10^3/ul)	
+Hematocrit (%)	
+Thrombocyte Est	
+Heterophils	
+Lymphocytes	
+Monocytes	
+Morphology	
+.Banded Heterophils Abso	
+(Heterophil Absolute#	
+(Lymphocyte Absolute#	
+0Act Lymphocyte Absolute#	
+$Monocyte Absolute#	
+(Eosinophil Absolute#	
+$Basophil Absolute#	
+Basophils	
+Eosinophils	
+Notes	
+ToNumber	
+AllowZeroLength
+Required*
+Select	
+Unique ID	
+Date	
+Glucose (mg/dL)	
+AST (U/L)	
+ALT (U/L)	
+Gamma (U/L)	
+Alk Ptse (U/L)	
+CK (U/L)	
+LDH (U/L)	
+&Cholesterol (mg/dL)	
+ T Protein (m/dL)	
+&Phosphorous (mg/dL)	
+Calcium (mg/dL)	
+Sodium (mmol/L)	
+$Potassium (mmol/L)	
+"Chloride (mmol/L)	
+(Bicarbonate (mmol/L)	
+"Uric Acid (mg/dL)	
+$Anion Gap (mmol/L)	
+Bile Acid	
+Billirubin	
+<White Blood Cell Ct (x10^3/ul)	
+Hematocrit (%)	
+Thrombocyte Est	
+Heterophils	
+Lymphocytes	
+Monocytes	
+Morphology	
+.Banded Heterophils Abso	
+(Heterophil Absolute#	
+(Lymphocyte Absolute#	
+0Act Lymphocyte Absolute#	
+$Monocyte Absolute#	
+(Eosinophil Absolute#	
+$Basophil Absolute#	
+Basophils	
+Eosinophils	
+Notes	
+ToNumber	
+AllowZeroLength
+Required*
+Select	
+SpeciesID	
+Glucose (mg/dL)	
+AST (U/L)	
+ALT (U/L)	
+Gamma (U/L)	
+Alk Ptse (U/L)	
+CK (U/L)	
+LDH (U/L)	
+&Cholesterol (mg/dL)	
+ T Protein (m/dL)	
+&Phosphorous (mg/dL)	
+Calcium (mg/dL)	
+Sodium (mmol/L)	
+$Potassium (mmol/L)	
+"Chloride (mmol/L)	
+(Bicarbonate (mmol/L)	
+"Uric Acid (mg/dL)	
+$Anion Gap (mmol/L)	
+Bile Acid	
+Billirubin	
+<White Blood Cell Ct (x10^3/ul)	
+Hematocrit (%)	
+Thrombocyte Est	
+Heterophils	
+Lymphocytes	
+Monocytes	
+Morphology	
+.Banded Heterophils Abso	
+(Heterophil Absolute#	
+(Lymphocyte Absolute#	
+0Act Lymphocyte Absolute#	
+$Monocyte Absolute#	
+(Eosinophil Absolute#	
+$Basophil Absolute#	
+Basophils	
+Eosinophils	
+ToNumber	
+AllowZeroLength
+Required
+DefaultValue
+ValidationRule
+ValidationText
+Orientation
+Filter
+OrderBy
+OrderByOn
+DefaultView
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DisplayControl
+IMEMode
+IMESentenceMode$UnicodeCompression
+DecimalPlacesp
+Select	
+Date in	
+Date to go Home	
+Client Name	
+First Name	
+Last Name	
+Home Phone	
+Work Phone	
+Cell Phone	
+Street	
+City	
+State	
+Zip	
+$Emergency Phone #1	
+$Emergency Phone #2	
+Birds Name	
+Species	
+Location	
+Weight	
+Vet Check Date	
+Exam	
+S/A	
+C/S	
+Poly	
+Groom Beak	
+Groom Wing	
+Groom Nails	
+Vet Exam	
+Vet S/A	
+Vet C/S	
+Vet Poly	
+Comme
+Toys	
+Carrier	
+Food	
+2Food/Special Instructions	
+Person Name	
+Beak	
+Eyes	
+Nares	
+Ears	
+(Head & Face Feathers	
+"Head & Face Other	
+ Head & Face None	
+(Head & Face Comments	
+Chest	
+Abdomen	
+Vent	
+Back	
+Body Feathers	
+Body Other	
+Body None	
+Body Comments	
+Nails	
+Toes	
+Skin	
+&Feet & Leg Function	
+&Feet & Leg Feathers	
+ Feet & Leg Other	
+Feet & Leg None	
+&Feet & Leg Comments	
+Top	
+Underside	
+Wings Function	
+ Wings Feathering	
+MMMName
+F1MMMMBandNo
+F1FMMMID
+F1FMMMName
+F1FMMMBandNo
+F1MFMMID
+F1MFMMName
+F1MFMMBandNo
+F1FFMMID
+F1FFMMName
+F1FFMMBandNo
+F1MMFMID
+F1MMFMName
+F1MMFMBandNo
+F1FMFMID
+F1FMFMName
+F1FMFMBandNo
+F1MFFMID
+F1MFFMName
+F1MFFMBandNo
+F1FFFMID
+F1FFFMName
+F1FFFMBandNo
+F1MMMFID
+F1MMMFName
+F1MMMFBandNo
+F1FMMFID
+F1FMMFName
+F1FMMFBandNo
+F1MFMFID
+F1MFMFName
+F1MFMFBandNo
+F1FFMFID
+F1FFMFName
+F1FFMFBandNo
+F1MMFFID
+F1MMFFName
+F1MMFFBandNo
+F1FMFFID
+F1FMFFName
+F1FMFFBandNo
+F1MFFFID
+F1MFFFName
+F1MFFFBandNo
+F1FFFFID
+F1FFFFName
+F1FFFFBandNo
+F5Sex
+F5Geno
+F4MaleGeno
+F4FemaleGeno
+F3MMGeno
+F3FMGeno
+F3MFGeno
+F3FFGeno
+F2MMMGeno
+F2FMMGeno
+F2MFMGeno
+F2FFMGeno
+F2MMFGeno
+F2FMFGeno
+F2MFFGeno
+F2FFFGeno
+F1MMMMGeno
+F1FMMMGeno
+F1MFMMGeno
+F1FFMMGeno
+F1MMFMGeno
+F1FMFMGeno
+F1MFFMGeno
+F1FFFMGeno
+F1MMMFGeno
+F1FMMFGeno
+F1MFMFGeno
+F1FFMFGeno
+F1MMFFGeno
+F1FMFFGeno
+F1MFFFGeno
+F1FFFFGeno
+Select
+Index
+Species
+Expected Weight$Adult Upper Weight$Adult Lower Weight
+Units
+ToNumber
+Index
+Species
+Wings Other	
+Wings None	
+Wings Comments	
+"Medical Treatment	
+Cost	
+Completed	
+False
+ToNumber	
+Index
+Status
+CS Date
+SA Date
+Poly Date
+OrderByOn
+AllowZeroLength
+Required
+ColumnWidth
+ColumnOrder
+ColumnHidden
+DisplayControl
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+InputMask
+Caption
+DefaultValue
+RowHeight
+DecimalPlaces!
+Breeding Status
+Male Name
+Female Name
+Cage Number
+Nest Box
+Date Set-up
+Short Date	
+Comments
+Index
+Clutch Number
+Species
+Male Unique ID
+ Female Unique ID
+Male Genotype
+Female Genotype
+Select
+Number of Eggs
+X10	
+Species Number	
+Colors	
+Incubation Date	
+ToNumber	
+Male Phenotype
+ Female Phenotype
+Male Band No
+Female Band No
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+Filter
+OrderBy
+ValidationRule
+ValidationText
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DecimalPlaces
+Breeding Status
+Male Name
+Female Name
+Cage Number
+Nest Box
+Date Set-up
+Short Date	
+Comments
+Index
+Clutch Number
+Species
+Male Unique ID
+ Female Unique ID
+Male Genotype
+Female Genotype
+Select
+Number of Eggs
+X10	
+Species Number	
+Colors	
+ToNumber	
+Male Band No
+Female Band No
+Male Phenotype
+ Female Phenotype
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Name
+Cage Number
+Handfed
+Committed
+Committed To
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight
+Final Status
+$Sold to First Name
+Sold to Address
+Sold to City
+Sold to State
+ Sold to Zip Code
+Sold to Phone
+Sold to FAX
+Submitted1
+Hatch Date
+Short Date	
+Date of Status
+Short Date	
+Date of Death
+Short Date	
+Birth Problems
+Nest Problems
+$Illness/Treatments
+OrderByOn
+AllowZeroLength
+Required
+ColumnWidth
+ColumnOrder
+ColumnHidden
+DisplayControl
+Filter
+OrderBy
+ValidationRule
+ValidationText
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Sold to City
+Final Status
+Sold to State
+ Sold to Zip Code
+Sold to Phone
+Sold to FAX
+Submitted1
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight
+Name
+$Sold to First Name
+Sold to Address
+Cage Number
+Handfed
+Committed
+Committed To
+Hatch Date
+Short Date	
+Date of Status
+Short Date	
+Date of Death
+Short Date	
+Birth Problems
+Nest Problems
+$Illness/Treatments
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControlU
+Select	
+Date	
+Schedule Item	
+Notes	
+Index
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+Format
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+InputMask
+Caption
+DefaultValue
+DecimalPlaces
+Index
+Select
+Status
+Clutch Number
+Species
+Unique ID
+Name
+Egg #
+Laid Date
+Short Date	
+Hatch Date
+Short Date	
+Submitted
+&Expected Hatch Date
+Short Date	
+Male Parent ID	
+"Male Parent Color	
+ Female Parent ID	
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControlU
+Select	
+Date	
+Schedule Item	
+Notes	
+Index
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+DefaultValue
+Filter
+OrderBy
+ValidationRule
+ValidationText
+Description
+Format
+InputMask
+Caption
+Home Address
+Home City
+ Business Address
+Business City
+Home State
+Home Zip
+Home Phone
+Home FAX
+"Home Mobile Phone
+Home Web
+Business State
+Business Zip
+Business Phone
+Business FAX
+*Business Mobile Phone
+Business Web
+Association
+Comments
+Index
+Last Name
+First Name
+Full Name
+Business Name
+Select
+ToNumber	
+Home e-mail
+Business e-mail
+AllowZeroLength
+Required*
+Select	
+Name	
+Street	
+City	
+State	
+Zip	
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+Filter
+OrderBy
+ValidationRule
+ValidationText
+Description
+Format
+Caption
+InputMask
+DefaultValue
+DecimalPlaces
+Home Address
+Home City
+ Business Address
+Business City
+Home State
+Home Zip
+Home Phone
+Home FAX
+"Home Mobile Phone
+Home Web
+Business State
+Business Zip
+Business Phone
+Business FAX
+*Business Mobile Phone
+Business Web
+Association
+Comments
+Index
+Last Name
+First Name
+Full Name
+Business Name
+Select
+ToNumber	
+Home e-mail
+Business e-mail
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControlU
+Select	
+HeaderSource	
+HeaderPath	
+BodySource	
+BodyPath	
+Index
+ValidationRule
+ValidationText
+Orientation
+Filter
+OrderBy
+OrderByOn
+DefaultView
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+Required
+AllowZeroLength
+DisplayControl
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Select
+Index
+Name
+FlockFields
+AilmentFields
+BirdCareFields
+$BirdCareCmplFields
+BreedingFields
+ContactsFields
+$ExpendituresFields
+InternetFields
+InvoiceFields
+OffspringFields
+ProductsFields
+ProjectsFields
+(ProjectResultsFields
+ReferenceFields
+ServicesFields
+ShowFields
+SpeciesFields
+Comments
+Cause of Death
+Phenotype
+Index
+Genotype
+Unique ID
+Clutch Number
+(Male Parent Genotype
+,Female Parent Genotype
+Sold to MI
+"Sold to Last Name
+*Sold to Business Name
+Type Address
+Species
+Select
+Male Parent ID
+ Male Parent Name
+ Female Parent ID
+$Female Parent Name
+Sale Price
+*$#,##0.00;($#,##0.00)	
+X10	
+File Name	
+Signature Title	
+ToNumber	
+Band Number
+&Male Parent Band No
+*Female Parent Band No
+*Male Parent Phenotype
+.Femal
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompressionp
+Select	
+Date	
+Eyes/Ears	
+Beak
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompressionp
+Select	
+Date	
+Eyes/Ears	
+Beak/Oral	
+Ab/Cloaca	
+Feet/Legs	
+Serum Chemistry	
+Vitamin D	
+Polyoma	
+Pachecos	
+Other	
+Cloacal Culture	
+Body Score	
+Weight	
+"Feather Condition	
+Examiner	
+Exam Notes	
+ToNumber	
+Index
+Flock ID
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompressionp
+Select	
+Date	
+Eyes/Ears	
+Beak/Oral	
+Ab/Cloaca	
+Feet/Legs	
+Serum Chemistry	
+Vitamin D	
+Polyoma	
+Pachecos	
+Other	
+Cloacal Culture	
+Body Score	
+Weight	
+"Feather Condition	
+Examiner	
+Exam Notes	
+ToNumber	
+Index
+Flock ID
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Index
+Date
+Short Date	
+Description
+Category
+Cost
+	*$#,##0.00;($#,##0.00)	
+Check No
+Receipt No
+Paid To
+Remarks
+Select
+Item ID	
+ToNumber	
+Account
+	*$#,##0.00;($#,##0.00)	
+Posted
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Format
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+DefaultValue
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Caption
+InputMask
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Index
+Date
+Short Date	
+Description
+Category
+Cost
+*$#,##0.00;($#,##0.00)	
+Check No
+Receipt No
+Paid To
+Remarks
+Select
+Item ID	
+ToNumber	
+Account
+*$#,##0.00;($#,##0.00)	
+Posted
+e Parent Phenotype
+Sold to e-mail
+Maturity Date
+Banding Date
+Fledging Date
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+Breeding Line
+Conta
+Select
+Index
+Name
+Orientation
+TopMargin
+BottomMargin
+LeftMargin
+RightMargin
+PictureHeight
+PictureWidth
+DrillDown
+Contacts
+Invoices
+Flock
+Offspring
+Breeding
+Index
+t5t576.rtfPortraitNo^ZJ66
+Test.rtfPortraitNoZVF66
+Standard Letter (Biz).rtfPortraitxxh66
+Standard Letter (Person).rtfPortrait~~n66
+Standard Letter.rtfPortraitll\66
+Gift Certificate (Biz).rtfPortraitNo~zj66
+Gift Certificate (Person).rtfPortraitNo
+Gift Certificate.rtfPortraitNorn^66
+Refund Policy (Biz).rtfPortraitNoxtd66
+Refund Policy (Person).rtfPortraitNo~zj66
+Refund Policy.rtfPortraitNolhX66
+Maturity Date
+Banding Date
+Fledging Date
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+Breeding Line
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Orientation
+Filter
+OrderBy
+OrderByOn
+DefaultView
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+IMEMode
+IMESentenceMode$UnicodeCompression
+DecimalPlacesp
+Select	
+Egg ID	
+Clutch Number	
+Male Unique ID	
+ Female Unique ID	
+ Male Band Number	
+$Female Band Number	
+Species	
+Date	
+Time	
+Day	
+Weight	
+Temperature	
+Humidity	
+ Incubator Number	
+Fertile	
+Hatched	
+Comments	
+Date Laid	
+ToNumber	
+Index
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Orientation
+Filter
+OrderBy
+OrderByOn
+DefaultView
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+IMEMode
+IMESentenceMode$UnicodeCompression
+DecimalPlacesp
+Select	
+Egg ID	
+Clutch Number	
+Male Unique ID	
+ Female Unique ID	
+ Male Band Number	
+$Female Band Number	
+Species	
+Date	
+Time	
+Day	
+Weight	
+Temperature	
+Humidity	
+ Incubator Number	
+Fertile	
+Hatched	
+Comments	
+Date Laid	
+ToNumber	
+Index
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+Internet Site
+Title
+Contents
+Page1 Address
+Page2 Address
+Page3 Address
+Page4 Address
+Page5 Address
+Page6 Address
+"Page6 Information
+"Page1 Information
+"Page2 Information
+"Page3 Information
+"Page4 Information
+"Page5 Information
+Index
+Select
+e-mail	
+ToNumber	
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+DefaultValue
+Filter
+OrderBy
+ValidationRule
+ValidationText
+Description
+Format
+Caption
+InputMask
+Index
+Invoice Number
+Unit Price
+*$#,##0.00;($#,##0.00)
+Extended Price
+*$#,##0.00;($#,##0.00)W
+Item ID
+Select
+Quantity
+ Item Description
+ToNumber	
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+Filter
+OrderBy
+ValidationRule
+ValidationText
+Description
+Format
+DecimalPlaces
+InputMask
+Caption
+DefaultValue
+Internet Site
+Title
+Contents
+Page1 Address
+"Page1 Information
+Page2 Address
+"Page2 Information
+Page3 Address
+"Page3 Information
+Page4 Address
+"Page4 Information
+Page5 Address
+"Page5 Information
+Page6 Address
+"Page6 Information
+Index
+Select
+e-mail	
+ToNumber	
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+DateTime
+FileName
+Index
+FilePath
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+DefaultValue
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+InputMask
+Caption
+Index
+Invoice Number
+Unit Price
+*$#,##0.00;($#,##0.00)
+Extended Price
+*$#,##0.00;($#,##0.00)W
+Item ID
+Select
+Quantity
+ Item Description
+Original Index	
+Invoice Index	
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+DefaultValue
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+Caption
+InputMask
+Index
+Invoice Number
+Unit Price
+*$#,##0.00;($#,##0.00)
+Extended Price
+*$#,##0.00;($#,##0.00)W
+Item ID
+Select
+Quantity
+ Item Description
+ToNumber	
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+DefaultValue
+Filter
+OrderBy
+ValidationRule
+ValidationText
+Description
+Format
+Caption
+InputMask
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Invoice Number
+Index
+First Name
+Street
+City
+SubTotal
+*$#,##0.00;($#,##0.00)
+*Shipping and Handling
+*$#,##0.00;($#,##0.00)
+*$#,##0.00;($#,##0.00)
+Total
+*$#,##0.00;($#,##0.00)|
+Type Address
+Last Name
+Comments
+Payment Method
+CC Name
+CC Type
+CC Number
+CC Exp Date
+Invoice Date
+Select
+State
+Phone
+Business Name
+Tax Rate
+General NumberY
+ToNumber	
+e-mail
+Payment
+*$#,##0.00;($#,##0.00)	
+Balance
+,##0.00;($#,##0.00)	
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+DefaultValue
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+Caption
+InputMask
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Invoice Number
+Index
+First Name
+Street
+City
+SubTotal
+*$#,##0.00;($#,##0.00)
+*Shipping and Handling
+*$#,##0.00;($#,##0.00)
+*$#,##0.00;($#,##0.00)
+Total
+*$#,##0.00;($#,##0.00)|
+Type Address
+Last Name
+Comments
+Payment Method
+CC Name
+CC Type
+CC Number
+CC Exp Date
+Invoice Date
+Select
+State
+Phone
+Business Name
+Tax Rate
+ToNumber	
+e-mail
+Payment
+*$#,##0.00;($#,##0.00)	
+Balance
+*$#,##0.00;($#,##0.00
+Orientation
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl$UnicodeCompression
+ValidationRule
+ValidationText
+Filter
+OrderBy
+DefaultView
+Description
+Format
+InputMask
+Caption
+DefaultValue
+IMEMode
+IMESentenceMode'
+Select
+Index
+Clutch Number
+Round 1 Number
+&Round 1 Number Laid
+Round 1 Fertile
+Round 1 Clear
+Round 1 DIS
+,Round 1 Number Hatched
+Round 2 Number
+&Round 2 Number Laid
+Round 2 Fertile
+Round 2 Clear
+Round 2 DIS
+,Round 2 Number Hatched
+Round 3 Number
+&Round 3 Number Laid
+Round 3 Fertile
+Round 3 Clear
+Round 3 DIS
+,Round 3 Number Hatched
+1BandNo
+2BandNo
+3BandNo
+4BandNo
+5BandNo
+6BandNo
+7BandNo
+8BandNo
+9BandNo
+10BandNo
+11BandNo
+12BandNo
+13BandNo
+14BandNo
+15BandNo
+$Round 1 First Laid
+$Round 2 First Laid
+$Round 3 First Laid
+1Laid
+1Hatched
+2Laid
+2Hatched
+3Laid
+3Hatched
+4Laid
+4Hatched
+5Laid
+5Hatched
+6Laid
+6Hatched
+7Laid
+7Hatched
+8Laid
+8Hatched
+9Laid
+9Hatched
+10Laid
+10Hatched
+11Laid
+11Hatched
+12Laid
+12Hatched
+13Laid
+13Hatched
+14Laid
+14Hatched
+15Laid
+15Hatched
+16Hatched
+17Hatched
+Date Set-up
+Cage Number
+Male Phenotype
+Male Band No
+ Female Phenotype
+Female Band No
+16Laid
+16BandNo
+17Laid
+17BandNo
+MSysAccessStorageSTGREL
+PPPPPPPPPPN 
+InvoicesInvoiceItems
+JJJJJJJJJJH 
+InvoicesArchiveInvoiceItemsArchive
+ffffffffffd 
+WeightResults
+HHH<<<<<<<: 
+WeightExpected
+JJJ>>>>>>>< 
+Tree
+666*******( 
+SpecieTerms
+DDD88888886 
+Species
+<<<0000000. 
+ShowAwards
+BBB66666664 
+Services
+>>>22222220 
+Routines
+>>>22222220 
+ResultsReport
+HHH<<<<<<<: 
+ReferencesArchive
+PPPDDDDDDDB 
+Projects
+>>>22222220 
+ProjectFields
+HHH<<<<<<<: 
+Products
+>>>22222220 
+PicturesArchive
+LLL@@@@@@@> 
+Pictures
+>>>22222220 
+Orders
+:::......., 
+Options
+<<<0000000. 
+OffspringRecordsArchive
+\\\PPPPPPPN 
+OffspringRecords
+NNNBBBBBBB@ 
+NestboxTemp
+DDD88888886 
+MSysIMEXSpecs
+<<<<<<<<<<: 
+MSysIMEXColumns
+@@@@@@@@@@> 
+MSysCmdbars
+88888888886 
+MSysAccessStorage
+DDDDDDDDDDB 
+444(((((((& 
+Location
+>>>22222220 
+Invoices
+>>>22222220 
+InvoiceItemsTemp
+NNNBBBBBBB@ 
+InvoiceItemsArchive
+TTTHHHHHHHF 
+InvoiceItems
+FFF:::::::8 
+InternetArchive
+LLL@@@@@@@> 
+IncubationArchive
+PPPDDDDDDDB 
+Incubation
+BBB66666664 
+FlockMembersArchive
+TTTHHHHHHHF 
+FlockMembers
+FFF:::::::8 
+ExpendituresArchive
+TTTHHHHHHHF 
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Name
+Cage Number
+Handfed
+Committed
+Committed To
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight
+Final Status
+$Sold to First Name
+Sold to Address
+Sold to City
+Sold to State
+ Sold to Zip Code
+Sold to Phone
+Sold to FAX
+Submitted1
+Hatch Date
+Short Date	
+Date of Status
+Short Date	
+Date of Death
+Short Date	
+Birth Problems
+Nest Problems
+$Illness/Treatments
+Comments
+Cause of Death
+Phenotype
+Index
+Genotype
+Unique ID
+Clutch Number
+(Male Parent Genotype
+,Female Parent Genotype
+Sold to MI
+"Sold to Last Name
+*Sold to Business Name
+Type Address
+Species
+Select
+Male Parent ID
+ Male Parent Name
+ Female Parent ID
+$Female Parent Name
+Sale Price
+*$#,##0.00;($#,##0.00)	
+X10	
+ToNumber	
+Band Number
+&Male Parent Band No
+*Female Parent Band No
+*Male Parent Phenotype
+.Female Parent Phenotype
+Sold to e-mail
+Maturity Date
+Banding Date
+Fledging Date
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+Breeding Line
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+Caption
+InputMask
+DefaultValue
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Male
+Female
+Name
+Street
+City
+State
+Phone
+Closing
+Signature Title	
+Backup Location	
+Backup Type	
+Last Location	
+Backup Date	
+Day	
+Time	
+Last Date	
+InvUpdate	
+Name1	
+Type1	
+Name2	
+Type2	
+Name3	
+Type3	
+Name4	
+Type4	
+Name5	
+Type5	
+e-mail
+XP DB
+Contract Nam
+Contract Filing
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Orientation
+Filter
+OrderBy
+OrderByOn
+DefaultView
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+IMEMode
+IMESentenceMode$UnicodeCompression
+DecimalPlacesp
+Select	
+Order ID	
+Date	
+Name	
+Street	
+City	
+State/Prov	
+Postal Code	
+Phone	
+e-mail	
+Item ID	
+ Item Description	
+Quantity	
+"Availability Date	
+Deposit	
+Completed	
+Comments	
+ToNumber	
+Index
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Name
+Index
+Unique ID
+File Name
+Select
+File Path
+ToNumber	
+Band Number
+Report Default
+Date
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Name
+Index
+Unique ID
+File Name
+Select
+File Path
+ToNumber	
+Band Number
+Report Default
+Date
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompressionp
+Select	
+Item ID	
+Category	
+Description	
+Cost	
+Qty On Hand	
+Last Updated	
+Notes	
+ToNumber	
+Index
+Barcode Number
+ Desired Quantity
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+DecimalPlacesU
+Select	
+Project	
+Date	
+Field2	
+Field3	
+Field4	
+Field5	
+Field6	
+Field7	
+Field8	
+Field9	
+Field10	
+Field11	
+Field12	
+Field13	
+Field14	
+Field15	
+Field16	
+Field17	
+Field18	
+Field19	
+Field20	
+Field21	
+Field22	
+Field23	
+Field24	
+Field25	
+Field26	
+Field27	
+Field28	
+Field29	
+Field30	
+Field31	
+Field32	
+Field33	
+Field34	
+Field35	
+Field36	
+Field37	
+Field38	
+Field39	
+Field40	
+Field41	
+Field42	
+Field43	
+Field44	
+Field45	
+Field46	
+Field47	
+Field48	
+Field49	
+Field50	
+Field51	
+Field52	
+Field53	
+Field54	
+Field55	
+Field56	
+Field57	
+Field58	
+Field59	
+Field60	
+ToNumber	
+Index
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+DecimalPlacesU
+Select	
+Project	
+Species	
+Unique ID	
+Cage Number	
+Sex	
+Date	
+Field2	
+Field3	
+Field4	
+Field5	
+Field6	
+Field7	
+Field8	
+Field9	
+Field10	
+Field11	
+Field12	
+Field13	
+Field14	
+Field15	
+Field16	
+Field17	
+Field18	
+Field19	
+Field20	
+Field21	
+Field22	
+Field23	
+Field24	
+Field25	
+Field26	
+Field27	
+Field28	
+Field29	
+Field30	
+Field31	
+Field32	
+Field33	
+Field34	
+Field35	
+Field36	
+Field37	
+Field38	
+Field39	
+Field40	
+Field41	
+Fiel
+d42	
+Field43	
+Field44	
+Field45	
+Field46	
+Field47	
+Field48	
+Field49	
+Field50	
+Field51	
+Field52	
+Field53	
+Field54	
+Field55	
+Field56	
+Field57	
+Field58	
+Field59	
+Field60	
+ToNumber	
+Index
+Band Number
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+Caption
+InputMask
+DefaultValue
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Title
+Author
+Topic
+Magazine Name
+Magazine Pages
+ Publication Name
+"Publication Pages
+Text Book Name
+"Text Book Edition
+Text Book Pages
+Comments
+Index
+Magazine Issue
+Short Date	
+"Publication Issue
+Short Date	
+Select
+ToNumber	
+File Name
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+Species
+Egg #
+Clutch Number
+Index
+Select	
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+Filter
+OrderBy
+ValidationRule
+ValidationText
+Description
+Format
+DecimalPlaces
+InputMask
+Caption
+DefaultValue
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Title
+Author
+Topic
+Magazine Name
+Magazine Pages
+ Publication Name
+"Publication Pages
+Text Book Name
+"Text Book Edition
+Text Book Pages
+Comments
+Index
+Magazine Issue
+Short Date	
+"Publication Issue
+Short Date	
+Select
+ToNumber	
+File Name
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+DecimalPlacesU
+Select	
+Service ID	
+Category	
+Description	
+Cost	
+Last Updated	
+Notes	
+ToNumber	
+Index
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+DecimalPlacesU
+Select	
+Event	
+Time	
+Duration	
+Days	
+Exclusions	
+ToNumber	
+Index
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+Division
+Section
+Class
+Placed
+Judge Name
+Date
+Short Date	
+Club Name
+Show Location
+Name
+Comments
+Points
+Unique ID
+Species
+Select
+Index
+Color
+Rating #1	
+Rating #2	
+Rating #3	
+Rating #4	
+Rating #5	
+Rating #6	
+Rating #7	
+Rating #8	
+Rating #9	
+Rating #10	
+Rating #11	
+Rating #12	
+Rating #13	
+Rating #14	
+Rating #15	
+Rating #16	
+Rating #17	
+ToNumber	
+Band No
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+Format
+DecimalPlaces
+DefaultValue
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+InputMask
+Caption
+Division
+Section
+Class
+Placed
+Judge Name
+Date
+Short Date	
+Club Name
+Show Location
+Name
+Comments
+Points
+Unique ID
+Species
+Select
+Index
+Color
+Rating #1	
+Rating #2	
+Rating #3	
+Rating #4	
+Rating #5	
+Rating #6	
+Rating #7	
+Rating #8	
+Rating #9	
+Rating #10	
+Rating #11	
+Rating #12	
+Rating #13	
+Rating #14	
+Rating #15	
+Rating #16	
+Rating #17	
+ToNumber	
+Band No
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+DecimalPlaces
+DefaultValue
+Orientation
+Filter
+OrderBy
+DefaultView
+ValidationRule
+ValidationText
+Description
+Format
+InputMask
+Caption
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Index
+Species
+Select
+(Recessive Variety #1
+(Recessive Variety #2
+(Recessive Variety #3
+(Recessive Variety #4
+(Recessive Variety #5
+(Recessive Variety #6
+(Recessive Variety #7
+(Recessive Variety #8
+(Recessive Variety #9
+0Part Dominant Variety #1
+0Part Dominant Variety #2
+0Part Dominant Variety #3
+0Part Dominant Variety #4
+0Full Dominant Variety #1
+0Full Dominant Variety #2
+0Full Dominant Variety #3
+0Full Dominant Variety #4
+*Sex Linked Variety #1
+*Sex Linked Variety #2
+*Sex Linked Variety #3
+,Sex Linked Variety #5a
+,Sex Linked Variety #5b
+,Sex Linked Variety #6a
+,Sex Linked Variety #6b
+,Multiple #1 Variety #1
+,Multiple #1 Variety #2
+,Multiple #1 Variety #3
+,Multiple #1 Variety #4
+,Multiple #2 Variety #1
+,Multiple #2 Variety #2
+,Multiple #2 Variety #3
+,Multiple #2 Variety #4
+Recessive Term
+$Full Dominant Term
+$Part Dominant Term
+Wild Type Term
+"Incubation Period
+&Recessive Symbol #1
+&Recessive Symbol #2
+&Recessive Symbol #3
+&Recessive Symbol #4
+&Recessive Symbol #5
+&Recessive Symbol #6
+&Recessive Symbol #7
+&Recessive Symbol #8
+&Recessive Symbol #9
+.Part Dominant Symbol #1
+.Part Dominant Symbol #2
+.Part Dominant Symbol #3
+.Part Dominant Symbol #4
+.Full Dominant Symbol #1
+.Full Dominant Symbol #2
+.Full Dominant Symbol #3
+.Full Dominant Symbol #4
+(Sex Linked Symbol #1
+(Sex Linked 
+ymbol #2
+(Sex Linked Symbol #3
+*Sex Linked Symbol #5a
+*Sex Linked Symbol #5b
+*Sex Linked Symbol #6a
+*Sex Linked Symbol #6b
+*Multiple #1 Symbol #1
+*Multiple #1 Symbol #2
+*Multiple #1 Symbol #3
+*Multiple #1 Symbol #4
+*Multiple #2 Symbol #1
+*Multiple #2 Symbol #2
+*Multiple #2 Symbol #3
+*Multiple #2 Symbol #4
+Sex1Dominant	
+Sex2Dominant	
+Sex3Dominant	
+Sex4Dominant	
+Banding Period	
+Species Number	
+Fledging Period	
+*Sex Linked Variety #4
+(Sex Linked Symbol #4
+,Sex Linked Variety #5c
+*Sex Linked Symbol #5c
+,Sex Linked Variety #5d
+*Sex Linked Symbol #5d
+,Sex Linked Variety #6c
+*Sex Linked Symbol #6c
+,Sex Linked Variety #6d
+*Sex Linked Symbol #6d
+*Recessive Variety #10
+(Recessive Symbol
+ #10
+*Recessive Variety #11
+(Recessive Symbol #11
+*Recessive Variety #12
+(Recessive Symbol #12
+*Recessive Variety #13
+(Recessive Symbol #13
+0Part Dominant Variety #5
+.Part Dominant Symbol #5
+0Full Dominant Variety #5
+.Full Dominant Symbol #5
+,Multiple #3 Variety #1
+,Multiple #3 Variety #2
+,Multiple #3 Variety #3
+,Multiple #3 Variety #4
+*Multiple #3 Symbol #1
+*Multiple #3 Symbol #2
+*Multiple #3 Symbol #3
+*Multiple #3 Symbol #4
+ToNumber	
+Maturity Period
+Other Name
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+Index
+Species
+Select
+Term1A
+Term1B
+Replace1
+Term2A
+Term2B
+Replace2
+Term3A
+Term3B
+Replace3
+Term4A
+Term4B
+Replace4
+Term5A
+Term5B
+Replace5
+Term6A
+Term6B
+Replace6
+Term7A
+Term7B
+Replace7
+Term8A
+Term8B
+Replace8
+Term9A
+Term9B
+Replace9
+Term10A
+Term10B
+Replace10
+Term11A
+Term11B
+Replace11
+Term12A
+Term12B
+Replace12
+Term13A
+Term13B
+Replace13
+Term14A
+Term14B
+Replace14
+Term15A
+Term15B
+Replace15
+Term16A
+Term16B
+place16
+Term17A
+Term17B
+Replace17
+Term18A
+Term18B
+Replace18
+Term19A
+Term19B
+Replace19
+Term20A
+Term20B
+Replace20
+ Show Standard #1	
+ Show Standard #2	
+ Show Standard #3	
+ Show Standard #4	
+ Show Standard #5	
+ Show Standard #6	
+ Show Standard #7	
+ Show Standard #8	
+ Show Standard #9	
+"Show Standard #10	
+"Show Standard #11	
+"Show Standard #12	
+"Show Standard #13	
+"Show Standard #14	
+"Show Standard #15	
+"Show Standard #16	
+"Show Standard #17	
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+InputMask
+Caption
+DefaultValue
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+F5Geno	
+F4MaleGeno	
+F4FemaleGeno	
+F3MMGeno	
+F3FMGeno	
+F3MFGeno	
+F3FFGeno	
+F2MMMGeno	
+F2FMMGeno	
+F2MFMGeno	
+F2FFMGeno	
+F2MMFGeno	
+F2FMFGeno	
+F2MFFGeno	
+F2FFFGeno	
+F1MMMMGeno	
+F1FMMMGeno	
+F1MFMMGeno	
+F1FFMMGeno	
+F1MMFMGeno	
+F1FMFMGeno	
+F1MFFMGeno	
+F1FFFMGeno	
+F1MMMFGeno	
+F1FMMFGeno	
+F1MFMFGeno	
+F1FFMFGeno	
+F1MMFFGeno	
+F1FMFFGeno	
+F1MFFFGeno	
+F1FFFFGeno	
+F5Name
+F5BandNo
+F4MaleID
+F4MaleName
+F4MaleBandNo
+F4FemaleID
+F4FemaleName
+F4FemaleBandNo
+F3MMID
+F3MMName
+F3MMBandNo
+F3FMID
+F3FMName
+F3FMBandNo
+F3MFID
+F3MFName
+F3MFBandNo
+F3FFID
+F3FFName
+F3FFBandNo
+F2MMMID
+F2MMMName
+F2MMMBandNo
+F2FMMID
+F2FMMName
+F2FMMBandNo
+F2MFMID
+F2MFMName
+F2MFMBandNo
+F2FFMID
+F2FFMName
+F2FFMBandNo
+F2MMFID
+F2MMFName
+F2MMFBandNo
+F2FMFID
+F2FMFName
+F2FMFBandNo
+F2MFFID
+F2MFF
+F2MFFBandNo
+F2FFFID
+F2FFFName
+F2FFFBandNo
+F1MMMMID
+F1MMMMName
+F1MMMMBandNo
+F1FMMMID
+F1FMMMName
+F1FMMMBandNo
+F1MFMMID
+F1MFMMName
+F1MFMMBandNo
+F1FFMMID
+F1FFMMName
+F1FFMMBandNo
+F1MMFMID
+F1MMFMName
+F1MMFMBandNo
+F1FMFMID
+F1FMFMName
+F1FMFMBandNo
+F1MFFMID
+F1MFFMName
+F1MFFMBandNo
+F1FFFMID
+F1FFFMName
+F1FFFMBandNo
+F1MMMFID
+F1MMMFName
+F1MMMFBandNo
+F1FMMFID
+F1FMMFName
+F1FMMFBandNo
+F1MFMFID
+F1MFMFName
+F1MFMFBandN
+F1FFMFID
+F1FFMFName
+F1FFMFBandNo
+F1MMFFID
+F1MMFFName
+F1MMFFBandNo
+F1FMFFID
+F1FMFFName
+F1FMFFBandNo
+F1MFFFID
+F1MFFFName
+F1MFFFBandNo
+F1FFFFID
+F1FFFFName
+F1FFFFBandNo
+F5Sex
+F5ID
+AllowZeroLength
+Required
+DefaultValue
+Filter
+OrderBy*
+Select	
+Name	
+Orientation	
+TopMargin	
+BottomMargin	
+LeftMargin	
+RightMargin	
+PictureHeight	
+PictureWidth	
+DrillDown	
+Contacts	
+False7
+Invoices	
+False1
+Flock	
+False9
+Offspring	
+False7
+Breeding	
+False
+AccessVersion
+Build"Show Values Limit,Show Values in Indexed4Show Values in Non-Indexed*Show Values in Remote6Track Name AutoCorrect Info0Perform Name AutoCorrect
+ProjVer
+CpgConversion
+09.50
+AllowZeroLength
+Required*
+Select	
+(WeightExpected Index	
+Unique ID	
+Date	
+Day	
+Weight	
+Expected Weight	
+6-7am	
+7-8am	
+8-9am	
+9-10am	
+10-11am	
+11-12am	
+12-1pm	
+1-2pm	
+2-3pm	
+3-4pm	
+4-5pm	
+5-6pm	
+6-7pm	
+7-8pm	
+8-9pm	
+9-10pm	
+10-11pm	
+11-12pm	
+12-1am	
+Total	
+Comments	
+Completed	
+ToNumber	
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Orientation
+Filter
+OrderBy
+OrderByOn
+DefaultView
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+IMEMode
+IMESentenceMode$UnicodeCompression
+DecimalPlacesp
+Select	
+Day	
+Expected Weight	
+$Adult Upper Weight	
+$Adult Lower Weight	
+Units	
+ToNumber	
+Index
+Species
+Comments
+Cause of Death
+Phenotype
+Index
+Genotype
+Unique ID
+Clutch Number
+(Male Parent Genotype
+,Female Parent Genotype
+Sold to MI
+"Sold to Last Name
+*Sold to Business Name
+Type Address
+Species
+Select
+Male Parent ID
+ Male Parent Name
+ Female Parent ID
+$Female Parent Name
+Sale Price
+*$#,##0.00;($#,##0.00)	
+X10	
+File Name	
+Signature Title	
+ToNumber	
+Band Number
+&Male Parent Band No
+*Female Parent Band No
+*Male Parent Phenotype
+.Femal
+AllowZeroLength
+Required
+ValidationRule
+ValidationText
+Filter
+OrderBy
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DisplayControl
+RowSourceType
+RowSource
+BoundColumn
+ColumnCount
+ColumnHeads
+ColumnWidths
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression
+Sellers Address	
+Sellers City	
+*Purchasers First Name
+$Purchasers Address
+Purchasers City
+$Acquisition Method
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight
+$Sellers First Name
+ Sellers Zip Code
+Sellers Phone
+Sellers FAX
+ Purchasers State
+&Purchasers Zip Code
+ Purchasers Phone
+Purchasers Fax
+Sellers State
+Table/Query
+Clutch Number
+Name
+Cage Number
+Breeding Status
+Hatch Date
+Short Date	
+Receipt Date
+Short Date	
+Sold Date
+Short Date	
+Death Date
+Short Date	
+Birth Problems
+Nest Problems
+$Illness/Treatments
+"Breeding Problems
+Comments
+Death Cause
+Phenotype
+Index
+Species
+Genotype
+Unique ID
+"Sellers Last Name
+(Purchasers Last Name
+Sellers MI
+*Sellers Business Name
+Purchasers MI
+0Purchasers Business Name
+(Sellers Type Address
+.Purchasers Type Address
+Select
+Estimated Value
+*$#,##0.00;($#,##0.00)	
+Cost
+*$#,##0.00;($#,##0.00)	
+Purchase Pric
+*$#,##0.00;($#,##0.00)	
+X10	
+Show Quality	
+Lost Date	
+Sell	
+ General Comments	
+Band Number
+Sellers e-mail
+"Purchasers e-mail
+Field 1
+Field 2
+Field 3
+Field 4
+Field 5
+ToNumber
+Parent Raised
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+OffspringRecordsArchive
+Test Query
+Create report in Design view
+Create data access page in Design view
+Index
+NewIndex
+PrimaryKey
+Index
+NewIndex
+PrimaryKeyP
+OrderByOn
+AllowZeroLength
+Required
+ColumnWidth
+ColumnOrder
+ColumnHidden
+DisplayControl
+RowSourceType
+BoundColumn
+ColumnCount
+ColumnHeads
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+InputMask
+Caption
+DefaultValue
+RowSource
+ColumnWidths
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Sellers Address	
+Sellers City	
+*Purchasers First Name
+$Purchasers Address
+Purchasers City
+$Acquisition Method
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight
+$Sellers First Name
+ Sellers Zip Code
+Sellers Phone
+Sellers FAX
+ Purchasers State
+&Purchasers Zip Code
+ Purchasers Phone
+Purchasers Fax
+Sellers State
+Table/Query
+Clutch Number
+Name
+Cage Number
+Breeding Status
+Hatch Date
+Short Date	
+Receipt Date
+Short Date	
+Sold Date
+Short Date	
+Death Date
+Short Date	
+Birth Problems
+Nest Problems
+$Illness/Treatments
+"Breeding Problems
+Comments
+Death Cause
+Phenotype
+Index
+Species
+Genotype
+Unique ID
+Sellers MI
+"Sellers Last Name
+*Sellers Business Name
+Purchasers MI
+(Purchasers Last Name
+0Purchasers Business Name
+(Sellers Type Address
+.Purchasers Type Address
+Select
+Estimated Value
+*$#,##0.00;($#,##0.00)	
+Cost
+*$#,##0.00;($#,##0.00)	
+Purchase Pric
+*$#,##0.00;($#,##0.00)	
+X10	
+Show Quality	
+Lost Date	
+ General Comments	
+Band Number
+Sellers e-mail
+"Purchasers e-mail
+Field 1
+Field 2
+Field 3
+Field 4
+Field 5
+ToNumber
+Parent Raised
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+Index
+NewIndex
+PrimaryKeyP
+Index
+NewIndex
+PrimaryKey
+Index
+NewIndex
+PrimaryKey
+OrderByOn
+AllowZeroLength
+Required
+ColumnWidth
+ColumnOrder
+ColumnHidden
+DisplayControl
+Filter
+OrderBy
+ValidationRule
+ValidationText
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Sold to City
+Final Status
+Sold to State
+ Sold to Zip Code
+Sold to Phone
+Sold to FAX
+Submitted1
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight
+Name
+$Sold to First Name
+Sold to Address
+Cage Number
+Handfed
+Committed
+Committed To
+Hatch Date
+Short Date	
+Date of Status
+Short Date	
+Date of Death
+Short Date	
+Birth Problems
+Nest Problems
+$Illness/Treatments
+Comments
+Cause of Death
+Phenotype
+Index
+Genotype
+Unique ID
+Clutch Number
+(Male Parent Genotype
+,Female Parent Genotype
+Sold to MI
+"Sold to Last Name
+*Sold to Business Name
+Type Address
+Species
+Select
+Male Parent ID
+ Male Parent Name
+ Female Parent ID
+$Female Parent Name
+Sale Price
+*$#,##0.00;($#,##0.00)	
+X10	
+File Name	
+Signature Title	
+ToNumber	
+Band Number
+&Male Parent Band No
+*Female Parent Band No
+*Male Parent Phenotype
+.Femal
+e Parent Phenotype
+Sold to e-mail
+Maturity Date
+Banding Date
+Fledging Date
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+OrderByOn
+ColumnWidth
+ColumnOrder
+ColumnHidden
+Required
+AllowZeroLength
+DisplayControl
+ValidationRule
+ValidationText
+Filter
+OrderBy
+Description
+Format
+InputMask
+Caption
+DefaultValue
+DecimalPlaces
+Orientation
+DefaultView
+IMEMode
+IMESentenceMode$UnicodeCompression'
+Name
+Cage Number
+Handfed
+Committed
+Committed To
+Week1 Weight
+Week2 Weight
+Week3 Weight
+Week4 Weight
+1Year Weight
+Final Status
+$Sold to First Name
+Sold to Address
+Sold to City
+Sold to State
+ Sold to Zip Code
+Sold to Phone
+Sold to FAX
+Submitted1
+Hatch Date
+Short Date	
+Date of Status
+Short Date	
+Date of Death
+Short Date	
+Birth Problems
+Nest Problems
+$Illness/Treatments
+Comments
+Cause of Death
+Phenotype
+Index
+Genotype
+Unique ID
+Clutch Number
+(Male Parent Genotype
+,Female Parent Genotype
+Sold to MI
+"Sold to Last Name
+*Sold to Business Name
+Type Address
+Species
+Select
+Male Parent ID
+ Male Parent Name
+ Female Parent ID
+$Female Parent Name
+Sale Price
+*$#,##0.00;($#,##0.00)	
+X10	
+ToNumber	
+Band Number
+&Male Parent Band No
+*Female Parent Band No
+*Male Parent Phenotype
+.Female Parent Phenotype
+Sold to e-mail
+Maturity Date
+Banding Date
+Fledging Date
+Seeds
+Pulses
+Fruits
+Vegetables
+Misc
+Diet Remarks
+OffspringRecordsArchive
+Test Query
+Test Query

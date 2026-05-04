@@ -6,6 +6,16 @@ require('fs').mkdirSync(dataDir, { recursive: true });
 const db = new Database(path.join(dataDir, 'birds.db'));
 db.pragma('foreign_keys = ON');
 
+function columnExists(table, column) {
+  return db.prepare(`PRAGMA table_info(${table})`).all().some((c) => c.name === column);
+}
+
+function addColumn(table, column, sqlType) {
+  if (!columnExists(table, column)) {
+    db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${sqlType}`);
+  }
+}
+
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -19,14 +29,28 @@ db.exec(`
   CREATE TABLE IF NOT EXISTS birds (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
+    unique_id TEXT,
     name TEXT NOT NULL,
     species TEXT,
     band_number TEXT,
+    cage_number TEXT,
+    clutch_number TEXT,
     gender TEXT DEFAULT 'unknown',
     dob TEXT,
     mutation TEXT,
     color TEXT,
+    genotype TEXT,
+    phenotype TEXT,
+    breeding_status TEXT,
+    breeding_line TEXT,
+    show_quality TEXT,
+    estimated_value REAL,
+    acquired_date TEXT,
+    sold_date TEXT,
+    purchase_price REAL,
+    sale_price REAL,
     photo_url TEXT,
+    notes TEXT,
     sire_id INTEGER,
     dam_id INTEGER,
     status TEXT DEFAULT 'active',
@@ -98,5 +122,20 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_contacts_user_id ON contacts(user_id);
   CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id);
 `);
+
+addColumn('birds', 'unique_id', 'TEXT');
+addColumn('birds', 'cage_number', 'TEXT');
+addColumn('birds', 'clutch_number', 'TEXT');
+addColumn('birds', 'genotype', 'TEXT');
+addColumn('birds', 'phenotype', 'TEXT');
+addColumn('birds', 'breeding_status', 'TEXT');
+addColumn('birds', 'breeding_line', 'TEXT');
+addColumn('birds', 'show_quality', 'TEXT');
+addColumn('birds', 'estimated_value', 'REAL');
+addColumn('birds', 'acquired_date', 'TEXT');
+addColumn('birds', 'sold_date', 'TEXT');
+addColumn('birds', 'purchase_price', 'REAL');
+addColumn('birds', 'sale_price', 'REAL');
+addColumn('birds', 'notes', 'TEXT');
 
 module.exports = db;

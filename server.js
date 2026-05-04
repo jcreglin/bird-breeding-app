@@ -167,18 +167,37 @@ app.post('/api/birds', auth, (req, res) => {
   }
 
   const result = db.prepare(`
-    INSERT INTO birds (user_id, name, species, band_number, gender, dob, mutation, color, photo_url, sire_id, dam_id, status)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO birds (
+      user_id, unique_id, name, species, band_number, cage_number, clutch_number,
+      gender, dob, mutation, color, genotype, phenotype, breeding_status,
+      breeding_line, show_quality, estimated_value, acquired_date, sold_date,
+      purchase_price, sale_price, photo_url, notes, sire_id, dam_id, status
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `).run(
     req.user.id,
+    req.body.unique_id || '',
     req.body.name,
     req.body.species || '',
     req.body.band_number || '',
+    req.body.cage_number || '',
+    req.body.clutch_number || '',
     req.body.gender || 'unknown',
     req.body.dob || null,
     req.body.mutation || '',
     req.body.color || '',
+    req.body.genotype || '',
+    req.body.phenotype || '',
+    req.body.breeding_status || '',
+    req.body.breeding_line || '',
+    req.body.show_quality || '',
+    req.body.estimated_value || null,
+    req.body.acquired_date || null,
+    req.body.sold_date || null,
+    req.body.purchase_price || null,
+    req.body.sale_price || null,
     req.body.photo_url || '',
+    req.body.notes || '',
     req.body.sire_id || null,
     req.body.dam_id || null,
     req.body.status || 'active'
@@ -198,17 +217,35 @@ app.put('/api/birds/:id', auth, (req, res) => {
 
   db.prepare(`
     UPDATE birds
-    SET name = ?, species = ?, band_number = ?, gender = ?, dob = ?, mutation = ?, color = ?, photo_url = ?, sire_id = ?, dam_id = ?, status = ?
+    SET unique_id = ?, name = ?, species = ?, band_number = ?, cage_number = ?, clutch_number = ?,
+        gender = ?, dob = ?, mutation = ?, color = ?, genotype = ?, phenotype = ?,
+        breeding_status = ?, breeding_line = ?, show_quality = ?, estimated_value = ?,
+        acquired_date = ?, sold_date = ?, purchase_price = ?, sale_price = ?,
+        photo_url = ?, notes = ?, sire_id = ?, dam_id = ?, status = ?
     WHERE id = ? AND user_id = ?
   `).run(
+    req.body.unique_id ?? bird.unique_id ?? '',
     req.body.name || bird.name,
     req.body.species || '',
     req.body.band_number || '',
+    req.body.cage_number || '',
+    req.body.clutch_number || '',
     req.body.gender || 'unknown',
     req.body.dob || null,
     req.body.mutation || '',
     req.body.color || '',
+    req.body.genotype || '',
+    req.body.phenotype || '',
+    req.body.breeding_status || '',
+    req.body.breeding_line || '',
+    req.body.show_quality || '',
+    req.body.estimated_value || null,
+    req.body.acquired_date || null,
+    req.body.sold_date || null,
+    req.body.purchase_price || null,
+    req.body.sale_price || null,
     req.body.photo_url || '',
+    req.body.notes || '',
     req.body.sire_id || null,
     req.body.dam_id || null,
     req.body.status || bird.status,

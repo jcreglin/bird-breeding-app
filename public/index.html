@@ -14,6 +14,7 @@
     .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
     .grid-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
     input, select, button, textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; box-sizing: border-box; }
+    textarea { min-height: 96px; resize: vertical; }
     button { background: #2563eb; color: white; border: none; cursor: pointer; font-weight: 600; }
     button.secondary { background: #6b7280; }
     button.danger { background: #dc2626; }
@@ -82,20 +83,36 @@
 
       <section id="tab-birds" class="tab-panel hidden">
         <div class="card">
-          <h3>Add / Edit Bird</h3>
+          <h3>Flock Record</h3>
           <div class="grid grid-2">
             <input type="hidden" id="birdId" />
-            <input id="birdName" placeholder="Name" />
+            <input id="birdName" placeholder="Bird name" />
+            <input id="birdUniqueId" placeholder="Unique ID" />
             <input id="birdSpecies" placeholder="Species" />
             <input id="birdBand" placeholder="Band number" />
+            <input id="birdCage" placeholder="Cage number" />
+            <input id="birdClutchNumber" placeholder="Clutch number" />
             <select id="birdGender"><option value="unknown">Unknown</option><option value="male">Male</option><option value="female">Female</option></select>
             <input id="birdDob" type="date" />
             <input id="birdMutation" placeholder="Mutation" />
-            <input id="birdColor" placeholder="Color" />
+            <input id="birdColor" placeholder="Color / base colour" />
+            <input id="birdGenotype" placeholder="Genotype" />
+            <input id="birdPhenotype" placeholder="Phenotype" />
+            <input id="birdBreedingStatus" placeholder="Breeding status" />
+            <input id="birdBreedingLine" placeholder="Breeding line" />
+            <input id="birdShowQuality" placeholder="Show quality" />
+            <input id="birdEstimatedValue" type="number" step="0.01" placeholder="Estimated value" />
+            <input id="birdPurchasePrice" type="number" step="0.01" placeholder="Purchase price" />
+            <input id="birdSalePrice" type="number" step="0.01" placeholder="Sale price" />
+            <input id="birdAcquiredDate" type="date" />
+            <input id="birdSoldDate" type="date" />
             <input id="birdPhoto" placeholder="Photo URL" />
             <select id="birdSire"></select>
             <select id="birdDam"></select>
             <select id="birdStatus"><option value="active">Active</option><option value="sold">Sold</option><option value="deceased">Deceased</option></select>
+          </div>
+          <div style="margin-top:12px;">
+            <textarea id="birdNotes" placeholder="Notes, health, pairing, sales, or other remarks"></textarea>
           </div>
           <div class="inline" style="margin-top:12px;">
             <button onclick="saveBird()">Save Bird</button>
@@ -103,9 +120,9 @@
           </div>
         </div>
         <div class="card">
-          <h3>Bird List</h3>
+          <h3>Flock Grid</h3>
           <table>
-            <thead><tr><th>Name</th><th>Species</th><th>Mutation</th><th>Parents</th><th>Status</th><th></th></tr></thead>
+            <thead><tr><th>Species</th><th>Unique ID</th><th>Name</th><th>Band</th><th>Cage</th><th>Phenotype</th><th>Genotype</th><th>Sex</th><th>Breeding</th><th>Clutch</th><th>Hatch Date</th><th></th></tr></thead>
             <tbody id="birdsTable"></tbody>
           </table>
         </div>
@@ -301,11 +318,17 @@
     function renderBirds() {
       birdsTable.innerHTML = birds.map(b => `
         <tr>
-          <td>${b.name}</td>
           <td>${b.species || ''}</td>
-          <td>${b.mutation || ''}</td>
-          <td>${b.sire_name || '-'} / ${b.dam_name || '-'}</td>
-          <td><span class="pill">${b.status}</span></td>
+          <td>${b.unique_id || ''}</td>
+          <td>${b.name}</td>
+          <td>${b.band_number || ''}</td>
+          <td>${b.cage_number || ''}</td>
+          <td>${b.phenotype || b.color || ''}</td>
+          <td>${b.genotype || b.mutation || ''}</td>
+          <td>${b.gender || ''}</td>
+          <td>${b.breeding_status || ''}</td>
+          <td>${b.clutch_number || ''}</td>
+          <td>${b.dob || ''}</td>
           <td>
             <button style="width:auto;" onclick='editBirdById(${b.id})'>Edit</button>
             <button style="width:auto;" class="danger" onclick='deleteBird(${b.id})'>Delete</button>
@@ -319,13 +342,27 @@
       if (!b) return;
       birdId.value = b.id;
       birdName.value = b.name || '';
+      birdUniqueId.value = b.unique_id || '';
       birdSpecies.value = b.species || '';
       birdBand.value = b.band_number || '';
+      birdCage.value = b.cage_number || '';
+      birdClutchNumber.value = b.clutch_number || '';
       birdGender.value = b.gender || 'unknown';
       birdDob.value = b.dob || '';
       birdMutation.value = b.mutation || '';
       birdColor.value = b.color || '';
+      birdGenotype.value = b.genotype || '';
+      birdPhenotype.value = b.phenotype || '';
+      birdBreedingStatus.value = b.breeding_status || '';
+      birdBreedingLine.value = b.breeding_line || '';
+      birdShowQuality.value = b.show_quality || '';
+      birdEstimatedValue.value = b.estimated_value ?? '';
+      birdPurchasePrice.value = b.purchase_price ?? '';
+      birdSalePrice.value = b.sale_price ?? '';
+      birdAcquiredDate.value = b.acquired_date || '';
+      birdSoldDate.value = b.sold_date || '';
       birdPhoto.value = b.photo_url || '';
+      birdNotes.value = b.notes || '';
       birdSire.value = b.sire_id || '';
       birdDam.value = b.dam_id || '';
       birdStatus.value = b.status || 'active';
@@ -335,13 +372,27 @@
     function resetBirdForm() {
       birdId.value = '';
       birdName.value = '';
+      birdUniqueId.value = '';
       birdSpecies.value = '';
       birdBand.value = '';
+      birdCage.value = '';
+      birdClutchNumber.value = '';
       birdGender.value = 'unknown';
       birdDob.value = '';
       birdMutation.value = '';
       birdColor.value = '';
+      birdGenotype.value = '';
+      birdPhenotype.value = '';
+      birdBreedingStatus.value = '';
+      birdBreedingLine.value = '';
+      birdShowQuality.value = '';
+      birdEstimatedValue.value = '';
+      birdPurchasePrice.value = '';
+      birdSalePrice.value = '';
+      birdAcquiredDate.value = '';
+      birdSoldDate.value = '';
       birdPhoto.value = '';
+      birdNotes.value = '';
       birdSire.value = '';
       birdDam.value = '';
       birdStatus.value = 'active';
@@ -351,13 +402,27 @@
       try {
         const payload = {
           name: birdName.value,
+          unique_id: birdUniqueId.value,
           species: birdSpecies.value,
           band_number: birdBand.value,
+          cage_number: birdCage.value,
+          clutch_number: birdClutchNumber.value,
           gender: birdGender.value,
           dob: birdDob.value,
           mutation: birdMutation.value,
           color: birdColor.value,
+          genotype: birdGenotype.value,
+          phenotype: birdPhenotype.value,
+          breeding_status: birdBreedingStatus.value,
+          breeding_line: birdBreedingLine.value,
+          show_quality: birdShowQuality.value,
+          estimated_value: birdEstimatedValue.value || null,
+          acquired_date: birdAcquiredDate.value || null,
+          sold_date: birdSoldDate.value || null,
+          purchase_price: birdPurchasePrice.value || null,
+          sale_price: birdSalePrice.value || null,
           photo_url: birdPhoto.value,
+          notes: birdNotes.value,
           sire_id: birdSire.value || null,
           dam_id: birdDam.value || null,
           status: birdStatus.value
