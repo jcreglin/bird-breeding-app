@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  bird-breeding-app:
+    build: .
+    container_name: bird-breeding-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - bird_breeding_data:/app/data
+    environment:
+      - NODE_ENV=production
+
+volumes:
+  bird_breeding_data:

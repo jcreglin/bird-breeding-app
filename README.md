@@ -12,24 +12,33 @@ A simple MVP for a subscription-ready bird breeding tracker.
 - Simple COI calculator
 - Subscription tiers with bird limits
 
-## Stack
-
-- Node.js
-- Express
-- SQLite via better-sqlite3
-- Vanilla HTML/CSS/JS frontend
-
 ## Run locally
 
 ```bash
-cd /data/.openclaw/workspace/bird-breeding-app
 npm install
 node server.js
 ```
 
-Then open:
+Open <http://localhost:3000>
 
-- <http://localhost:3000>
+## Run with Docker
+
+```bash
+docker compose up -d --build
+```
+
+Open <http://localhost:3000>
+
+## Deploy from GitHub URL
+
+Use this repo URL in your VPS/container platform:
+
+- <https://github.com/jcreglin/bird-breeding-app>
+
+It includes:
+- `Dockerfile`
+- `docker-compose.yml`
+- `.dockerignore`
 
 ## Notes
 
