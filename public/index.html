@@ -6,32 +6,55 @@
   <title>Bird Breeding App</title>
   <style>
     :root { color-scheme: light; }
-    body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
-    header { background: #1d4ed8; color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
-    main { padding: 20px; max-width: 1200px; margin: 0 auto; }
-    .card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 10px rgba(0,0,0,.06); margin-bottom: 16px; }
+    body { font-family: Inter, Arial, sans-serif; margin: 0; background: linear-gradient(180deg, #eff4ff 0%, #f8fafc 28%, #f5f7fb 100%); color: #1f2937; }
+    header { background: linear-gradient(135deg, #1d4ed8, #1e3a8a); color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 30px rgba(29,78,216,.18); }
+    main { padding: 20px; max-width: 1280px; margin: 0 auto; }
+    .card { background: rgba(255,255,255,.92); border: 1px solid rgba(255,255,255,.7); backdrop-filter: blur(8px); border-radius: 18px; padding: 18px; box-shadow: 0 12px 32px rgba(15,23,42,.08); margin-bottom: 16px; }
     .grid { display: grid; gap: 16px; }
     .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
     .grid-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-    input, select, button, textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; box-sizing: border-box; }
+    input, select, button, textarea { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #d1d5db; box-sizing: border-box; }
     textarea { min-height: 96px; resize: vertical; }
-    button { background: #2563eb; color: white; border: none; cursor: pointer; font-weight: 600; }
+    button { background: #2563eb; color: white; border: none; cursor: pointer; font-weight: 600; transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease; }
+    button:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(37,99,235,.22); }
     button.secondary { background: #6b7280; }
+    button.ghost { background: #eef2ff; color: #1e3a8a; border: 1px solid #c7d2fe; }
     button.danger { background: #dc2626; }
     .inline { display: flex; gap: 10px; align-items: center; }
     .inline > * { flex: 1; }
     .hidden { display: none; }
     table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 10px; border-bottom: 1px solid #e5e7eb; text-align: left; font-size: 14px; }
+    th, td { padding: 10px; border-bottom: 1px solid #e5e7eb; text-align: left; font-size: 14px; vertical-align: top; }
     .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-    .tab { width: auto; padding: 10px 14px; background: #e5e7eb; color: #111827; }
+    .tab { width: auto; padding: 10px 14px; background: #e5e7eb; color: #111827; border-radius: 999px; }
     .tab.active { background: #2563eb; color: white; }
     .stat { font-size: 28px; font-weight: 700; }
     .muted { color: #6b7280; font-size: 13px; }
     .pill { display:inline-block; padding:4px 8px; border-radius:999px; background:#dbeafe; color:#1d4ed8; font-size:12px; }
-    .message { padding: 10px 12px; border-radius: 8px; margin-bottom: 12px; }
+    .message { padding: 10px 12px; border-radius: 10px; margin-bottom: 12px; }
     .success { background: #dcfce7; color: #166534; }
     .error { background: #fee2e2; color: #991b1b; }
+    .hero { display:grid; grid-template-columns: 1.4fr .9fr; gap:16px; margin-bottom:16px; }
+    .heroPanel { background: linear-gradient(135deg, #0f172a, #1e3a8a 60%, #2563eb); color: white; }
+    .heroPanel h2 { margin: 0 0 8px; font-size: 30px; }
+    .heroPanel p { margin: 0; color: rgba(255,255,255,.84); max-width: 620px; }
+    .quickActions { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-top:16px; }
+    .actionBtn { text-align:left; padding:14px; border-radius:14px; background: rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.16); color:white; }
+    .actionBtn small { display:block; opacity:.78; margin-top:4px; font-weight:400; }
+    .miniStat { background: linear-gradient(180deg, #ffffff, #f8fafc); }
+    .miniStat .label { color:#64748b; font-size:12px; text-transform: uppercase; letter-spacing: .05em; }
+    .miniStat .value { font-size: 30px; font-weight: 700; margin-top: 8px; }
+    .moduleGrid { display:grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap:14px; }
+    .moduleCard { padding:16px; border-radius:16px; border:1px solid #e5e7eb; background: linear-gradient(180deg, #ffffff, #f8fafc); }
+    .moduleCard h4 { margin:0 0 6px; font-size:15px; }
+    .moduleCard p { margin:0 0 12px; color:#64748b; font-size:13px; min-height:36px; }
+    .dashboardSectionTitle { display:flex; justify-content:space-between; gap:12px; align-items:end; margin-bottom:12px; }
+    .dashboardSectionTitle h3 { margin:0; }
+    .timelineItem { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid #e5e7eb; }
+    .timelineItem:last-child { border-bottom:none; }
+    .timelineDate { color:#64748b; font-size:12px; white-space:nowrap; }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
     @media (max-width: 720px) { .inline { flex-direction: column; } }
   </style>
 </head>
@@ -78,7 +101,61 @@
       </div>
 
       <section id="tab-dashboard" class="tab-panel">
-        <div class="grid grid-4" id="statsGrid"></div>
+        <div class="hero">
+          <div class="card heroPanel">
+            <div class="pill" style="background:rgba(255,255,255,.16); color:white;">Breeder dashboard</div>
+            <h2>Bird breeding operations</h2>
+            <p>A modern launch screen inspired by Bird Tracker, with the main breeder modules front and centre even before every workflow is wired in.</p>
+            <div class="quickActions">
+              <button class="actionBtn" onclick="showTab('birds')">Flock Records<small>Bird profiles, grid view, master records</small></button>
+              <button class="actionBtn" onclick="showTab('pairs')">Breeding Records<small>Pairs, rounds, nest activity, planning</small></button>
+              <button class="actionBtn" onclick="showTab('breeding')">Incubation & Eggs<small>Clutches, egg workflow, hatch dates</small></button>
+              <button class="actionBtn" onclick="showTab('genetics')">Genetic Predictions<small>COI and mutation outcomes</small></button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="dashboardSectionTitle">
+              <div>
+                <div class="muted">Account snapshot</div>
+                <h3 style="margin:4px 0 0;">Breeder overview</h3>
+              </div>
+              <span class="pill" id="dashboardTierPill">Free</span>
+            </div>
+            <div class="grid grid-2" id="statsGrid"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="dashboardSectionTitle">
+            <div>
+              <div class="muted">Main modules</div>
+              <h3>Workspace</h3>
+            </div>
+            <div class="muted">Modern shell, Bird Tracker-style structure</div>
+          </div>
+          <div class="moduleGrid" id="moduleGrid"></div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="dashboardSectionTitle">
+              <div>
+                <div class="muted">Operational focus</div>
+                <h3>Egg status and breeding pulse</h3>
+              </div>
+            </div>
+            <div class="grid grid-3" id="breedingPulseGrid"></div>
+          </div>
+          <div class="card">
+            <div class="dashboardSectionTitle">
+              <div>
+                <div class="muted">Upcoming / recent</div>
+                <h3>Breeding timeline</h3>
+              </div>
+            </div>
+            <div id="timelineList"></div>
+          </div>
+        </div>
       </section>
 
       <section id="tab-birds" class="tab-panel hidden">
@@ -228,6 +305,7 @@
     let birds = [];
     let pairs = [];
     let clutches = [];
+    let calendarItems = [];
 
     const messageEl = document.getElementById('message');
     const el = (id) => document.getElementById(id);
@@ -532,8 +610,60 @@
       } catch (e) { showMessage(e.message, 'error'); }
     }
 
+    function renderDashboardModules() {
+      const modules = [
+        ['Flock Records', 'Profile-driven bird records with grid access', 'birds'],
+        ['Breeding Records', 'Pairs, rounds, dates, nest activity', 'pairs'],
+        ['Offspring Records', 'Young bird records and outcomes', 'birds'],
+        ['Incubation Records', 'Incubation dates, handling, hatching flow', 'breeding'],
+        ['Egg Status', 'Operational egg tracking and breeder snapshot', 'breeding'],
+        ['Genetic Predictions', 'Mutation logic and COI tools', 'genetics'],
+        ['Contacts', 'Future buyer, seller, vet, and breeder records', 'subscription'],
+        ['Invoices', 'Future sales/admin workflow shell', 'subscription'],
+        ['Calendar', 'Breeding and hatch timeline visibility', 'breeding'],
+        ['Task Scheduler', 'Future reminders and breeder to-dos', 'subscription']
+      ];
+      moduleGrid.innerHTML = modules.map(([title, desc, tab]) => `
+        <div class="moduleCard">
+          <h4>${title}</h4>
+          <p>${desc}</p>
+          <button class="ghost" onclick="showTab('${tab}')">Open</button>
+        </div>
+      `).join('');
+    }
+
+    function renderBreedingPulse(stats) {
+      const pendingEggs = Math.max(0, stats.eggsTracked - (clutches.reduce((sum, c) => sum + (c.egg_count || 0), 0) - stats.eggsTracked));
+      const items = [
+        ['Active Pairs', stats.activePairs],
+        ['Clutches Running', stats.totalClutches],
+        ['Eggs Logged', stats.eggsTracked],
+        ['Bird Capacity Left', Number.isFinite(stats.birdLimit) ? Math.max(0, stats.birdLimit - stats.totalBirds) : '∞']
+      ];
+      breedingPulseGrid.innerHTML = items.map(([label, value]) => `
+        <div class="miniStat card" style="margin-bottom:0;">
+          <div class="label">${label}</div>
+          <div class="value">${value}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderTimeline() {
+      const items = calendarItems.slice(0, 8);
+      timelineList.innerHTML = items.length ? items.map(i => `
+        <div class="timelineItem">
+          <div>
+            <div><strong>${i.title}</strong></div>
+            <div class="muted">${i.type}${i.extra ? ` · ${i.extra}` : ''}</div>
+          </div>
+          <div class="timelineDate">${i.event_date || 'No date'}</div>
+        </div>
+      `).join('') : '<div class="muted">No breeding events yet. Once pairs, clutches, and egg dates are added, this timeline will populate.</div>';
+    }
+
     async function loadStats() {
       const stats = await api('/api/stats');
+      dashboardTierPill.textContent = stats.tier;
       statsGrid.innerHTML = [
         ['Birds', `${stats.totalBirds} / ${stats.birdLimit === null || !isFinite(stats.birdLimit) ? '∞' : stats.birdLimit}`],
         ['Males', stats.maleBirds],
@@ -541,7 +671,9 @@
         ['Active Pairs', stats.activePairs],
         ['Clutches', stats.totalClutches],
         ['Eggs', stats.eggsTracked]
-      ].map(([label, value]) => `<div class="card"><div class="muted">${label}</div><div class="stat">${value}</div></div>`).join('');
+      ].map(([label, value]) => `<div class="miniStat card" style="margin-bottom:0;"><div class="label">${label}</div><div class="value">${value}</div></div>`).join('');
+      renderDashboardModules();
+      renderBreedingPulse(stats);
     }
 
     async function loadBirds() {
@@ -563,8 +695,9 @@
     }
 
     async function loadCalendar() {
-      const items = await api('/api/calendar');
-      calendarTable.innerHTML = items.map(i => `<tr><td>${i.event_date || ''}</td><td>${i.type}</td><td>${i.title}</td><td>${i.extra || i.status || ''}</td></tr>`).join('');
+      calendarItems = await api('/api/calendar');
+      calendarTable.innerHTML = calendarItems.map(i => `<tr><td>${i.event_date || ''}</td><td>${i.type}</td><td>${i.title}</td><td>${i.extra || i.status || ''}</td></tr>`).join('');
+      renderTimeline();
     }
 
     async function loadSubscription() {
