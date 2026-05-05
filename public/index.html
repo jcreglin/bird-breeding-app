@@ -544,7 +544,8 @@
 
     function bandDisplay(value) {
       const match = bands.find(b => String(b.id) === String(value) || b.band_number === value);
-      return match?.band_number || value || '';
+      if (!match) return value || '';
+      return [match.color, match.band_text, match.band_number].filter(Boolean).join(' · ');
     }
 
     function ageDisplay(dob) {
