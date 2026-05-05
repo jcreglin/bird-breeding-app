@@ -525,10 +525,13 @@
     function syncSelectors() {
       const males = birds.filter(b => b.gender === 'male');
       const females = birds.filter(b => b.gender === 'female');
+      const editingBirdId = birdId?.value ? Number(birdId.value) : null;
+      const usedBands = new Set(birds.filter(b => !editingBirdId || b.id !== editingBirdId).map(b => b.band_number).filter(Boolean));
+      const availableBands = bands.filter(b => !usedBands.has(b.band_number) || (editingBirdId && birds.find(x => x.id === editingBirdId)?.band_number === b.band_number));
       birdSire.innerHTML = optionMarkup(males, b => `${b.name} (${b.band_number || 'no band'})`);
       birdDam.innerHTML = optionMarkup(females, b => `${b.name} (${b.band_number || 'no band'})`);
       birdSpecies.innerHTML = optionMarkup(speciesRecords, s => s.name, false);
-      birdBand.innerHTML = optionMarkup(bands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}`, false);
+      birdBand.innerHTML = optionMarkup(availableBands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}`, false);
       birdCage.innerHTML = optionMarkup(cages, c => `${c.cage_number}${c.location ? ' · ' + c.location : ''}`, false);
       pairSire.innerHTML = optionMarkup(males, b => b.name, false);
       pairDam.innerHTML = optionMarkup(females, b => b.name, false);
@@ -716,6 +719,10 @@
 
     async function loadSpecies() {
       speciesRecords = await api('/api/species');
+      if (!speciesRecords.length) {
+        await api('/api/species/seed-defaults', { method: 'POST', body: JSON.stringify({}) });
+        speciesRecords = await api('/api/species');
+      }
       renderSpecies();
       syncSelectors();
     }

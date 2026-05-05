@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const db = require('./database');
+const speciesSeed = require('./species-seed.json');
 
 const app = express();
 const PORT = 3000;
@@ -112,6 +113,27 @@ function nextBirdUniqueId(userId) {
   return `B${String(next).padStart(5, '0')}`;
 }
 
+function seedSpeciesForUser(userId) {
+  const insert = db.prepare('INSERT OR IGNORE INTO species (user_id, name, scientific_name, banding_period, incubation_days, notes) VALUES (?, ?, ?, ?, ?, ?)');
+  const tx = db.transaction(() => {
+    for (const item of speciesSeed) {
+      insert.run(
+        userId,
+        item.name,
+        item.other_name || '',
+        item.banding_period || '',
+        item.incubation_days != null ? String(item.incubation_days) : '',
+        [
+          item.species_number ? `Species No: ${item.species_number}` : '',
+          item.fledging_period ? `Fledging: ${item.fledging_period}` : '',
+          item.maturity_period ? `Maturity: ${item.maturity_period}` : ''
+        ].filter(Boolean).join(' | ')
+      );
+    }
+  });
+  tx();
+}
+
 app.post('/api/register', async (req, res) => {
   const missing = requireFields(['email', 'password', 'name'], req.body);
   if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
@@ -119,6 +141,7 @@ app.post('/api/register', async (req, res) => {
     const hash = await bcrypt.hash(req.body.password, 10);
     const result = db.prepare('INSERT INTO users (email, password_hash, name, subscription_tier) VALUES (?, ?, ?, ?)').run(req.body.email.trim().toLowerCase(), hash, req.body.name.trim(), 'Free');
     db.prepare('INSERT INTO subscriptions (user_id, tier, status) VALUES (?, ?, ?)').run(result.lastInsertRowid, 'Free', 'active');
+    seedSpeciesForUser(result.lastInsertRowid);
     const user = userFromToken.get(result.lastInsertRowid);
     const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
     res.json({ token, user: safeUser(user) });
@@ -406,24 +429,8 @@ app.post('/api/species', auth, (req, res) => {
 });
 
 app.post('/api/species/seed-defaults', auth, (req, res) => {
-  const defaults = [
-    ['Budgerigar', 'Melopsittacus undulatus'],
-    ['Cockatiel', 'Nymphicus hollandicus'],
-    ['Indian Ringneck', 'Psittacula krameri'],
-    ['Alexandrine', 'Psittacula eupatria'],
-    ['Eclectus', 'Eclectus roratus'],
-    ['Rainbow Lorikeet', 'Trichoglossus moluccanus'],
-    ['Sun Conure', 'Aratinga solstitialis'],
-    ['Crimson Rosella', 'Platycercus elegans'],
-    ['Galah', 'Eolophus roseicapilla'],
-    ['Major Mitchell Cockatoo', 'Lophochroa leadbeateri']
-  ];
-  const insert = db.prepare('INSERT OR IGNORE INTO species (user_id, name, scientific_name, banding_period, incubation_days, notes) VALUES (?, ?, ?, ?, ?, ?)');
-  const tx = db.transaction(() => {
-    for (const [name, sci] of defaults) insert.run(req.user.id, name, sci, '', '', 'Seeded starter record');
-  });
-  tx();
-  res.json({ ok: true, seeded: defaults.length, note: 'Starter species seeded. Exact MDB species extraction still needs a dedicated Access-table extraction pass.' });
+  seedSpeciesForUser(req.user.id);
+  res.json({ ok: true, seeded: speciesSeed.length, note: `Imported ${speciesSeed.length} species from the supplied Bird Tracker species spreadsheet.` });
 });
 
 app.get('/api/bands', auth, (req, res) => {

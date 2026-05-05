@@ -1,0 +1,785 @@
+[
+  {
+    "name": "Budgerigar",
+    "incubation_days": 18,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Colored Canary",
+    "incubation_days": 13,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Type Canary",
+    "incubation_days": 13,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Cockatiel",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Peachfaced Lovebird",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Masked Lovebird",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Nyasa Lovebird",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Fischer\u00b4s Lovebird",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Black-cheeked Lovebird",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Abysinnian Lovebird",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Gouldian Finch",
+    "incubation_days": 13,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Zebra Finch",
+    "incubation_days": 13,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Bourke\u00b4s Parrot",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Turquoise Parrot",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Scarlet-chested Parrot",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Elegant Parrot",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Rock Parrot",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Blue-winged Parrot",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Red-rumped Parrot",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Hooded Parrot",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Mulga Parrot",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Blue-bonnet Parrot",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Mallee Ringnecked Parrot",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Port Lincoln Parrot",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Cloncurry Parrot",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Eastern Rosella",
+    "incubation_days": 22,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Pale-headed Rosella",
+    "incubation_days": 22,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Crimson Rosella",
+    "incubation_days": 22,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Adelaide Rosella",
+    "incubation_days": 22,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Yellow Rosella",
+    "incubation_days": 22,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Western Rosella",
+    "incubation_days": 22,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Princess Parrot",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Superb Parrot",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Regent Parrot",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Crimson-winged Parrot",
+    "incubation_days": 25,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "King Parrot",
+    "incubation_days": 25,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Eclectus Parrot",
+    "incubation_days": 28,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Galah",
+    "incubation_days": 30,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Yellow-tailed Black Cockatoo",
+    "incubation_days": 28,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Yellow-fronted Kakariki",
+    "incubation_days": 19,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Red-fronted Kakariki",
+    "incubation_days": 19,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Swift Parrot",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Rainbow Lorikeet",
+    "incubation_days": 25,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Red-collared Lorikeet",
+    "incubation_days": 25,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Scaly-breasted Lorikeet",
+    "incubation_days": 25,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Musk Lorikeet",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Purple-crowned Lorikeet",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Stella\u00b4s Lory",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Indian Ringnecked Parrot",
+    "incubation_days": 25,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Alexandrine Parrot",
+    "incubation_days": 26,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Plum-headed Parrot",
+    "incubation_days": 25,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Moustache Parrot",
+    "incubation_days": 25,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Slaty-headed Parrot",
+    "incubation_days": 25,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "African Grey Parrot",
+    "incubation_days": 28,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Senegal Parrot",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Red-bellied Parrot",
+    "incubation_days": 25,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Pacific Parrotlet",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Blue-winged Parrotlet",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Green-rumped Parrotlet",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Spectacled Parrot",
+    "incubation_days": 21,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Lineolated Parrot",
+    "incubation_days": 19,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Plain Parakeet",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Scarlet Macaw",
+    "incubation_days": 26,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Blue and Gold Macaw",
+    "incubation_days": 26,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Quaker Parrot",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Nanday Conure",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Sun Conure",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Dusky-headed Conure",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Golden-crowned Conure",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Sharp-tailed Conure",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Maroon-bellied Conure",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Green-cheeked Conure",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Black-capped Conure",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Painted Conure",
+    "incubation_days": 23,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Pantagonian Conure",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Blue-fronted Amazon",
+    "incubation_days": 26,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Yellow-naped Amazon",
+    "incubation_days": 28,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Red-lored Amazon",
+    "incubation_days": 26,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Double Yellow-headed Amazon",
+    "incubation_days": 28,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Mealy Amazon",
+    "incubation_days": 28,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Lilac-crowned Amazon",
+    "incubation_days": 26,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Orange-winged Amazon",
+    "incubation_days": 26,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Festive Amazon",
+    "incubation_days": 28,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "White-fronted Amazon",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "White-crowned Pionus",
+    "incubation_days": 26,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Java Finch",
+    "incubation_days": 18,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  },
+  {
+    "name": "Ringneck Dove",
+    "incubation_days": 24,
+    "banding_period": null,
+    "species_number": null,
+    "fledging_period": "",
+    "maturity_period": null,
+    "other_name": null
+  }
+]
