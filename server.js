@@ -114,7 +114,7 @@ function nextBirdUniqueId(userId) {
 }
 
 function seedSpeciesForUser(userId) {
-  const insert = db.prepare('INSERT OR IGNORE INTO species (user_id, name, scientific_name, banding_period, incubation_days, notes) VALUES (?, ?, ?, ?, ?, ?)');
+  const insert = db.prepare('INSERT OR IGNORE INTO species (user_id, name, scientific_name, banding_period, incubation_days, notes, show_in_dropdown) VALUES (?, ?, ?, ?, ?, ?, ?)');
   const tx = db.transaction(() => {
     for (const item of speciesSeed) {
       insert.run(
@@ -127,7 +127,8 @@ function seedSpeciesForUser(userId) {
           item.species_number ? `Species No: ${item.species_number}` : '',
           item.fledging_period ? `Fledging: ${item.fledging_period}` : '',
           item.maturity_period ? `Maturity: ${item.maturity_period}` : ''
-        ].filter(Boolean).join(' | ')
+        ].filter(Boolean).join(' | '),
+        0
       );
     }
   });
@@ -409,6 +410,20 @@ app.post('/api/cages', auth, (req, res) => {
   res.json({ id: result.lastInsertRowid });
 });
 
+app.put('/api/cages/:id', auth, (req, res) => {
+  const cage = db.prepare('SELECT * FROM cages WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
+  if (!cage) return res.status(404).json({ error: 'Cage not found' });
+  db.prepare('UPDATE cages SET cage_number = ?, location = ?, size = ?, notes = ? WHERE id = ? AND user_id = ?').run(
+    req.body.cage_number || cage.cage_number,
+    req.body.location || '',
+    req.body.size || '',
+    req.body.notes || '',
+    req.params.id,
+    req.user.id
+  );
+  res.json({ ok: true });
+});
+
 app.get('/api/species', auth, (req, res) => {
   const rows = db.prepare('SELECT * FROM species WHERE user_id = ? ORDER BY name').all(req.user.id);
   res.json(rows);
@@ -417,15 +432,32 @@ app.get('/api/species', auth, (req, res) => {
 app.post('/api/species', auth, (req, res) => {
   const missing = requireFields(['name'], req.body);
   if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
-  const result = db.prepare('INSERT INTO species (user_id, name, scientific_name, banding_period, incubation_days, notes) VALUES (?, ?, ?, ?, ?, ?)').run(
+  const result = db.prepare('INSERT INTO species (user_id, name, scientific_name, banding_period, incubation_days, notes, show_in_dropdown) VALUES (?, ?, ?, ?, ?, ?, ?)').run(
     req.user.id,
     req.body.name,
     req.body.scientific_name || '',
     req.body.banding_period || '',
     req.body.incubation_days || '',
-    req.body.notes || ''
+    req.body.notes || '',
+    req.body.show_in_dropdown ? 1 : 0
   );
   res.json({ id: result.lastInsertRowid });
+});
+
+app.put('/api/species/:id', auth, (req, res) => {
+  const species = db.prepare('SELECT * FROM species WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
+  if (!species) return res.status(404).json({ error: 'Species not found' });
+  db.prepare('UPDATE species SET name = ?, scientific_name = ?, banding_period = ?, incubation_days = ?, notes = ?, show_in_dropdown = ? WHERE id = ? AND user_id = ?').run(
+    req.body.name || species.name,
+    req.body.scientific_name || '',
+    req.body.banding_period || '',
+    req.body.incubation_days || '',
+    req.body.notes || '',
+    req.body.show_in_dropdown ? 1 : 0,
+    req.params.id,
+    req.user.id
+  );
+  res.json({ ok: true });
 });
 
 app.post('/api/species/seed-defaults', auth, (req, res) => {
@@ -449,6 +481,20 @@ app.post('/api/bands', auth, (req, res) => {
     req.body.notes || ''
   );
   res.json({ id: result.lastInsertRowid });
+});
+
+app.put('/api/bands/:id', auth, (req, res) => {
+  const band = db.prepare('SELECT * FROM bands WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
+  if (!band) return res.status(404).json({ error: 'Band not found' });
+  db.prepare('UPDATE bands SET color = ?, band_text = ?, band_number = ?, notes = ? WHERE id = ? AND user_id = ?').run(
+    req.body.color || band.color,
+    req.body.band_text || '',
+    req.body.band_number || band.band_number,
+    req.body.notes || '',
+    req.params.id,
+    req.user.id
+  );
+  res.json({ ok: true });
 });
 
 app.get('/api/contacts', auth, (req, res) => {

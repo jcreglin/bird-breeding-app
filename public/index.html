@@ -284,13 +284,14 @@
       <section id="tab-cages" class="tab-panel hidden">
         <div class="card">
           <h3>Cages</h3>
+          <input type="hidden" id="cageId" />
           <div class="grid grid-2">
             <div class="fieldGroup"><label>Cage number</label><input id="cageNumber" /></div>
             <div class="fieldGroup"><label>Location</label><input id="cageLocation" /></div>
             <div class="fieldGroup"><label>Size</label><input id="cageSize" /></div>
             <div class="fieldGroup"><label>Notes</label><textarea id="cageNotes"></textarea></div>
           </div>
-          <button onclick="saveCage()">Save Cage</button>
+          <div class="inline"><button onclick="saveCage()">Save Cage</button><button class="secondary" onclick="resetCageForm()">Clear</button></div>
         </div>
         <div class="card">
           <h3>Cage List</h3>
@@ -304,19 +305,21 @@
       <section id="tab-species" class="tab-panel hidden">
         <div class="card">
           <h3>Species</h3>
+          <input type="hidden" id="speciesId" />
           <div class="grid grid-2">
             <div class="fieldGroup"><label>Species name</label><input id="speciesName" /></div>
             <div class="fieldGroup"><label>Scientific name</label><input id="speciesScientificName" /></div>
             <div class="fieldGroup"><label>Banding period</label><input id="speciesBandingPeriod" /></div>
             <div class="fieldGroup"><label>Incubation days</label><input id="speciesIncubationDays" /></div>
+            <div class="fieldGroup"><label>Show in dropdown</label><input id="speciesShowInDropdown" type="checkbox" style="width:auto;" /></div>
             <div class="fieldGroup"><label>Notes</label><textarea id="speciesNotes"></textarea></div>
           </div>
-          <div class="inline"><button onclick="saveSpecies()">Save Species</button><button class="ghost" onclick="seedSpeciesDefaults()">Seed Starter Species</button></div>
+          <div class="inline"><button onclick="saveSpecies()">Save Species</button><button class="secondary" onclick="resetSpeciesForm()">Clear</button><button class="ghost" onclick="seedSpeciesDefaults()">Seed Starter Species</button></div>
         </div>
         <div class="card">
           <h3>Species List</h3>
           <table>
-            <thead><tr><th>Name</th><th>Scientific Name</th><th>Banding Period</th><th>Incubation Days</th><th>Notes</th></tr></thead>
+            <thead><tr><th>Show</th><th>Name</th><th>Scientific Name</th><th>Banding Period</th><th>Incubation Days</th><th>Notes</th></tr></thead>
             <tbody id="speciesTable"></tbody>
           </table>
         </div>
@@ -325,13 +328,14 @@
       <section id="tab-bands" class="tab-panel hidden">
         <div class="card">
           <h3>Bands</h3>
+          <input type="hidden" id="bandId" />
           <div class="grid grid-2">
             <div class="fieldGroup"><label>Band color</label><input id="bandColor" /></div>
             <div class="fieldGroup"><label>Band text</label><input id="bandText" /></div>
             <div class="fieldGroup"><label>Band number</label><input id="bandNumber" /></div>
             <div class="fieldGroup"><label>Notes</label><textarea id="bandNotes"></textarea></div>
           </div>
-          <button onclick="saveBand()">Save Band</button>
+          <div class="inline"><button onclick="saveBand()">Save Band</button><button class="secondary" onclick="resetBandForm()">Clear</button></div>
         </div>
         <div class="card">
           <h3>Band List</h3>
@@ -584,7 +588,8 @@
       const availableBands = bands.filter(b => !usedBands.has(b.band_number) || (currentBird && bandDisplay(currentBird.band_number) === b.band_number));
       birdSire.innerHTML = optionMarkup(males, b => `${b.name} (${b.band_number || 'no band'})`);
       birdDam.innerHTML = optionMarkup(females, b => `${b.name} (${b.band_number || 'no band'})`);
-      birdSpecies.innerHTML = optionMarkup(speciesRecords, s => s.name, false, s => s.name);
+      const visibleSpecies = speciesRecords.filter(s => Number(s.show_in_dropdown) === 1);
+      birdSpecies.innerHTML = optionMarkup(visibleSpecies, s => s.name, false, s => s.name);
       birdBand.innerHTML = optionMarkup(availableBands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}`, false, b => b.band_number);
       birdCage.innerHTML = optionMarkup(cages, c => `${c.cage_number}${c.location ? ' · ' + c.location : ''}`, false, c => c.cage_number);
       pairSire.innerHTML = optionMarkup(males, b => b.name, false);
@@ -786,15 +791,15 @@
     }
 
     function renderCages() {
-      cagesTable.innerHTML = cages.map(c => `<tr><td>${c.cage_number}</td><td>${c.location || ''}</td><td>${c.size || ''}</td><td>${c.notes || ''}</td></tr>`).join('');
+      cagesTable.innerHTML = cages.map(c => `<tr onclick="editCageById(${c.id})" style="cursor:pointer;"><td>${c.cage_number}</td><td>${c.location || ''}</td><td>${c.size || ''}</td><td>${c.notes || ''}</td></tr>`).join('');
     }
 
     function renderSpecies() {
-      speciesTable.innerHTML = speciesRecords.map(s => `<tr><td>${s.name}</td><td>${s.scientific_name || ''}</td><td>${s.banding_period || ''}</td><td>${s.incubation_days || ''}</td><td>${s.notes || ''}</td></tr>`).join('');
+      speciesTable.innerHTML = speciesRecords.map(s => `<tr onclick="editSpeciesById(${s.id})" style="cursor:pointer;"><td><input type="checkbox" ${Number(s.show_in_dropdown) === 1 ? 'checked' : ''} onclick="event.stopPropagation(); toggleSpeciesShow(${s.id}, this.checked)" /></td><td>${s.name}</td><td>${s.scientific_name || ''}</td><td>${s.banding_period || ''}</td><td>${s.incubation_days || ''}</td><td>${s.notes || ''}</td></tr>`).join('');
     }
 
     function renderBands() {
-      bandsTable.innerHTML = bands.map(b => `<tr><td>${b.color}</td><td>${b.band_text || ''}</td><td>${b.band_number}</td><td>${b.notes || ''}</td></tr>`).join('');
+      bandsTable.innerHTML = bands.map(b => `<tr onclick="editBandById(${b.id})" style="cursor:pointer;"><td>${b.color}</td><td>${b.band_text || ''}</td><td>${b.band_number}</td><td>${b.notes || ''}</td></tr>`).join('');
     }
 
     async function loadCages() {
@@ -819,39 +824,93 @@
       syncSelectors();
     }
 
+    function editCageById(id) {
+      const cage = cages.find(c => c.id === id);
+      if (!cage) return;
+      cageId.value = cage.id;
+      cageNumber.value = cage.cage_number || '';
+      cageLocation.value = cage.location || '';
+      cageSize.value = cage.size || '';
+      cageNotes.value = cage.notes || '';
+    }
+
+    function resetCageForm() {
+      cageId.value = '';
+      cageNumber.value = '';
+      cageLocation.value = '';
+      cageSize.value = '';
+      cageNotes.value = '';
+    }
+
     async function saveCage() {
       try {
-        await api('/api/cages', { method: 'POST', body: JSON.stringify({
+        const payload = {
           cage_number: cageNumber.value,
           location: cageLocation.value,
           size: cageSize.value,
           notes: cageNotes.value
-        })});
-        cageNumber.value = '';
-        cageLocation.value = '';
-        cageSize.value = '';
-        cageNotes.value = '';
+        };
+        if (cageId.value) await api(`/api/cages/${cageId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
+        else await api('/api/cages', { method: 'POST', body: JSON.stringify(payload) });
+        resetCageForm();
         await loadCages();
         showMessage('Cage saved');
       } catch (e) { showMessage(e.message, 'error'); }
     }
 
+    function editSpeciesById(id) {
+      const species = speciesRecords.find(s => s.id === id);
+      if (!species) return;
+      speciesId.value = species.id;
+      speciesName.value = species.name || '';
+      speciesScientificName.value = species.scientific_name || '';
+      speciesBandingPeriod.value = species.banding_period || '';
+      speciesIncubationDays.value = species.incubation_days || '';
+      speciesShowInDropdown.checked = Number(species.show_in_dropdown) === 1;
+      speciesNotes.value = species.notes || '';
+    }
+
+    function resetSpeciesForm() {
+      speciesId.value = '';
+      speciesName.value = '';
+      speciesScientificName.value = '';
+      speciesBandingPeriod.value = '';
+      speciesIncubationDays.value = '';
+      speciesShowInDropdown.checked = false;
+      speciesNotes.value = '';
+    }
+
     async function saveSpecies() {
       try {
-        await api('/api/species', { method: 'POST', body: JSON.stringify({
+        const payload = {
           name: speciesName.value,
           scientific_name: speciesScientificName.value,
           banding_period: speciesBandingPeriod.value,
           incubation_days: speciesIncubationDays.value,
+          show_in_dropdown: speciesShowInDropdown.checked,
           notes: speciesNotes.value
-        })});
-        speciesName.value = '';
-        speciesScientificName.value = '';
-        speciesBandingPeriod.value = '';
-        speciesIncubationDays.value = '';
-        speciesNotes.value = '';
+        };
+        if (speciesId.value) await api(`/api/species/${speciesId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
+        else await api('/api/species', { method: 'POST', body: JSON.stringify(payload) });
+        resetSpeciesForm();
         await loadSpecies();
         showMessage('Species saved');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function toggleSpeciesShow(id, checked) {
+      const species = speciesRecords.find(s => s.id === id);
+      if (!species) return;
+      try {
+        await api(`/api/species/${id}`, { method: 'PUT', body: JSON.stringify({
+          name: species.name,
+          scientific_name: species.scientific_name,
+          banding_period: species.banding_period,
+          incubation_days: species.incubation_days,
+          notes: species.notes,
+          show_in_dropdown: checked
+        })});
+        await loadSpecies();
       } catch (e) { showMessage(e.message, 'error'); }
     }
 
@@ -863,18 +922,35 @@
       } catch (e) { showMessage(e.message, 'error'); }
     }
 
+    function editBandById(id) {
+      const band = bands.find(b => b.id === id);
+      if (!band) return;
+      bandId.value = band.id;
+      bandColor.value = band.color || '';
+      bandText.value = band.band_text || '';
+      bandNumber.value = band.band_number || '';
+      bandNotes.value = band.notes || '';
+    }
+
+    function resetBandForm() {
+      bandId.value = '';
+      bandColor.value = '';
+      bandText.value = '';
+      bandNumber.value = '';
+      bandNotes.value = '';
+    }
+
     async function saveBand() {
       try {
-        await api('/api/bands', { method: 'POST', body: JSON.stringify({
+        const payload = {
           color: bandColor.value,
           band_text: bandText.value,
           band_number: bandNumber.value,
           notes: bandNotes.value
-        })});
-        bandColor.value = '';
-        bandText.value = '';
-        bandNumber.value = '';
-        bandNotes.value = '';
+        };
+        if (bandId.value) await api(`/api/bands/${bandId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
+        else await api('/api/bands', { method: 'POST', body: JSON.stringify(payload) });
+        resetBandForm();
         await loadBands();
         showMessage('Band saved');
       } catch (e) { showMessage(e.message, 'error'); }
