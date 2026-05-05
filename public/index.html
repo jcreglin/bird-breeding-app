@@ -518,21 +518,37 @@
       document.getElementById(`bird-subtab-${name}`).classList.remove('hidden');
     }
 
-    function optionMarkup(list, labelFn, includeBlank = true) {
-      return `${includeBlank ? '<option value="">None</option>' : ''}` + list.map(item => `<option value="${item.id}">${labelFn(item)}</option>`).join('');
+    function optionMarkup(list, labelFn, includeBlank = true, valueFn = item => item.id) {
+      return `${includeBlank ? '<option value="">None</option>' : ''}` + list.map(item => `<option value="${String(valueFn(item)).replace(/"/g, '&quot;')}">${labelFn(item)}</option>`).join('');
+    }
+
+    function speciesDisplay(value) {
+      const match = speciesRecords.find(s => String(s.id) === String(value) || s.name === value);
+      return match?.name || value || '';
+    }
+
+    function cageDisplay(value) {
+      const match = cages.find(c => String(c.id) === String(value) || c.cage_number === value);
+      return match?.cage_number || value || '';
+    }
+
+    function bandDisplay(value) {
+      const match = bands.find(b => String(b.id) === String(value) || b.band_number === value);
+      return match?.band_number || value || '';
     }
 
     function syncSelectors() {
       const males = birds.filter(b => b.gender === 'male');
       const females = birds.filter(b => b.gender === 'female');
       const editingBirdId = birdId?.value ? Number(birdId.value) : null;
-      const usedBands = new Set(birds.filter(b => !editingBirdId || b.id !== editingBirdId).map(b => b.band_number).filter(Boolean));
-      const availableBands = bands.filter(b => !usedBands.has(b.band_number) || (editingBirdId && birds.find(x => x.id === editingBirdId)?.band_number === b.band_number));
+      const currentBird = editingBirdId ? birds.find(x => x.id === editingBirdId) : null;
+      const usedBands = new Set(birds.filter(b => !editingBirdId || b.id !== editingBirdId).map(b => bandDisplay(b.band_number)).filter(Boolean));
+      const availableBands = bands.filter(b => !usedBands.has(b.band_number) || (currentBird && bandDisplay(currentBird.band_number) === b.band_number));
       birdSire.innerHTML = optionMarkup(males, b => `${b.name} (${b.band_number || 'no band'})`);
       birdDam.innerHTML = optionMarkup(females, b => `${b.name} (${b.band_number || 'no band'})`);
-      birdSpecies.innerHTML = optionMarkup(speciesRecords, s => s.name, false);
-      birdBand.innerHTML = optionMarkup(availableBands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}`, false);
-      birdCage.innerHTML = optionMarkup(cages, c => `${c.cage_number}${c.location ? ' · ' + c.location : ''}`, false);
+      birdSpecies.innerHTML = optionMarkup(speciesRecords, s => s.name, false, s => s.name);
+      birdBand.innerHTML = optionMarkup(availableBands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}`, false, b => b.band_number);
+      birdCage.innerHTML = optionMarkup(cages, c => `${c.cage_number}${c.location ? ' · ' + c.location : ''}`, false, c => c.cage_number);
       pairSire.innerHTML = optionMarkup(males, b => b.name, false);
       pairDam.innerHTML = optionMarkup(females, b => b.name, false);
       genSire.innerHTML = optionMarkup(males, b => b.name, false);
@@ -540,15 +556,20 @@
       coiBird.innerHTML = optionMarkup(birds, b => b.name, false);
       clutchPair.innerHTML = optionMarkup(pairs, p => `${p.sire_name} x ${p.dam_name}`, false);
       eggClutch.innerHTML = optionMarkup(clutches, c => `${c.sire_name} x ${c.dam_name} (${c.lay_date || 'no lay date'})`, false);
+      if (currentBird) {
+        birdSpecies.value = speciesDisplay(currentBird.species);
+        birdBand.value = bandDisplay(currentBird.band_number);
+        birdCage.value = cageDisplay(currentBird.cage_number);
+      }
     }
 
     function renderBirds() {
       birdsTable.innerHTML = birds.map(b => `
         <tr>
-          <td>${b.species || ''}</td>
+          <td>${speciesDisplay(b.species)}</td>
           <td>${b.name}</td>
-          <td>${b.band_number || ''}</td>
-          <td>${b.cage_number || ''}</td>
+          <td>${bandDisplay(b.band_number)}</td>
+          <td>${cageDisplay(b.cage_number)}</td>
           <td>${b.phenotype || b.color || ''}</td>
           <td>${b.genotype || b.mutation || ''}</td>
           <td>${b.gender || ''}</td>
@@ -567,10 +588,11 @@
       const b = birds.find(x => x.id === id);
       if (!b) return;
       birdId.value = b.id;
+      syncSelectors();
       birdName.value = b.name || '';
-      birdSpecies.value = b.species || '';
-      birdBand.value = b.band_number || '';
-      birdCage.value = b.cage_number || '';
+      birdSpecies.value = speciesDisplay(b.species);
+      birdBand.value = bandDisplay(b.band_number);
+      birdCage.value = cageDisplay(b.cage_number);
       birdClutchNumber.value = b.clutch_number || '';
       birdGender.value = b.gender || 'unknown';
       birdDob.value = b.dob || '';
@@ -606,6 +628,7 @@
 
     function resetBirdForm() {
       birdId.value = '';
+      syncSelectors();
       birdName.value = '';
       birdSpecies.value = '';
       birdBand.value = '';
