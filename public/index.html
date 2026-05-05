@@ -112,6 +112,7 @@
         <button class="tab" onclick="showTab('birds', event)">Flock</button>
         <button class="tab" onclick="showTab('cages', event)">Cages</button>
         <button class="tab" onclick="showTab('species', event)">Species</button>
+        <button class="tab" onclick="showTab('bands', event)">Bands</button>
         <button class="tab" onclick="showTab('pairs', event)">Pairs</button>
         <button class="tab" onclick="showTab('breeding', event)">Breeding</button>
         <button class="tab" onclick="showTab('genetics', event)">Genetics</button>
@@ -198,9 +199,9 @@
           <div id="bird-subtab-profile" class="subtab-panel">
             <div class="grid grid-2">
               <div class="fieldGroup"><label>Bird name</label><input id="birdName" /></div>
-              <div class="fieldGroup"><label>Species</label><input id="birdSpecies" /></div>
-              <div class="fieldGroup"><label>Band number</label><input id="birdBand" /></div>
-              <div class="fieldGroup"><label>Cage number</label><input id="birdCage" /></div>
+              <div class="fieldGroup"><label>Species</label><select id="birdSpecies"></select></div>
+              <div class="fieldGroup"><label>Band number</label><select id="birdBand"></select></div>
+              <div class="fieldGroup"><label>Cage number</label><select id="birdCage"></select></div>
               <div class="fieldGroup"><label>Clutch number</label><input id="birdClutchNumber" /></div>
               <div class="fieldGroup"><label>Sex</label><select id="birdGender"><option value="unknown">Unknown</option><option value="male">Male</option><option value="female">Female</option></select></div>
               <div class="fieldGroup"><label>Hatch date</label><input id="birdDob" type="date" /></div>
@@ -304,13 +305,33 @@
             <div class="fieldGroup"><label>Incubation days</label><input id="speciesIncubationDays" /></div>
             <div class="fieldGroup"><label>Notes</label><textarea id="speciesNotes"></textarea></div>
           </div>
-          <button onclick="saveSpecies()">Save Species</button>
+          <div class="inline"><button onclick="saveSpecies()">Save Species</button><button class="ghost" onclick="seedSpeciesDefaults()">Seed Starter Species</button></div>
         </div>
         <div class="card">
           <h3>Species List</h3>
           <table>
             <thead><tr><th>Name</th><th>Scientific Name</th><th>Banding Period</th><th>Incubation Days</th><th>Notes</th></tr></thead>
             <tbody id="speciesTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-bands" class="tab-panel hidden">
+        <div class="card">
+          <h3>Bands</h3>
+          <div class="grid grid-2">
+            <div class="fieldGroup"><label>Band color</label><input id="bandColor" /></div>
+            <div class="fieldGroup"><label>Band text</label><input id="bandText" /></div>
+            <div class="fieldGroup"><label>Band number</label><input id="bandNumber" /></div>
+            <div class="fieldGroup"><label>Notes</label><textarea id="bandNotes"></textarea></div>
+          </div>
+          <button onclick="saveBand()">Save Band</button>
+        </div>
+        <div class="card">
+          <h3>Band List</h3>
+          <table>
+            <thead><tr><th>Color</th><th>Text</th><th>Number</th><th>Notes</th></tr></thead>
+            <tbody id="bandsTable"></tbody>
           </table>
         </div>
       </section>
@@ -415,6 +436,7 @@
     let birds = [];
     let cages = [];
     let speciesRecords = [];
+    let bands = [];
     let pairs = [];
     let clutches = [];
     let calendarItems = [];
@@ -505,6 +527,9 @@
       const females = birds.filter(b => b.gender === 'female');
       birdSire.innerHTML = optionMarkup(males, b => `${b.name} (${b.band_number || 'no band'})`);
       birdDam.innerHTML = optionMarkup(females, b => `${b.name} (${b.band_number || 'no band'})`);
+      birdSpecies.innerHTML = optionMarkup(speciesRecords, s => s.name, false);
+      birdBand.innerHTML = optionMarkup(bands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}`, false);
+      birdCage.innerHTML = optionMarkup(cages, c => `${c.cage_number}${c.location ? ' · ' + c.location : ''}`, false);
       pairSire.innerHTML = optionMarkup(males, b => b.name, false);
       pairDam.innerHTML = optionMarkup(females, b => b.name, false);
       genSire.innerHTML = optionMarkup(males, b => b.name, false);
@@ -679,14 +704,26 @@
       speciesTable.innerHTML = speciesRecords.map(s => `<tr><td>${s.name}</td><td>${s.scientific_name || ''}</td><td>${s.banding_period || ''}</td><td>${s.incubation_days || ''}</td><td>${s.notes || ''}</td></tr>`).join('');
     }
 
+    function renderBands() {
+      bandsTable.innerHTML = bands.map(b => `<tr><td>${b.color}</td><td>${b.band_text || ''}</td><td>${b.band_number}</td><td>${b.notes || ''}</td></tr>`).join('');
+    }
+
     async function loadCages() {
       cages = await api('/api/cages');
       renderCages();
+      syncSelectors();
     }
 
     async function loadSpecies() {
       speciesRecords = await api('/api/species');
       renderSpecies();
+      syncSelectors();
+    }
+
+    async function loadBands() {
+      bands = await api('/api/bands');
+      renderBands();
+      syncSelectors();
     }
 
     async function saveCage() {
@@ -722,6 +759,31 @@
         speciesNotes.value = '';
         await loadSpecies();
         showMessage('Species saved');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function seedSpeciesDefaults() {
+      try {
+        const data = await api('/api/species/seed-defaults', { method: 'POST', body: JSON.stringify({}) });
+        await loadSpecies();
+        showMessage(data.note || 'Species seeded');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function saveBand() {
+      try {
+        await api('/api/bands', { method: 'POST', body: JSON.stringify({
+          color: bandColor.value,
+          band_text: bandText.value,
+          band_number: bandNumber.value,
+          notes: bandNotes.value
+        })});
+        bandColor.value = '';
+        bandText.value = '';
+        bandNumber.value = '';
+        bandNotes.value = '';
+        await loadBands();
+        showMessage('Band saved');
       } catch (e) { showMessage(e.message, 'error'); }
     }
 
@@ -927,6 +989,7 @@
       await loadBirds();
       await loadCages();
       await loadSpecies();
+      await loadBands();
       await loadPairs();
       await loadClutches();
       await loadCalendar();

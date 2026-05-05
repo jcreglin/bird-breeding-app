@@ -405,6 +405,45 @@ app.post('/api/species', auth, (req, res) => {
   res.json({ id: result.lastInsertRowid });
 });
 
+app.post('/api/species/seed-defaults', auth, (req, res) => {
+  const defaults = [
+    ['Budgerigar', 'Melopsittacus undulatus'],
+    ['Cockatiel', 'Nymphicus hollandicus'],
+    ['Indian Ringneck', 'Psittacula krameri'],
+    ['Alexandrine', 'Psittacula eupatria'],
+    ['Eclectus', 'Eclectus roratus'],
+    ['Rainbow Lorikeet', 'Trichoglossus moluccanus'],
+    ['Sun Conure', 'Aratinga solstitialis'],
+    ['Crimson Rosella', 'Platycercus elegans'],
+    ['Galah', 'Eolophus roseicapilla'],
+    ['Major Mitchell Cockatoo', 'Lophochroa leadbeateri']
+  ];
+  const insert = db.prepare('INSERT OR IGNORE INTO species (user_id, name, scientific_name, banding_period, incubation_days, notes) VALUES (?, ?, ?, ?, ?, ?)');
+  const tx = db.transaction(() => {
+    for (const [name, sci] of defaults) insert.run(req.user.id, name, sci, '', '', 'Seeded starter record');
+  });
+  tx();
+  res.json({ ok: true, seeded: defaults.length, note: 'Starter species seeded. Exact MDB species extraction still needs a dedicated Access-table extraction pass.' });
+});
+
+app.get('/api/bands', auth, (req, res) => {
+  const rows = db.prepare('SELECT * FROM bands WHERE user_id = ? ORDER BY color, band_text, band_number').all(req.user.id);
+  res.json(rows);
+});
+
+app.post('/api/bands', auth, (req, res) => {
+  const missing = requireFields(['color', 'band_number'], req.body);
+  if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
+  const result = db.prepare('INSERT INTO bands (user_id, color, band_text, band_number, notes) VALUES (?, ?, ?, ?, ?)').run(
+    req.user.id,
+    req.body.color,
+    req.body.band_text || '',
+    req.body.band_number,
+    req.body.notes || ''
+  );
+  res.json({ id: result.lastInsertRowid });
+});
+
 app.get('/api/contacts', auth, (req, res) => {
   const contacts = db.prepare('SELECT * FROM contacts WHERE user_id = ? ORDER BY name').all(req.user.id);
   res.json(contacts);

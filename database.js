@@ -138,6 +138,17 @@ db.exec(`
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
   );
 
+  CREATE TABLE IF NOT EXISTS bands (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    color TEXT NOT NULL,
+    band_text TEXT,
+    band_number TEXT NOT NULL,
+    notes TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  );
+
   CREATE INDEX IF NOT EXISTS idx_birds_user_id ON birds(user_id);
   CREATE INDEX IF NOT EXISTS idx_pairs_user_id ON pairs(user_id);
   CREATE INDEX IF NOT EXISTS idx_clutches_user_id ON clutches(user_id);
@@ -146,6 +157,7 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id);
   CREATE INDEX IF NOT EXISTS idx_cages_user_id ON cages(user_id);
   CREATE INDEX IF NOT EXISTS idx_species_user_id ON species(user_id);
+  CREATE INDEX IF NOT EXISTS idx_bands_user_id ON bands(user_id);
 `);
 
 addColumn('birds', 'unique_id', 'TEXT');
@@ -177,6 +189,9 @@ db.exec(`
 
   CREATE UNIQUE INDEX IF NOT EXISTS idx_species_user_name_unique
   ON species(user_id, name);
+
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_bands_user_band_number_unique
+  ON bands(user_id, band_number);
 `);
 
 module.exports = db;
