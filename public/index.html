@@ -542,6 +542,11 @@
       return match?.cage_number || value || '';
     }
 
+    function bandNumberValue(value) {
+      const match = bands.find(b => String(b.id) === String(value) || b.band_number === value);
+      return match?.band_number || value || '';
+    }
+
     function bandDisplay(value) {
       const match = bands.find(b => String(b.id) === String(value) || b.band_number === value);
       if (!match) return value || '';
@@ -585,8 +590,9 @@
       const females = birds.filter(b => b.gender === 'female');
       const editingBirdId = birdId?.value ? Number(birdId.value) : null;
       const currentBird = editingBirdId ? birds.find(x => x.id === editingBirdId) : null;
-      const usedBands = new Set(birds.filter(b => !editingBirdId || b.id !== editingBirdId).map(b => bandDisplay(b.band_number)).filter(Boolean));
-      const availableBands = bands.filter(b => !usedBands.has(b.band_number) || (currentBird && bandDisplay(currentBird.band_number) === b.band_number));
+      const currentBirdBandNumber = currentBird ? bandNumberValue(currentBird.band_number) : '';
+      const usedBands = new Set(birds.filter(b => !editingBirdId || b.id !== editingBirdId).map(b => bandNumberValue(b.band_number)).filter(Boolean));
+      const availableBands = bands.filter(b => !usedBands.has(b.band_number) || (currentBirdBandNumber && currentBirdBandNumber === b.band_number));
       birdSire.innerHTML = optionMarkup(males, b => `${b.name} (${b.band_number || 'no band'})`);
       birdDam.innerHTML = optionMarkup(females, b => `${b.name} (${b.band_number || 'no band'})`);
       const visibleSpecies = speciesRecords.filter(s => Number(s.show_in_dropdown) === 1);
@@ -602,7 +608,7 @@
       eggClutch.innerHTML = optionMarkup(clutches, c => `${c.sire_name} x ${c.dam_name} (${c.lay_date || 'no lay date'})`, false);
       if (currentBird) {
         birdSpecies.value = speciesDisplay(currentBird.species);
-        birdBand.value = bandDisplay(currentBird.band_number);
+        birdBand.value = bandNumberValue(currentBird.band_number);
         birdCage.value = cageDisplay(currentBird.cage_number);
       }
     }
@@ -632,7 +638,7 @@
       syncSelectors();
       birdName.value = b.name || '';
       birdSpecies.value = speciesDisplay(b.species);
-      birdBand.value = bandDisplay(b.band_number);
+      birdBand.value = bandNumberValue(b.band_number);
       birdCage.value = cageDisplay(b.cage_number);
       birdClutchNumber.value = b.clutch_number || '';
       birdGender.value = b.gender || 'unknown';
