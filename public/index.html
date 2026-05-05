@@ -6,8 +6,8 @@
   <title>Animal HQ Bird Tracker</title>
   <style>
     :root { color-scheme: light; }
-    body { font-family: Inter, Arial, sans-serif; margin: 0; background: linear-gradient(180deg, #f2f7fb 0%, #f7fafc 26%, #edf4f7 100%); color: #1f2937; }
-    header { background: linear-gradient(135deg, #0f172a, #164e63 55%, #0ea5a4); color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 30px rgba(15,23,42,.2); border-bottom: 1px solid rgba(255,255,255,.08); }
+    body { font-family: Inter, Arial, sans-serif; margin: 0; background: linear-gradient(180deg, #f7f7fb 0%, #fbfbfd 22%, #f1f5f9 100%); color: #1f2937; }
+    header { background: #ffffff; color: #111827; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 26px rgba(15,23,42,.06); border-bottom: 1px solid #e5e7eb; }
     main { padding: 20px; max-width: 1280px; margin: 0 auto; }
     .card { background: rgba(255,255,255,.94); border: 1px solid rgba(203,213,225,.7); backdrop-filter: blur(8px); border-radius: 18px; padding: 18px; box-shadow: 0 12px 32px rgba(15,23,42,.07); margin-bottom: 16px; }
     .grid { display: grid; gap: 16px; }
@@ -16,10 +16,10 @@
     .grid-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
     input, select, button, textarea { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #d1d5db; box-sizing: border-box; }
     textarea { min-height: 96px; resize: vertical; }
-    button { background: linear-gradient(135deg, #0f766e, #0891b2); color: white; border: none; cursor: pointer; font-weight: 600; transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease; }
-    button:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(8,145,178,.24); }
+    button { background: linear-gradient(135deg, #6d28d9, #9333ea); color: white; border: none; cursor: pointer; font-weight: 600; transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease; }
+    button:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(147,51,234,.24); }
     button.secondary { background: #64748b; }
-    button.ghost { background: #ecfeff; color: #155e75; border: 1px solid #a5f3fc; }
+    button.ghost { background: #faf5ff; color: #6b21a8; border: 1px solid #e9d5ff; }
     button.danger { background: #dc2626; }
     .inline { display: flex; gap: 10px; align-items: center; }
     .inline > * { flex: 1; }
@@ -28,25 +28,25 @@
     th, td { padding: 10px; border-bottom: 1px solid #e5e7eb; text-align: left; font-size: 14px; vertical-align: top; }
     .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
     .tab { width: auto; padding: 10px 14px; background: #e5e7eb; color: #111827; border-radius: 999px; }
-    .tab.active { background: linear-gradient(135deg, #0f766e, #0891b2); color: white; }
+    .tab.active { background: linear-gradient(135deg, #6d28d9, #9333ea); color: white; }
     .stat { font-size: 28px; font-weight: 700; }
     .muted { color: #6b7280; font-size: 13px; }
-    .pill { display:inline-block; padding:4px 8px; border-radius:999px; background:#ccfbf1; color:#115e59; font-size:12px; }
+    .pill { display:inline-block; padding:4px 8px; border-radius:999px; background:#f3e8ff; color:#6b21a8; font-size:12px; }
     .message { padding: 10px 12px; border-radius: 10px; margin-bottom: 12px; }
     .success { background: #dcfce7; color: #166534; }
     .error { background: #fee2e2; color: #991b1b; }
     .hero { display:grid; grid-template-columns: 1.4fr .9fr; gap:16px; margin-bottom:16px; }
-    .heroPanel { background: linear-gradient(135deg, #0f172a, #134e4a 45%, #0f766e 72%, #22c55e 100%); color: white; }
+    .heroPanel { background: linear-gradient(135deg, #050505, #141414 34%, #3b0764 72%, #7e22ce 100%); color: white; }
     .heroPanel h2 { margin: 0 0 8px; font-size: 30px; }
     .heroPanel p { margin: 0; color: rgba(255,255,255,.84); max-width: 620px; }
     .quickActions { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-top:16px; }
     .actionBtn { text-align:left; padding:14px; border-radius:14px; background: rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); color:white; }
     .actionBtn small { display:block; opacity:.78; margin-top:4px; font-weight:400; }
-    .miniStat { background: linear-gradient(180deg, #ffffff, #f0fdfa); }
+    .miniStat { background: linear-gradient(180deg, #ffffff, #faf5ff); }
     .miniStat .label { color:#64748b; font-size:12px; text-transform: uppercase; letter-spacing: .05em; }
     .miniStat .value { font-size: 30px; font-weight: 700; margin-top: 8px; }
     .moduleGrid { display:grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap:14px; }
-    .moduleCard { padding:16px; border-radius:16px; border:1px solid #dbeafe; background: linear-gradient(180deg, #ffffff, #f0fdfa); }
+    .moduleCard { padding:16px; border-radius:16px; border:1px solid #ede9fe; background: linear-gradient(180deg, #ffffff, #faf5ff); }
     .moduleCard h4 { margin:0 0 6px; font-size:15px; }
     .moduleCard p { margin:0 0 12px; color:#64748b; font-size:13px; min-height:36px; }
     .dashboardSectionTitle { display:flex; justify-content:space-between; gap:12px; align-items:end; margin-bottom:12px; }
@@ -54,15 +54,22 @@
     .timelineItem { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid #e5e7eb; }
     .timelineItem:last-child { border-bottom:none; }
     .timelineDate { color:#64748b; font-size:12px; white-space:nowrap; }
+    .brand { display:flex; align-items:center; gap:14px; }
+    .brand img { height:48px; width:auto; display:block; }
+    .brandText strong { display:block; font-size:16px; }
+    .brandText .muted { margin-top:2px; }
     @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
     @media (max-width: 720px) { .inline { flex-direction: column; } }
   </style>
 </head>
 <body>
   <header>
-    <div>
-      <strong>Animal HQ Bird Tracker</strong>
-      <div id="userSummary" class="muted" style="color:rgba(255,255,255,.82);"></div>
+    <div class="brand">
+      <img src="/assets/animalhq-logo.png" alt="Animal HQ logo" />
+      <div class="brandText">
+        <strong>Bird Tracker</strong>
+        <div id="userSummary" class="muted">Animal HQ addon</div>
+      </div>
     </div>
     <button id="logoutBtn" class="secondary hidden" style="width:auto;">Logout</button>
   </header>
@@ -73,6 +80,7 @@
     <section id="authView" class="grid grid-2">
       <div class="card">
         <h2>Animal HQ Login</h2>
+        <div class="muted" style="margin-bottom:12px;">Sign in to your Bird Tracker workspace</div>
         <div class="grid">
           <input id="loginEmail" placeholder="Email" />
           <input id="loginPassword" type="password" placeholder="Password" />
@@ -81,6 +89,7 @@
       </div>
       <div class="card">
         <h2>Create Animal HQ Bird Tracker Account</h2>
+        <div class="muted" style="margin-bottom:12px;">Start a new breeder workspace under the Animal HQ brand</div>
         <div class="grid">
           <input id="registerName" placeholder="Name" />
           <input id="registerEmail" placeholder="Email" />
@@ -103,9 +112,9 @@
       <section id="tab-dashboard" class="tab-panel">
         <div class="hero">
           <div class="card heroPanel">
-            <div class="pill" style="background:rgba(255,255,255,.16); color:white;">Animal HQ addon</div>
-            <h2>Animal HQ Bird Tracker</h2>
-            <p>A branded breeder workspace designed to feel like part of Animal HQ, while giving you dedicated bird tracking, breeding, incubation, and management tools.</p>
+            <div class="pill" style="background:rgba(255,255,255,.12); color:white; border:1px solid rgba(255,255,255,.12);">Animal HQ addon</div>
+            <h2>Bird Tracker</h2>
+            <p>A branded breeder workspace designed to sit naturally beside the main Animal HQ website, with bird tracking, breeding, incubation, and management tools in a cleaner premium shell.</p>
             <div class="quickActions">
               <button class="actionBtn" onclick="showTab('birds')">Flock Records<small>Bird profiles, grid view, master records</small></button>
               <button class="actionBtn" onclick="showTab('pairs')">Breeding Records<small>Pairs, rounds, nest activity, planning</small></button>
