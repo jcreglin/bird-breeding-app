@@ -115,12 +115,37 @@ db.exec(`
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
   );
 
+  CREATE TABLE IF NOT EXISTS cages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    cage_number TEXT NOT NULL,
+    location TEXT,
+    size TEXT,
+    notes TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  );
+
+  CREATE TABLE IF NOT EXISTS species (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    scientific_name TEXT,
+    banding_period TEXT,
+    incubation_days TEXT,
+    notes TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  );
+
   CREATE INDEX IF NOT EXISTS idx_birds_user_id ON birds(user_id);
   CREATE INDEX IF NOT EXISTS idx_pairs_user_id ON pairs(user_id);
   CREATE INDEX IF NOT EXISTS idx_clutches_user_id ON clutches(user_id);
   CREATE INDEX IF NOT EXISTS idx_eggs_user_id ON eggs(user_id);
   CREATE INDEX IF NOT EXISTS idx_contacts_user_id ON contacts(user_id);
   CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id);
+  CREATE INDEX IF NOT EXISTS idx_cages_user_id ON cages(user_id);
+  CREATE INDEX IF NOT EXISTS idx_species_user_id ON species(user_id);
 `);
 
 addColumn('birds', 'unique_id', 'TEXT');
@@ -137,5 +162,21 @@ addColumn('birds', 'sold_date', 'TEXT');
 addColumn('birds', 'purchase_price', 'REAL');
 addColumn('birds', 'sale_price', 'REAL');
 addColumn('birds', 'notes', 'TEXT');
+
+db.exec(`
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_birds_user_band_unique
+  ON birds(user_id, band_number)
+  WHERE band_number IS NOT NULL AND band_number <> '';
+
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_birds_user_unique_id_unique
+  ON birds(user_id, unique_id)
+  WHERE unique_id IS NOT NULL AND unique_id <> '';
+
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_cages_user_cage_number_unique
+  ON cages(user_id, cage_number);
+
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_species_user_name_unique
+  ON species(user_id, name);
+`);
 
 module.exports = db;

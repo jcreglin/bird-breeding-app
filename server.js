@@ -98,6 +98,20 @@ function requireFields(fields, body) {
   return missing;
 }
 
+function ensureBandNumberAvailable(userId, bandNumber, excludeBirdId = null) {
+  if (!bandNumber) return true;
+  const row = excludeBirdId
+    ? db.prepare('SELECT id FROM birds WHERE user_id = ? AND band_number = ? AND id <> ?').get(userId, bandNumber, excludeBirdId)
+    : db.prepare('SELECT id FROM birds WHERE user_id = ? AND band_number = ?').get(userId, bandNumber);
+  return !row;
+}
+
+function nextBirdUniqueId(userId) {
+  const row = db.prepare("SELECT id FROM birds WHERE user_id = ? ORDER BY id DESC LIMIT 1").get(userId);
+  const next = (row?.id || 0) + 1;
+  return `B${String(next).padStart(5, '0')}`;
+}
+
 app.post('/api/register', async (req, res) => {
   const missing = requireFields(['email', 'password', 'name'], req.body);
   if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
@@ -166,6 +180,10 @@ app.post('/api/birds', auth, (req, res) => {
     }
   }
 
+  if (!ensureBandNumberAvailable(req.user.id, req.body.band_number || '')) {
+    return res.status(400).json({ error: 'Band number must be unique for this account' });
+  }
+
   const result = db.prepare(`
     INSERT INTO birds (
       user_id, unique_id, name, species, band_number, cage_number, clutch_number,
@@ -176,7 +194,7 @@ app.post('/api/birds', auth, (req, res) => {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `).run(
     req.user.id,
-    req.body.unique_id || '',
+    nextBirdUniqueId(req.user.id),
     req.body.name,
     req.body.species || '',
     req.body.band_number || '',
@@ -215,6 +233,10 @@ app.put('/api/birds/:id', auth, (req, res) => {
     }
   }
 
+  if (!ensureBandNumberAvailable(req.user.id, req.body.band_number || '', req.params.id)) {
+    return res.status(400).json({ error: 'Band number must be unique for this account' });
+  }
+
   db.prepare(`
     UPDATE birds
     SET unique_id = ?, name = ?, species = ?, band_number = ?, cage_number = ?, clutch_number = ?,
@@ -224,7 +246,7 @@ app.put('/api/birds/:id', auth, (req, res) => {
         photo_url = ?, notes = ?, sire_id = ?, dam_id = ?, status = ?
     WHERE id = ? AND user_id = ?
   `).run(
-    req.body.unique_id ?? bird.unique_id ?? '',
+    bird.unique_id || nextBirdUniqueId(req.user.id),
     req.body.name || bird.name,
     req.body.species || '',
     req.body.band_number || '',
@@ -344,6 +366,43 @@ app.put('/api/eggs/:id', auth, (req, res) => {
   if (!egg) return res.status(404).json({ error: 'Egg not found' });
   db.prepare('UPDATE eggs SET egg_number = ?, outcome = ? WHERE id = ? AND user_id = ?').run(req.body.egg_number || egg.egg_number, req.body.outcome || egg.outcome, req.params.id, req.user.id);
   res.json({ ok: true });
+});
+
+app.get('/api/cages', auth, (req, res) => {
+  const rows = db.prepare('SELECT * FROM cages WHERE user_id = ? ORDER BY cage_number').all(req.user.id);
+  res.json(rows);
+});
+
+app.post('/api/cages', auth, (req, res) => {
+  const missing = requireFields(['cage_number'], req.body);
+  if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
+  const result = db.prepare('INSERT INTO cages (user_id, cage_number, location, size, notes) VALUES (?, ?, ?, ?, ?)').run(
+    req.user.id,
+    req.body.cage_number,
+    req.body.location || '',
+    req.body.size || '',
+    req.body.notes || ''
+  );
+  res.json({ id: result.lastInsertRowid });
+});
+
+app.get('/api/species', auth, (req, res) => {
+  const rows = db.prepare('SELECT * FROM species WHERE user_id = ? ORDER BY name').all(req.user.id);
+  res.json(rows);
+});
+
+app.post('/api/species', auth, (req, res) => {
+  const missing = requireFields(['name'], req.body);
+  if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
+  const result = db.prepare('INSERT INTO species (user_id, name, scientific_name, banding_period, incubation_days, notes) VALUES (?, ?, ?, ?, ?, ?)').run(
+    req.user.id,
+    req.body.name,
+    req.body.scientific_name || '',
+    req.body.banding_period || '',
+    req.body.incubation_days || '',
+    req.body.notes || ''
+  );
+  res.json({ id: result.lastInsertRowid });
 });
 
 app.get('/api/contacts', auth, (req, res) => {

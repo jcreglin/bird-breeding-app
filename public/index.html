@@ -110,6 +110,8 @@
       <div class="tabs">
         <button class="tab active" onclick="showTab('dashboard', event)">Dashboard</button>
         <button class="tab" onclick="showTab('birds', event)">Flock</button>
+        <button class="tab" onclick="showTab('cages', event)">Cages</button>
+        <button class="tab" onclick="showTab('species', event)">Species</button>
         <button class="tab" onclick="showTab('pairs', event)">Pairs</button>
         <button class="tab" onclick="showTab('breeding', event)">Breeding</button>
         <button class="tab" onclick="showTab('genetics', event)">Genetics</button>
@@ -195,35 +197,34 @@
 
           <div id="bird-subtab-profile" class="subtab-panel">
             <div class="grid grid-2">
-              <input id="birdName" placeholder="Bird name" />
-              <input id="birdUniqueId" placeholder="Unique ID" />
-              <input id="birdSpecies" placeholder="Species" />
-              <input id="birdBand" placeholder="Band number" />
-              <input id="birdCage" placeholder="Cage number" />
-              <input id="birdClutchNumber" placeholder="Clutch number" />
-              <select id="birdGender"><option value="unknown">Unknown</option><option value="male">Male</option><option value="female">Female</option></select>
-              <input id="birdDob" type="date" />
-              <input id="birdMutation" placeholder="Mutation" />
-              <input id="birdColor" placeholder="Color / base colour" />
-              <input id="birdGenotype" placeholder="Genotype" />
-              <input id="birdPhenotype" placeholder="Phenotype" />
-              <input id="birdBreedingStatus" placeholder="Breeding status" />
-              <input id="birdBreedingLine" placeholder="Breeding line" />
-              <input id="birdShowQuality" placeholder="Show quality" />
-              <input id="birdEstimatedValue" type="number" step="0.01" placeholder="Estimated value" />
-              <input id="birdPhoto" placeholder="Photo URL" />
-              <select id="birdSire"></select>
-              <select id="birdDam"></select>
-              <select id="birdStatus"><option value="active">Active</option><option value="sold">Sold</option><option value="deceased">Deceased</option></select>
+              <div class="fieldGroup"><label>Bird name</label><input id="birdName" /></div>
+              <div class="fieldGroup"><label>Species</label><input id="birdSpecies" /></div>
+              <div class="fieldGroup"><label>Band number</label><input id="birdBand" /></div>
+              <div class="fieldGroup"><label>Cage number</label><input id="birdCage" /></div>
+              <div class="fieldGroup"><label>Clutch number</label><input id="birdClutchNumber" /></div>
+              <div class="fieldGroup"><label>Sex</label><select id="birdGender"><option value="unknown">Unknown</option><option value="male">Male</option><option value="female">Female</option></select></div>
+              <div class="fieldGroup"><label>Hatch date</label><input id="birdDob" type="date" /></div>
+              <div class="fieldGroup"><label>Mutation</label><input id="birdMutation" /></div>
+              <div class="fieldGroup"><label>Color / base colour</label><input id="birdColor" /></div>
+              <div class="fieldGroup"><label>Genotype</label><input id="birdGenotype" /></div>
+              <div class="fieldGroup"><label>Phenotype</label><input id="birdPhenotype" /></div>
+              <div class="fieldGroup"><label>Breeding status</label><input id="birdBreedingStatus" /></div>
+              <div class="fieldGroup"><label>Breeding line</label><input id="birdBreedingLine" /></div>
+              <div class="fieldGroup"><label>Show quality</label><input id="birdShowQuality" /></div>
+              <div class="fieldGroup"><label>Estimated value</label><input id="birdEstimatedValue" type="number" step="0.01" /></div>
+              <div class="fieldGroup"><label>Photo URL</label><input id="birdPhoto" /></div>
+              <div class="fieldGroup"><label>Sire</label><select id="birdSire"></select></div>
+              <div class="fieldGroup"><label>Dam</label><select id="birdDam"></select></div>
+              <div class="fieldGroup"><label>Status</label><select id="birdStatus"><option value="active">Active</option><option value="sold">Sold</option><option value="deceased">Deceased</option></select></div>
             </div>
           </div>
 
           <div id="bird-subtab-sales" class="subtab-panel hidden">
             <div class="grid grid-2">
-              <input id="birdAcquiredDate" type="date" />
-              <input id="birdPurchasePrice" type="number" step="0.01" placeholder="Purchase price" />
-              <input id="birdSoldDate" type="date" />
-              <input id="birdSalePrice" type="number" step="0.01" placeholder="Sale price" />
+              <div class="fieldGroup"><label>Date received</label><input id="birdAcquiredDate" type="date" /></div>
+              <div class="fieldGroup"><label>Purchase price</label><input id="birdPurchasePrice" type="number" step="0.01" /></div>
+              <div class="fieldGroup"><label>Sold date</label><input id="birdSoldDate" type="date" /></div>
+              <div class="fieldGroup"><label>Sale price</label><input id="birdSalePrice" type="number" step="0.01" /></div>
             </div>
             <div class="featurePlaceholder" style="margin-top:12px;">This section will become the full acquisition and sales workflow, including seller, buyer, contact linking, acquisition method, and do-not-sell controls.</div>
           </div>
@@ -267,8 +268,49 @@
         <div class="card">
           <h3>Flock Grid</h3>
           <table>
-            <thead><tr><th>Species</th><th>Unique ID</th><th>Name</th><th>Band</th><th>Cage</th><th>Phenotype</th><th>Genotype</th><th>Sex</th><th>Breeding</th><th>Clutch</th><th>Hatch Date</th><th></th></tr></thead>
+            <thead><tr><th>Species</th><th>Name</th><th>Band</th><th>Cage</th><th>Phenotype</th><th>Genotype</th><th>Sex</th><th>Breeding</th><th>Clutch</th><th>Hatch Date</th><th></th></tr></thead>
             <tbody id="birdsTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-cages" class="tab-panel hidden">
+        <div class="card">
+          <h3>Cages</h3>
+          <div class="grid grid-2">
+            <div class="fieldGroup"><label>Cage number</label><input id="cageNumber" /></div>
+            <div class="fieldGroup"><label>Location</label><input id="cageLocation" /></div>
+            <div class="fieldGroup"><label>Size</label><input id="cageSize" /></div>
+            <div class="fieldGroup"><label>Notes</label><textarea id="cageNotes"></textarea></div>
+          </div>
+          <button onclick="saveCage()">Save Cage</button>
+        </div>
+        <div class="card">
+          <h3>Cage List</h3>
+          <table>
+            <thead><tr><th>Cage Number</th><th>Location</th><th>Size</th><th>Notes</th></tr></thead>
+            <tbody id="cagesTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-species" class="tab-panel hidden">
+        <div class="card">
+          <h3>Species</h3>
+          <div class="grid grid-2">
+            <div class="fieldGroup"><label>Species name</label><input id="speciesName" /></div>
+            <div class="fieldGroup"><label>Scientific name</label><input id="speciesScientificName" /></div>
+            <div class="fieldGroup"><label>Banding period</label><input id="speciesBandingPeriod" /></div>
+            <div class="fieldGroup"><label>Incubation days</label><input id="speciesIncubationDays" /></div>
+            <div class="fieldGroup"><label>Notes</label><textarea id="speciesNotes"></textarea></div>
+          </div>
+          <button onclick="saveSpecies()">Save Species</button>
+        </div>
+        <div class="card">
+          <h3>Species List</h3>
+          <table>
+            <thead><tr><th>Name</th><th>Scientific Name</th><th>Banding Period</th><th>Incubation Days</th><th>Notes</th></tr></thead>
+            <tbody id="speciesTable"></tbody>
           </table>
         </div>
       </section>
@@ -371,6 +413,8 @@
     let token = localStorage.getItem('birdapp_token') || '';
     let currentUser = null;
     let birds = [];
+    let cages = [];
+    let speciesRecords = [];
     let pairs = [];
     let clutches = [];
     let calendarItems = [];
@@ -474,7 +518,6 @@
       birdsTable.innerHTML = birds.map(b => `
         <tr>
           <td>${b.species || ''}</td>
-          <td>${b.unique_id || ''}</td>
           <td>${b.name}</td>
           <td>${b.band_number || ''}</td>
           <td>${b.cage_number || ''}</td>
@@ -497,7 +540,6 @@
       if (!b) return;
       birdId.value = b.id;
       birdName.value = b.name || '';
-      birdUniqueId.value = b.unique_id || '';
       birdSpecies.value = b.species || '';
       birdBand.value = b.band_number || '';
       birdCage.value = b.cage_number || '';
@@ -537,7 +579,6 @@
     function resetBirdForm() {
       birdId.value = '';
       birdName.value = '';
-      birdUniqueId.value = '';
       birdSpecies.value = '';
       birdBand.value = '';
       birdCage.value = '';
@@ -577,7 +618,6 @@
       try {
         const payload = {
           name: birdName.value,
-          unique_id: birdUniqueId.value,
           species: birdSpecies.value,
           band_number: birdBand.value,
           cage_number: birdCage.value,
@@ -629,6 +669,60 @@
           <td><button class="danger" style="width:auto;" onclick="deletePair(${p.id})">Delete</button></td>
         </tr>
       `).join('');
+    }
+
+    function renderCages() {
+      cagesTable.innerHTML = cages.map(c => `<tr><td>${c.cage_number}</td><td>${c.location || ''}</td><td>${c.size || ''}</td><td>${c.notes || ''}</td></tr>`).join('');
+    }
+
+    function renderSpecies() {
+      speciesTable.innerHTML = speciesRecords.map(s => `<tr><td>${s.name}</td><td>${s.scientific_name || ''}</td><td>${s.banding_period || ''}</td><td>${s.incubation_days || ''}</td><td>${s.notes || ''}</td></tr>`).join('');
+    }
+
+    async function loadCages() {
+      cages = await api('/api/cages');
+      renderCages();
+    }
+
+    async function loadSpecies() {
+      speciesRecords = await api('/api/species');
+      renderSpecies();
+    }
+
+    async function saveCage() {
+      try {
+        await api('/api/cages', { method: 'POST', body: JSON.stringify({
+          cage_number: cageNumber.value,
+          location: cageLocation.value,
+          size: cageSize.value,
+          notes: cageNotes.value
+        })});
+        cageNumber.value = '';
+        cageLocation.value = '';
+        cageSize.value = '';
+        cageNotes.value = '';
+        await loadCages();
+        showMessage('Cage saved');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function saveSpecies() {
+      try {
+        await api('/api/species', { method: 'POST', body: JSON.stringify({
+          name: speciesName.value,
+          scientific_name: speciesScientificName.value,
+          banding_period: speciesBandingPeriod.value,
+          incubation_days: speciesIncubationDays.value,
+          notes: speciesNotes.value
+        })});
+        speciesName.value = '';
+        speciesScientificName.value = '';
+        speciesBandingPeriod.value = '';
+        speciesIncubationDays.value = '';
+        speciesNotes.value = '';
+        await loadSpecies();
+        showMessage('Species saved');
+      } catch (e) { showMessage(e.message, 'error'); }
     }
 
     async function savePair() {
@@ -831,6 +925,8 @@
       await loadSubscription();
       await loadStats();
       await loadBirds();
+      await loadCages();
+      await loadSpecies();
       await loadPairs();
       await loadClutches();
       await loadCalendar();
