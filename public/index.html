@@ -58,6 +58,13 @@
     .brand img { height:48px; width:auto; display:block; }
     .brandText strong { display:block; font-size:16px; }
     .brandText .muted { margin-top:2px; }
+    .subtabs { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 18px; }
+    .subtab { width:auto; padding:9px 12px; border-radius:999px; background:#f3f4f6; color:#374151; border:1px solid #e5e7eb; font-size:13px; }
+    .subtab.active { background:linear-gradient(135deg, #6d28d9, #9333ea); color:#fff; border-color:transparent; }
+    .subtab-panel.hidden { display:none; }
+    .fieldGroup { margin-bottom:14px; }
+    .fieldGroup label { display:block; margin-bottom:6px; color:#475569; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; }
+    .featurePlaceholder { padding:14px; border-radius:14px; border:1px dashed #d8b4fe; background:#faf5ff; color:#6b7280; font-size:13px; }
     @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
     @media (max-width: 720px) { .inline { flex-direction: column; } }
   </style>
@@ -169,37 +176,89 @@
 
       <section id="tab-birds" class="tab-panel hidden">
         <div class="card">
-          <h3>Flock Record</h3>
-          <div class="grid grid-2">
-            <input type="hidden" id="birdId" />
-            <input id="birdName" placeholder="Bird name" />
-            <input id="birdUniqueId" placeholder="Unique ID" />
-            <input id="birdSpecies" placeholder="Species" />
-            <input id="birdBand" placeholder="Band number" />
-            <input id="birdCage" placeholder="Cage number" />
-            <input id="birdClutchNumber" placeholder="Clutch number" />
-            <select id="birdGender"><option value="unknown">Unknown</option><option value="male">Male</option><option value="female">Female</option></select>
-            <input id="birdDob" type="date" />
-            <input id="birdMutation" placeholder="Mutation" />
-            <input id="birdColor" placeholder="Color / base colour" />
-            <input id="birdGenotype" placeholder="Genotype" />
-            <input id="birdPhenotype" placeholder="Phenotype" />
-            <input id="birdBreedingStatus" placeholder="Breeding status" />
-            <input id="birdBreedingLine" placeholder="Breeding line" />
-            <input id="birdShowQuality" placeholder="Show quality" />
-            <input id="birdEstimatedValue" type="number" step="0.01" placeholder="Estimated value" />
-            <input id="birdPurchasePrice" type="number" step="0.01" placeholder="Purchase price" />
-            <input id="birdSalePrice" type="number" step="0.01" placeholder="Sale price" />
-            <input id="birdAcquiredDate" type="date" />
-            <input id="birdSoldDate" type="date" />
-            <input id="birdPhoto" placeholder="Photo URL" />
-            <select id="birdSire"></select>
-            <select id="birdDam"></select>
-            <select id="birdStatus"><option value="active">Active</option><option value="sold">Sold</option><option value="deceased">Deceased</option></select>
+          <div class="dashboardSectionTitle">
+            <div>
+              <div class="muted">Bird Tracker record view</div>
+              <h3>Flock Record</h3>
+            </div>
+            <div class="muted">Profile, sales, health, examinations, diet, other info</div>
           </div>
-          <div style="margin-top:12px;">
-            <textarea id="birdNotes" placeholder="Notes, health, pairing, sales, or other remarks"></textarea>
+          <input type="hidden" id="birdId" />
+          <div class="subtabs">
+            <button class="subtab active" onclick="showBirdSubtab('profile', event)">Profile</button>
+            <button class="subtab" onclick="showBirdSubtab('sales', event)">Receipt / Sales</button>
+            <button class="subtab" onclick="showBirdSubtab('health', event)">Health Record</button>
+            <button class="subtab" onclick="showBirdSubtab('exam', event)">Examinations</button>
+            <button class="subtab" onclick="showBirdSubtab('diet', event)">Diet</button>
+            <button class="subtab" onclick="showBirdSubtab('other', event)">Other Information</button>
           </div>
+
+          <div id="bird-subtab-profile" class="subtab-panel">
+            <div class="grid grid-2">
+              <input id="birdName" placeholder="Bird name" />
+              <input id="birdUniqueId" placeholder="Unique ID" />
+              <input id="birdSpecies" placeholder="Species" />
+              <input id="birdBand" placeholder="Band number" />
+              <input id="birdCage" placeholder="Cage number" />
+              <input id="birdClutchNumber" placeholder="Clutch number" />
+              <select id="birdGender"><option value="unknown">Unknown</option><option value="male">Male</option><option value="female">Female</option></select>
+              <input id="birdDob" type="date" />
+              <input id="birdMutation" placeholder="Mutation" />
+              <input id="birdColor" placeholder="Color / base colour" />
+              <input id="birdGenotype" placeholder="Genotype" />
+              <input id="birdPhenotype" placeholder="Phenotype" />
+              <input id="birdBreedingStatus" placeholder="Breeding status" />
+              <input id="birdBreedingLine" placeholder="Breeding line" />
+              <input id="birdShowQuality" placeholder="Show quality" />
+              <input id="birdEstimatedValue" type="number" step="0.01" placeholder="Estimated value" />
+              <input id="birdPhoto" placeholder="Photo URL" />
+              <select id="birdSire"></select>
+              <select id="birdDam"></select>
+              <select id="birdStatus"><option value="active">Active</option><option value="sold">Sold</option><option value="deceased">Deceased</option></select>
+            </div>
+          </div>
+
+          <div id="bird-subtab-sales" class="subtab-panel hidden">
+            <div class="grid grid-2">
+              <input id="birdAcquiredDate" type="date" />
+              <input id="birdPurchasePrice" type="number" step="0.01" placeholder="Purchase price" />
+              <input id="birdSoldDate" type="date" />
+              <input id="birdSalePrice" type="number" step="0.01" placeholder="Sale price" />
+            </div>
+            <div class="featurePlaceholder" style="margin-top:12px;">This section will become the full acquisition and sales workflow, including seller, buyer, contact linking, acquisition method, and do-not-sell controls.</div>
+          </div>
+
+          <div id="bird-subtab-health" class="subtab-panel hidden">
+            <div class="grid grid-2">
+              <div class="fieldGroup"><label>Weekly weights</label><textarea id="birdWeeklyWeights" placeholder="Week 1, 2, 3, 4 weights"></textarea></div>
+              <div class="fieldGroup"><label>Breeding problems</label><textarea id="birdBreedingProblems" placeholder="Breeding issues or observations"></textarea></div>
+              <div class="fieldGroup"><label>Illness / treatments</label><textarea id="birdTreatments" placeholder="Illnesses, medications, treatments"></textarea></div>
+              <div class="fieldGroup"><label>Cause of death / notes</label><textarea id="birdCauseOfDeath" placeholder="Cause of death, nest problems, birth problems"></textarea></div>
+            </div>
+          </div>
+
+          <div id="bird-subtab-exam" class="subtab-panel hidden">
+            <div class="grid grid-2">
+              <div class="fieldGroup"><label>Exam notes</label><textarea id="birdExamNotes" placeholder="Physical exam notes, body score, feather condition, examiner"></textarea></div>
+              <div class="fieldGroup"><label>Labs / vaccines</label><textarea id="birdExamLabs" placeholder="Serum, vitamin D, vaccines, cultures"></textarea></div>
+            </div>
+            <div class="featurePlaceholder">Repeatable examination records are planned next. For now, this gives you the tab structure and note placeholders in the right place.</div>
+          </div>
+
+          <div id="bird-subtab-diet" class="subtab-panel hidden">
+            <div class="grid grid-2">
+              <div class="fieldGroup"><label>Diet plan</label><textarea id="birdDietPlan" placeholder="Seeds, pulses, fruits, vegetables, misc"></textarea></div>
+              <div class="fieldGroup"><label>Diet remarks</label><textarea id="birdDietRemarks" placeholder="Diet notes and feeding remarks"></textarea></div>
+            </div>
+          </div>
+
+          <div id="bird-subtab-other" class="subtab-panel hidden">
+            <div class="grid grid-2">
+              <div class="fieldGroup"><label>General notes</label><textarea id="birdNotes" placeholder="Notes, health, pairing, sales, or other remarks"></textarea></div>
+              <div class="fieldGroup"><label>User-defined / extra info</label><textarea id="birdCustomFields" placeholder="Custom breeder-specific fields and reminders"></textarea></div>
+            </div>
+          </div>
+
           <div class="inline" style="margin-top:12px;">
             <button onclick="saveBird()">Save Bird</button>
             <button class="secondary" onclick="resetBirdForm()">Clear</button>
@@ -381,7 +440,16 @@
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
       if (event) event.target.classList.add('active');
+      const tabButton = document.querySelector(`.tab[onclick*="${name}"]`);
+      if (!event && tabButton) tabButton.classList.add('active');
       document.getElementById(`tab-${name}`).classList.remove('hidden');
+    }
+
+    function showBirdSubtab(name, event) {
+      document.querySelectorAll('.subtab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.subtab-panel').forEach(p => p.classList.add('hidden'));
+      if (event) event.target.classList.add('active');
+      document.getElementById(`bird-subtab-${name}`).classList.remove('hidden');
     }
 
     function optionMarkup(list, labelFn, includeBlank = true) {
@@ -453,6 +521,16 @@
       birdSire.value = b.sire_id || '';
       birdDam.value = b.dam_id || '';
       birdStatus.value = b.status || 'active';
+      birdWeeklyWeights.value = '';
+      birdBreedingProblems.value = '';
+      birdTreatments.value = '';
+      birdCauseOfDeath.value = '';
+      birdExamNotes.value = '';
+      birdExamLabs.value = '';
+      birdDietPlan.value = '';
+      birdDietRemarks.value = '';
+      birdCustomFields.value = '';
+      showBirdSubtab('profile');
       showMessage(`Editing ${b.name}`);
     }
 
@@ -483,6 +561,16 @@
       birdSire.value = '';
       birdDam.value = '';
       birdStatus.value = 'active';
+      birdWeeklyWeights.value = '';
+      birdBreedingProblems.value = '';
+      birdTreatments.value = '';
+      birdCauseOfDeath.value = '';
+      birdExamNotes.value = '';
+      birdExamLabs.value = '';
+      birdDietPlan.value = '';
+      birdDietRemarks.value = '';
+      birdCustomFields.value = '';
+      showBirdSubtab('profile');
     }
 
     async function saveBird() {
