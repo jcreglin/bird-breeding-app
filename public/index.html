@@ -971,9 +971,23 @@
     }
 
     function renderBands() {
+      const usedBandNumbers = new Set(birds.map(b => bandNumberValue(b.band_number)).filter(Boolean));
+      const sizeCounts = new Map();
+      for (const ring of bands) {
+        const size = ring.ring_size || 'Unspecified';
+        if (!sizeCounts.has(size)) sizeCounts.set(size, { total: 0, available: 0 });
+        const bucket = sizeCounts.get(size);
+        bucket.total += 1;
+        if (!usedBandNumbers.has(ring.band_number)) bucket.available += 1;
+      }
+      const sizeChips = [...sizeCounts.entries()]
+        .sort((a, b) => a[0].localeCompare(b[0], undefined, { numeric: true, sensitivity: 'base' }))
+        .map(([size, counts]) => `<div class="statChip"><div class="k">Size ${size}</div><div class="v">${counts.available}/${counts.total}</div></div>`)
+        .join('');
       bandStatsStrip.innerHTML = `
         <div class="statChip"><div class="k">Total Rings</div><div class="v">${bands.length}</div></div>
-        <div class="statChip"><div class="k">Available</div><div class="v">${Math.max(0, bands.length - birds.filter(b => bandNumberValue(b.band_number)).length)}</div></div>
+        <div class="statChip"><div class="k">Available</div><div class="v">${Math.max(0, bands.length - usedBandNumbers.size)}</div></div>
+        ${sizeChips}
       `;
       bandsTable.innerHTML = bands.map(b => `<tr onclick="editBandById(${b.id})" style="cursor:pointer;"><td>${b.color}</td><td>${b.band_text || ''}</td><td>${b.band_number}</td><td>${b.ring_size || ''}</td><td>${b.notes || ''}</td></tr>`).join('');
     }
