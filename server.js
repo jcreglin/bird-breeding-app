@@ -12,7 +12,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'change-me-in-production';
 const TIER_LIMITS = { Free: 10, Hobby: 50, Breeder: 200, Pro: Infinity };
 
 app.use(cors());
-app.use(express.json({ limit: '2mb' }));
+app.use(express.json({ limit: '15mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 const auth = (req, res, next) => {
@@ -130,6 +130,77 @@ function seedSpeciesForUser(userId) {
         ].filter(Boolean).join(' | '),
         0
       );
+    }
+  });
+  tx();
+}
+
+function exportUserData(userId) {
+  return {
+    version: 1,
+    exported_at: new Date().toISOString(),
+    user: db.prepare('SELECT email, name, subscription_tier, created_at FROM users WHERE id = ?').get(userId),
+    subscriptions: db.prepare('SELECT tier, status, created_at FROM subscriptions WHERE user_id = ? ORDER BY id').all(userId),
+    cages: db.prepare('SELECT id, cage_number, location, size, notes, created_at FROM cages WHERE user_id = ? ORDER BY id').all(userId),
+    species: db.prepare('SELECT id, name, scientific_name, banding_period, incubation_days, notes, show_in_dropdown, created_at FROM species WHERE user_id = ? ORDER BY id').all(userId),
+    bands: db.prepare('SELECT id, color, band_text, band_number, notes, created_at FROM bands WHERE user_id = ? ORDER BY id').all(userId),
+    birds: db.prepare('SELECT * FROM birds WHERE user_id = ? ORDER BY id').all(userId),
+    pairs: db.prepare('SELECT * FROM pairs WHERE user_id = ? ORDER BY id').all(userId),
+    clutches: db.prepare('SELECT * FROM clutches WHERE user_id = ? ORDER BY id').all(userId),
+    eggs: db.prepare('SELECT * FROM eggs WHERE user_id = ? ORDER BY id').all(userId),
+    contacts: db.prepare('SELECT * FROM contacts WHERE user_id = ? ORDER BY id').all(userId)
+  };
+}
+
+function importUserData(userId, payload) {
+  const data = payload || {};
+  const tx = db.transaction(() => {
+    db.prepare('DELETE FROM eggs WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM clutches WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM pairs WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM birds WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM bands WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM species WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM cages WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM contacts WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM subscriptions WHERE user_id = ?').run(userId);
+
+    const currentUser = db.prepare('SELECT name, subscription_tier FROM users WHERE id = ?').get(userId);
+    db.prepare('UPDATE users SET name = ?, subscription_tier = ? WHERE id = ?').run(
+      data.user?.name || currentUser?.name || 'User',
+      data.user?.subscription_tier || currentUser?.subscription_tier || 'Free',
+      userId
+    );
+
+    const insertSubscription = db.prepare('INSERT INTO subscriptions (user_id, tier, status, created_at) VALUES (?, ?, ?, ?)');
+    for (const row of (data.subscriptions || [])) insertSubscription.run(userId, row.tier || 'Free', row.status || 'active', row.created_at || null);
+
+    const insertCage = db.prepare('INSERT INTO cages (id, user_id, cage_number, location, size, notes, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.cages || [])) insertCage.run(row.id || null, userId, row.cage_number, row.location || '', row.size || '', row.notes || '', row.created_at || null);
+
+    const insertSpecies = db.prepare('INSERT INTO species (id, user_id, name, scientific_name, banding_period, incubation_days, notes, show_in_dropdown, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.species || [])) insertSpecies.run(row.id || null, userId, row.name, row.scientific_name || '', row.banding_period || '', row.incubation_days || '', row.notes || '', row.show_in_dropdown ? 1 : 0, row.created_at || null);
+
+    const insertBand = db.prepare('INSERT INTO bands (id, user_id, color, band_text, band_number, notes, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.bands || [])) insertBand.run(row.id || null, userId, row.color, row.band_text || '', row.band_number, row.notes || '', row.created_at || null);
+
+    const insertBird = db.prepare('INSERT INTO birds (id, user_id, unique_id, name, species, band_number, cage_number, clutch_number, gender, dob, mutation, color, genotype, phenotype, breeding_status, breeding_line, show_quality, estimated_value, acquired_date, sold_date, purchase_price, sale_price, photo_url, notes, sire_id, dam_id, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.birds || [])) insertBird.run(row.id || null, userId, row.unique_id || '', row.name, row.species || '', row.band_number || '', row.cage_number || '', row.clutch_number || '', row.gender || 'unknown', row.dob || null, row.mutation || '', row.color || '', row.genotype || '', row.phenotype || '', row.breeding_status || '', row.breeding_line || '', row.show_quality || '', row.estimated_value || null, row.acquired_date || null, row.sold_date || null, row.purchase_price || null, row.sale_price || null, row.photo_url || '', row.notes || '', row.sire_id || null, row.dam_id || null, row.status || 'active', row.created_at || null);
+
+    const insertPair = db.prepare('INSERT INTO pairs (id, user_id, sire_id, dam_id, pair_date, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.pairs || [])) insertPair.run(row.id || null, userId, row.sire_id, row.dam_id, row.pair_date || null, row.status || 'active', row.created_at || null);
+
+    const insertClutch = db.prepare('INSERT INTO clutches (id, user_id, pair_id, lay_date, hatch_date, created_at) VALUES (?, ?, ?, ?, ?, ?)');
+    for (const row of (data.clutches || [])) insertClutch.run(row.id || null, userId, row.pair_id, row.lay_date || null, row.hatch_date || null, row.created_at || null);
+
+    const insertEgg = db.prepare('INSERT INTO eggs (id, user_id, clutch_id, egg_number, outcome, created_at) VALUES (?, ?, ?, ?, ?, ?)');
+    for (const row of (data.eggs || [])) insertEgg.run(row.id || null, userId, row.clutch_id, row.egg_number || null, row.outcome || 'pending', row.created_at || null);
+
+    const insertContact = db.prepare('INSERT INTO contacts (id, user_id, name, email, phone, type, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.contacts || [])) insertContact.run(row.id || null, userId, row.name, row.email || '', row.phone || '', row.type || 'other', row.created_at || null);
+
+    if (!(data.subscriptions || []).length) {
+      db.prepare('INSERT INTO subscriptions (user_id, tier, status) VALUES (?, ?, ?)').run(userId, data.user?.subscription_tier || 'Free', 'active');
     }
   });
   tx();
@@ -507,6 +578,24 @@ app.post('/api/contacts', auth, (req, res) => {
   if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
   const result = db.prepare('INSERT INTO contacts (user_id, name, email, phone, type) VALUES (?, ?, ?, ?, ?)').run(req.user.id, req.body.name, req.body.email || '', req.body.phone || '', req.body.type || 'other');
   res.json({ id: result.lastInsertRowid });
+});
+
+app.get('/api/data-export', auth, (req, res) => {
+  const payload = exportUserData(req.user.id);
+  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Content-Disposition', `attachment; filename="bird-tracker-backup-${req.user.id}.json"`);
+  res.json(payload);
+});
+
+app.post('/api/data-import', auth, (req, res) => {
+  const payload = req.body;
+  if (!payload || typeof payload !== 'object') return res.status(400).json({ error: 'Invalid import file' });
+  try {
+    importUserData(req.user.id, payload);
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(400).json({ error: 'Import failed. Please check the backup file format.' });
+  }
 });
 
 app.get('/api/subscriptions', auth, (req, res) => {

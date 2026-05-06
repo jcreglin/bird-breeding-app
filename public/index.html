@@ -534,6 +534,15 @@
           </div>
           <div style="margin-top:12px;"><button class="secondary" onclick="stripeStub()">Run Stripe Stub</button></div>
         </div>
+        <div class="card">
+          <h3>Backup and Restore</h3>
+          <div class="muted" style="margin-bottom:12px;">Export your account data before redeploying, then import it back after the new version is live.</div>
+          <div class="inline">
+            <button onclick="exportDataBackup()">Export Backup</button>
+            <button class="ghost" onclick="triggerImportBackup()">Import Backup</button>
+          </div>
+          <input id="importBackupFile" type="file" accept="application/json" class="hidden" />
+        </div>
       </section>
     </section>
   </main>
@@ -1236,6 +1245,39 @@
         coiResult.innerHTML = `<div class="message success"><strong>COI: ${data.coi}%</strong><br>Common ancestors: ${data.commonAncestors.length ? data.commonAncestors.map(a => a.name).join(', ') : 'None detected in recent generations'}</div>`;
       } catch (e) { showMessage(e.message, 'error'); }
     }
+
+    async function exportDataBackup() {
+      try {
+        const response = await fetch('/api/data-export', { headers: { Authorization: `Bearer ${token}` } });
+        if (!response.ok) throw new Error('Export failed');
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `bird-tracker-backup-${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showMessage('Backup exported');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    function triggerImportBackup() {
+      importBackupFile.click();
+    }
+
+    importBackupFile.addEventListener('change', async (event) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        const payload = JSON.parse(text);
+        if (!confirm('Importing will replace your current account data. Continue?')) return;
+        await api('/api/data-import', { method: 'POST', body: JSON.stringify(payload) });
+        await refreshAll();
+        showMessage('Backup imported');
+      } catch (e) { showMessage(e.message, 'error'); }
+      finally { event.target.value = ''; }
+    });
 
     function renderDashboardModules() {
       const modules = [
