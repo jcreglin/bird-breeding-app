@@ -409,6 +409,8 @@
             <div class="fieldGroup"><label>Ring text</label><input id="bandText" /></div>
             <div class="fieldGroup"><label>Ring number</label><input id="bandNumber" /></div>
             <div class="fieldGroup"><label>Ring size</label><input id="bandRingSize" /></div>
+            <div class="fieldGroup"><label>Series quantity</label><input id="bandSeriesQty" type="number" min="1" /></div>
+            <div class="fieldGroup"><label>Ring spec</label><input id="bandSpecPreview" readonly /></div>
             <div class="fieldGroup" style="grid-column:1 / -1;">
               <div class="grid grid-2" style="gap:18px;">
                 <div>
@@ -428,8 +430,6 @@
                 </div>
               </div>
             </div>
-            <div class="fieldGroup"><label>Series quantity</label><input id="bandSeriesQty" type="number" min="1" /></div>
-            <div class="fieldGroup"><label>Ring spec</label><input id="bandSpecPreview" readonly /></div>
             <div class="fieldGroup" style="grid-column:1 / -1;"><label>Notes</label><textarea id="bandNotes" placeholder="Add any extra notes here"></textarea></div>
           </div>
           <div class="inline"><button onclick="saveBand()">Save Ring</button><button onclick="saveBandSeries()">Save Series</button><button class="secondary" onclick="closeBandModal()">Close</button><button class="ghost" onclick="resetBandForm()">Clear</button></div>
