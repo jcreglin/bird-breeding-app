@@ -311,18 +311,17 @@
 
       <section id="tab-cages" class="tab-panel hidden">
         <div class="card">
-          <h3>Cages</h3>
-          <input type="hidden" id="cageId" />
-          <div class="grid grid-2">
-            <div class="fieldGroup"><label>Cage number</label><input id="cageNumber" /></div>
-            <div class="fieldGroup"><label>Location</label><input id="cageLocation" /></div>
-            <div class="fieldGroup"><label>Size</label><input id="cageSize" /></div>
-            <div class="fieldGroup"><label>Notes</label><textarea id="cageNotes"></textarea></div>
+          <div class="panelToolbar">
+            <div><div class="muted">Cage workspace</div><h3 style="margin:4px 0 0;">Cages</h3></div>
+            <button style="width:auto;" onclick="openCageModalForNew()">Add New Cage</button>
           </div>
-          <div class="inline"><button onclick="saveCage()">Save Cage</button><button class="secondary" onclick="resetCageForm()">Clear</button></div>
+          <div class="statStrip" id="cageStatsStrip"></div>
         </div>
         <div class="card">
-          <h3>Cage List</h3>
+          <div class="panelToolbar">
+            <div><div class="muted">Master list</div><h3 style="margin:4px 0 0;">Cage List</h3></div>
+            <div class="muted">Click a row to edit</div>
+          </div>
           <table>
             <thead><tr><th>Cage Number</th><th>Location</th><th>Size</th><th>Notes</th></tr></thead>
             <tbody id="cagesTable"></tbody>
@@ -330,9 +329,43 @@
         </div>
       </section>
 
+      <div id="cageModal" class="modalOverlay hidden" onclick="if(event.target===this) closeCageModal()">
+        <div class="modalCard">
+          <div class="dashboardSectionTitle"><div><div class="muted">Cage record popup</div><h3 id="cageModalTitle">Cage</h3></div><button class="secondary" style="width:auto;" onclick="closeCageModal()">Close</button></div>
+          <input type="hidden" id="cageId" />
+          <div class="grid grid-2">
+            <div class="fieldGroup"><label>Cage number</label><input id="cageNumber" /></div>
+            <div class="fieldGroup"><label>Location</label><input id="cageLocation" /></div>
+            <div class="fieldGroup"><label>Size</label><input id="cageSize" /></div>
+            <div class="fieldGroup"><label>Notes</label><textarea id="cageNotes"></textarea></div>
+          </div>
+          <div class="inline"><button onclick="saveCage()">Save Cage</button><button class="secondary" onclick="closeCageModal()">Close</button><button class="ghost" onclick="resetCageForm()">Clear</button></div>
+        </div>
+      </div>
+
       <section id="tab-species" class="tab-panel hidden">
         <div class="card">
-          <h3>Species</h3>
+          <div class="panelToolbar">
+            <div><div class="muted">Species workspace</div><h3 style="margin:4px 0 0;">Species</h3></div>
+            <button style="width:auto;" onclick="openSpeciesModalForNew()">Add New Species</button>
+          </div>
+          <div class="statStrip" id="speciesStatsStrip"></div>
+        </div>
+        <div class="card">
+          <div class="panelToolbar">
+            <div><div class="muted">Master list</div><h3 style="margin:4px 0 0;">Species List</h3></div>
+            <div class="inline" style="width:auto;"><button class="ghost" style="width:auto;" onclick="seedSpeciesDefaults()">Seed Starter Species</button></div>
+          </div>
+          <table>
+            <thead><tr><th>Show</th><th>Name</th><th>Scientific Name</th><th>Banding Period</th><th>Incubation Days</th><th>Notes</th></tr></thead>
+            <tbody id="speciesTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div id="speciesModal" class="modalOverlay hidden" onclick="if(event.target===this) closeSpeciesModal()">
+        <div class="modalCard">
+          <div class="dashboardSectionTitle"><div><div class="muted">Species record popup</div><h3 id="speciesModalTitle">Species</h3></div><button class="secondary" style="width:auto;" onclick="closeSpeciesModal()">Close</button></div>
           <input type="hidden" id="speciesId" />
           <div class="grid grid-2">
             <div class="fieldGroup"><label>Species name</label><input id="speciesName" /></div>
@@ -342,31 +375,23 @@
             <div class="fieldGroup"><label>Show in dropdown</label><input id="speciesShowInDropdown" type="checkbox" style="width:auto;" /></div>
             <div class="fieldGroup"><label>Notes</label><textarea id="speciesNotes"></textarea></div>
           </div>
-          <div class="inline"><button onclick="saveSpecies()">Save Species</button><button class="secondary" onclick="resetSpeciesForm()">Clear</button><button class="ghost" onclick="seedSpeciesDefaults()">Seed Starter Species</button></div>
+          <div class="inline"><button onclick="saveSpecies()">Save Species</button><button class="secondary" onclick="closeSpeciesModal()">Close</button><button class="ghost" onclick="resetSpeciesForm()">Clear</button></div>
         </div>
-        <div class="card">
-          <h3>Species List</h3>
-          <table>
-            <thead><tr><th>Show</th><th>Name</th><th>Scientific Name</th><th>Banding Period</th><th>Incubation Days</th><th>Notes</th></tr></thead>
-            <tbody id="speciesTable"></tbody>
-          </table>
-        </div>
-      </section>
+      </div>
 
       <section id="tab-bands" class="tab-panel hidden">
         <div class="card">
-          <h3>Bands</h3>
-          <input type="hidden" id="bandId" />
-          <div class="grid grid-2">
-            <div class="fieldGroup"><label>Band color</label><input id="bandColor" /></div>
-            <div class="fieldGroup"><label>Band text</label><input id="bandText" /></div>
-            <div class="fieldGroup"><label>Band number</label><input id="bandNumber" /></div>
-            <div class="fieldGroup"><label>Notes</label><textarea id="bandNotes"></textarea></div>
+          <div class="panelToolbar">
+            <div><div class="muted">Band workspace</div><h3 style="margin:4px 0 0;">Bands</h3></div>
+            <button style="width:auto;" onclick="openBandModalForNew()">Add New Band</button>
           </div>
-          <div class="inline"><button onclick="saveBand()">Save Band</button><button class="secondary" onclick="resetBandForm()">Clear</button></div>
+          <div class="statStrip" id="bandStatsStrip"></div>
         </div>
         <div class="card">
-          <h3>Band List</h3>
+          <div class="panelToolbar">
+            <div><div class="muted">Master list</div><h3 style="margin:4px 0 0;">Band List</h3></div>
+            <div class="muted">Click a row to edit</div>
+          </div>
           <table>
             <thead><tr><th>Color</th><th>Text</th><th>Number</th><th>Notes</th></tr></thead>
             <tbody id="bandsTable"></tbody>
@@ -374,19 +399,33 @@
         </div>
       </section>
 
+      <div id="bandModal" class="modalOverlay hidden" onclick="if(event.target===this) closeBandModal()">
+        <div class="modalCard">
+          <div class="dashboardSectionTitle"><div><div class="muted">Band record popup</div><h3 id="bandModalTitle">Band</h3></div><button class="secondary" style="width:auto;" onclick="closeBandModal()">Close</button></div>
+          <input type="hidden" id="bandId" />
+          <div class="grid grid-2">
+            <div class="fieldGroup"><label>Band color</label><input id="bandColor" /></div>
+            <div class="fieldGroup"><label>Band text</label><input id="bandText" /></div>
+            <div class="fieldGroup"><label>Band number</label><input id="bandNumber" /></div>
+            <div class="fieldGroup"><label>Notes</label><textarea id="bandNotes"></textarea></div>
+          </div>
+          <div class="inline"><button onclick="saveBand()">Save Band</button><button class="secondary" onclick="closeBandModal()">Close</button><button class="ghost" onclick="resetBandForm()">Clear</button></div>
+        </div>
+      </div>
+
       <section id="tab-pairs" class="tab-panel hidden">
         <div class="card">
-          <h3>Create Pair</h3>
-          <div class="grid grid-2">
-            <select id="pairSire"></select>
-            <select id="pairDam"></select>
-            <input id="pairDate" type="date" />
-            <select id="pairStatus"><option value="active">Active</option><option value="retired">Retired</option></select>
+          <div class="panelToolbar">
+            <div><div class="muted">Breeding pair workspace</div><h3 style="margin:4px 0 0;">Pairs</h3></div>
+            <button style="width:auto;" onclick="openPairModalForNew()">Add New Pair</button>
           </div>
-          <div style="margin-top:12px;"><button onclick="savePair()">Save Pair</button></div>
+          <div class="statStrip" id="pairStatsStrip"></div>
         </div>
         <div class="card">
-          <h3>Pairs</h3>
+          <div class="panelToolbar">
+            <div><div class="muted">Pair list</div><h3 style="margin:4px 0 0;">Pairs</h3></div>
+            <div class="muted">Edit opens popup</div>
+          </div>
           <table>
             <thead><tr><th>Pair</th><th>Date</th><th>Status</th><th></th></tr></thead>
             <tbody id="pairsTable"></tbody>
@@ -394,24 +433,27 @@
         </div>
       </section>
 
+      <div id="pairModal" class="modalOverlay hidden" onclick="if(event.target===this) closePairModal()">
+        <div class="modalCard">
+          <div class="dashboardSectionTitle"><div><div class="muted">Pair record popup</div><h3 id="pairModalTitle">Pair</h3></div><button class="secondary" style="width:auto;" onclick="closePairModal()">Close</button></div>
+          <input type="hidden" id="pairId" />
+          <div class="grid grid-2">
+            <select id="pairSire"></select>
+            <select id="pairDam"></select>
+            <input id="pairDate" type="date" />
+            <select id="pairStatus"><option value="active">Active</option><option value="retired">Retired</option></select>
+          </div>
+          <div style="margin-top:12px;" class="inline"><button onclick="savePair()">Save Pair</button><button class="secondary" onclick="closePairModal()">Close</button></div>
+        </div>
+      </div>
+
       <section id="tab-breeding" class="tab-panel hidden">
         <div class="card">
-          <h3>Add Clutch</h3>
-          <div class="grid grid-2">
-            <select id="clutchPair"></select>
-            <input id="clutchLayDate" type="date" />
-            <input id="clutchHatchDate" type="date" />
+          <div class="panelToolbar">
+            <div><div class="muted">Breeding workspace</div><h3 style="margin:4px 0 0;">Clutches and Eggs</h3></div>
+            <div class="inline" style="width:auto;"><button style="width:auto;" onclick="openClutchModalForNew()">Add Clutch</button><button style="width:auto;" class="ghost" onclick="openEggModalForNew()">Add Egg</button></div>
           </div>
-          <div style="margin-top:12px;"><button onclick="saveClutch()">Save Clutch</button></div>
-        </div>
-        <div class="card">
-          <h3>Add Egg</h3>
-          <div class="grid grid-2">
-            <select id="eggClutch"></select>
-            <input id="eggNumber" type="number" placeholder="Egg number" />
-            <select id="eggOutcome"><option value="pending">Pending</option><option value="hatched">Hatched</option><option value="infertile">Infertile</option><option value="addled">Addled</option><option value="dead">Dead in shell</option></select>
-          </div>
-          <div style="margin-top:12px;"><button onclick="saveEgg()">Save Egg</button></div>
+          <div class="statStrip" id="breedingStatsStrip"></div>
         </div>
         <div class="card">
           <h3>Breeding Calendar</h3>
@@ -421,13 +463,41 @@
           </table>
         </div>
         <div class="card">
-          <h3>Clutches</h3>
+          <div class="panelToolbar">
+            <div><div class="muted">Breeding list</div><h3 style="margin:4px 0 0;">Clutches</h3></div>
+            <div class="muted">Click a row to edit clutch</div>
+          </div>
           <table>
             <thead><tr><th>Pair</th><th>Lay Date</th><th>Hatch Date</th><th>Eggs</th></tr></thead>
             <tbody id="clutchesTable"></tbody>
           </table>
         </div>
       </section>
+
+      <div id="clutchModal" class="modalOverlay hidden" onclick="if(event.target===this) closeClutchModal()">
+        <div class="modalCard">
+          <div class="dashboardSectionTitle"><div><div class="muted">Clutch record popup</div><h3 id="clutchModalTitle">Clutch</h3></div><button class="secondary" style="width:auto;" onclick="closeClutchModal()">Close</button></div>
+          <input type="hidden" id="clutchId" />
+          <div class="grid grid-2">
+            <select id="clutchPair"></select>
+            <input id="clutchLayDate" type="date" />
+            <input id="clutchHatchDate" type="date" />
+          </div>
+          <div style="margin-top:12px;" class="inline"><button onclick="saveClutch()">Save Clutch</button><button class="secondary" onclick="closeClutchModal()">Close</button></div>
+        </div>
+      </div>
+
+      <div id="eggModal" class="modalOverlay hidden" onclick="if(event.target===this) closeEggModal()">
+        <div class="modalCard">
+          <div class="dashboardSectionTitle"><div><div class="muted">Egg record popup</div><h3 id="eggModalTitle">Egg</h3></div><button class="secondary" style="width:auto;" onclick="closeEggModal()">Close</button></div>
+          <div class="grid grid-2">
+            <select id="eggClutch"></select>
+            <input id="eggNumber" type="number" placeholder="Egg number" />
+            <select id="eggOutcome"><option value="pending">Pending</option><option value="hatched">Hatched</option><option value="infertile">Infertile</option><option value="addled">Addled</option><option value="dead">Dead in shell</option></select>
+          </div>
+          <div style="margin-top:12px;" class="inline"><button onclick="saveEgg()">Save Egg</button><button class="secondary" onclick="closeEggModal()">Close</button></div>
+        </div>
+      </div>
 
       <section id="tab-genetics" class="tab-panel hidden">
         <div class="card">
@@ -843,25 +913,42 @@
     }
 
     function renderPairs() {
+      const active = pairs.filter(p => p.status === 'active').length;
+      pairStatsStrip.innerHTML = `
+        <div class="statChip"><div class="k">Total Pairs</div><div class="v">${pairs.length}</div></div>
+        <div class="statChip"><div class="k">Active</div><div class="v">${active}</div></div>
+      `;
       pairsTable.innerHTML = pairs.map(p => `
-        <tr>
+        <tr onclick="editPairById(${p.id})" style="cursor:pointer;">
           <td>${p.sire_name} x ${p.dam_name}</td>
           <td>${p.pair_date || ''}</td>
           <td>${p.status}</td>
-          <td><button class="danger" style="width:auto;" onclick="deletePair(${p.id})">Delete</button></td>
+          <td><button class="danger" style="width:auto;" onclick="event.stopPropagation(); deletePair(${p.id})">Delete</button></td>
         </tr>
       `).join('');
     }
 
     function renderCages() {
+      cageStatsStrip.innerHTML = `
+        <div class="statChip"><div class="k">Total Cages</div><div class="v">${cages.length}</div></div>
+        <div class="statChip"><div class="k">With Location</div><div class="v">${cages.filter(c => c.location).length}</div></div>
+      `;
       cagesTable.innerHTML = cages.map(c => `<tr onclick="editCageById(${c.id})" style="cursor:pointer;"><td>${c.cage_number}</td><td>${c.location || ''}</td><td>${c.size || ''}</td><td>${c.notes || ''}</td></tr>`).join('');
     }
 
     function renderSpecies() {
+      speciesStatsStrip.innerHTML = `
+        <div class="statChip"><div class="k">Total Species</div><div class="v">${speciesRecords.length}</div></div>
+        <div class="statChip"><div class="k">Shown In Dropdown</div><div class="v">${speciesRecords.filter(s => Number(s.show_in_dropdown) === 1).length}</div></div>
+      `;
       speciesTable.innerHTML = speciesRecords.map(s => `<tr onclick="editSpeciesById(${s.id})" style="cursor:pointer;"><td><input type="checkbox" ${Number(s.show_in_dropdown) === 1 ? 'checked' : ''} onclick="event.stopPropagation(); toggleSpeciesShow(${s.id}, this.checked)" /></td><td>${s.name}</td><td>${s.scientific_name || ''}</td><td>${s.banding_period || ''}</td><td>${s.incubation_days || ''}</td><td>${s.notes || ''}</td></tr>`).join('');
     }
 
     function renderBands() {
+      bandStatsStrip.innerHTML = `
+        <div class="statChip"><div class="k">Total Bands</div><div class="v">${bands.length}</div></div>
+        <div class="statChip"><div class="k">Available</div><div class="v">${Math.max(0, bands.length - birds.filter(b => bandNumberValue(b.band_number)).length)}</div></div>
+      `;
       bandsTable.innerHTML = bands.map(b => `<tr onclick="editBandById(${b.id})" style="cursor:pointer;"><td>${b.color}</td><td>${b.band_text || ''}</td><td>${b.band_number}</td><td>${b.notes || ''}</td></tr>`).join('');
     }
 
@@ -890,6 +977,7 @@
     function editCageById(id) {
       const cage = cages.find(c => c.id === id);
       if (!cage) return;
+      openCageModal();
       cageId.value = cage.id;
       cageNumber.value = cage.cage_number || '';
       cageLocation.value = cage.location || '';
@@ -897,7 +985,12 @@
       cageNotes.value = cage.notes || '';
     }
 
+    function openCageModal() { cageModal.classList.remove('hidden'); }
+    function closeCageModal() { cageModal.classList.add('hidden'); }
+    function openCageModalForNew() { resetCageForm(); cageModalTitle.textContent = 'Add New Cage'; openCageModal(); }
+
     function resetCageForm() {
+      cageModalTitle.textContent = 'Add New Cage';
       cageId.value = '';
       cageNumber.value = '';
       cageLocation.value = '';
@@ -916,6 +1009,7 @@
         if (cageId.value) await api(`/api/cages/${cageId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
         else await api('/api/cages', { method: 'POST', body: JSON.stringify(payload) });
         resetCageForm();
+        closeCageModal();
         await loadCages();
         showMessage('Cage saved');
       } catch (e) { showMessage(e.message, 'error'); }
@@ -924,6 +1018,7 @@
     function editSpeciesById(id) {
       const species = speciesRecords.find(s => s.id === id);
       if (!species) return;
+      openSpeciesModal();
       speciesId.value = species.id;
       speciesName.value = species.name || '';
       speciesScientificName.value = species.scientific_name || '';
@@ -933,7 +1028,12 @@
       speciesNotes.value = species.notes || '';
     }
 
+    function openSpeciesModal() { speciesModal.classList.remove('hidden'); }
+    function closeSpeciesModal() { speciesModal.classList.add('hidden'); }
+    function openSpeciesModalForNew() { resetSpeciesForm(); speciesModalTitle.textContent = 'Add New Species'; openSpeciesModal(); }
+
     function resetSpeciesForm() {
+      speciesModalTitle.textContent = 'Add New Species';
       speciesId.value = '';
       speciesName.value = '';
       speciesScientificName.value = '';
@@ -956,6 +1056,7 @@
         if (speciesId.value) await api(`/api/species/${speciesId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
         else await api('/api/species', { method: 'POST', body: JSON.stringify(payload) });
         resetSpeciesForm();
+        closeSpeciesModal();
         await loadSpecies();
         showMessage('Species saved');
       } catch (e) { showMessage(e.message, 'error'); }
@@ -988,6 +1089,7 @@
     function editBandById(id) {
       const band = bands.find(b => b.id === id);
       if (!band) return;
+      openBandModal();
       bandId.value = band.id;
       bandColor.value = band.color || '';
       bandText.value = band.band_text || '';
@@ -995,7 +1097,12 @@
       bandNotes.value = band.notes || '';
     }
 
+    function openBandModal() { bandModal.classList.remove('hidden'); }
+    function closeBandModal() { bandModal.classList.add('hidden'); }
+    function openBandModalForNew() { resetBandForm(); bandModalTitle.textContent = 'Add New Band'; openBandModal(); }
+
     function resetBandForm() {
+      bandModalTitle.textContent = 'Add New Band';
       bandId.value = '';
       bandColor.value = '';
       bandText.value = '';
@@ -1014,19 +1121,33 @@
         if (bandId.value) await api(`/api/bands/${bandId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
         else await api('/api/bands', { method: 'POST', body: JSON.stringify(payload) });
         resetBandForm();
+        closeBandModal();
         await loadBands();
         showMessage('Band saved');
       } catch (e) { showMessage(e.message, 'error'); }
     }
 
+    function openPairModal() { pairModal.classList.remove('hidden'); }
+    function closePairModal() { pairModal.classList.add('hidden'); }
+    function openPairModalForNew() { pairId.value = ''; pairModalTitle.textContent = 'Add New Pair'; pairDate.value=''; pairStatus.value='active'; openPairModal(); }
+    function editPairById(id) {
+      const pair = pairs.find(p => p.id === id);
+      if (!pair) return;
+      pairId.value = pair.id;
+      pairSire.value = pair.sire_id || '';
+      pairDam.value = pair.dam_id || '';
+      pairDate.value = pair.pair_date || '';
+      pairStatus.value = pair.status || 'active';
+      pairModalTitle.textContent = `Edit ${pair.sire_name} x ${pair.dam_name}`;
+      openPairModal();
+    }
+
     async function savePair() {
       try {
-        await api('/api/pairs', { method: 'POST', body: JSON.stringify({
-          sire_id: pairSire.value,
-          dam_id: pairDam.value,
-          pair_date: pairDate.value,
-          status: pairStatus.value
-        })});
+        const payload = { sire_id: pairSire.value, dam_id: pairDam.value, pair_date: pairDate.value, status: pairStatus.value };
+        if (pairId.value) await api(`/api/pairs/${pairId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
+        else await api('/api/pairs', { method: 'POST', body: JSON.stringify(payload) });
+        closePairModal();
         await loadPairs();
         await loadStats();
         showMessage('Pair saved');
@@ -1043,8 +1164,12 @@
     }
 
     function renderClutches() {
+      breedingStatsStrip.innerHTML = `
+        <div class="statChip"><div class="k">Clutches</div><div class="v">${clutches.length}</div></div>
+        <div class="statChip"><div class="k">Eggs Logged</div><div class="v">${clutches.reduce((sum, c) => sum + (c.egg_count || 0), 0)}</div></div>
+      `;
       clutchesTable.innerHTML = clutches.map(c => `
-        <tr>
+        <tr onclick="editClutchById(${c.id})" style="cursor:pointer;">
           <td>${c.sire_name} x ${c.dam_name}</td>
           <td>${c.lay_date || ''}</td>
           <td>${c.hatch_date || ''}</td>
@@ -1053,19 +1178,36 @@
       `).join('');
     }
 
+    function openClutchModal() { clutchModal.classList.remove('hidden'); }
+    function closeClutchModal() { clutchModal.classList.add('hidden'); }
+    function openClutchModalForNew() { clutchId.value=''; clutchModalTitle.textContent='Add Clutch'; clutchLayDate.value=''; clutchHatchDate.value=''; openClutchModal(); }
+    function editClutchById(id) {
+      const clutch = clutches.find(c => c.id === id);
+      if (!clutch) return;
+      clutchId.value = clutch.id;
+      clutchPair.value = clutch.pair_id || '';
+      clutchLayDate.value = clutch.lay_date || '';
+      clutchHatchDate.value = clutch.hatch_date || '';
+      clutchModalTitle.textContent = `Edit ${clutch.sire_name} x ${clutch.dam_name}`;
+      openClutchModal();
+    }
+
     async function saveClutch() {
       try {
-        await api('/api/clutches', { method: 'POST', body: JSON.stringify({
-          pair_id: clutchPair.value,
-          lay_date: clutchLayDate.value,
-          hatch_date: clutchHatchDate.value
-        })});
+        const payload = { pair_id: clutchPair.value, lay_date: clutchLayDate.value, hatch_date: clutchHatchDate.value };
+        if (clutchId.value) await api(`/api/clutches/${clutchId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
+        else await api('/api/clutches', { method: 'POST', body: JSON.stringify(payload) });
+        closeClutchModal();
         await loadClutches();
         await loadCalendar();
         await loadStats();
         showMessage('Clutch saved');
       } catch (e) { showMessage(e.message, 'error'); }
     }
+
+    function openEggModal() { eggModal.classList.remove('hidden'); }
+    function closeEggModal() { eggModal.classList.add('hidden'); }
+    function openEggModalForNew() { eggNumber.value=''; eggOutcome.value='pending'; eggModalTitle.textContent='Add Egg'; openEggModal(); }
 
     async function saveEgg() {
       try {
@@ -1075,6 +1217,7 @@
           outcome: eggOutcome.value
         })});
         eggNumber.value = '';
+        closeEggModal();
         await loadClutches();
         await loadStats();
         showMessage('Egg saved');
