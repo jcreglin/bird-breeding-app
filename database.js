@@ -175,6 +175,8 @@ addColumn('birds', 'purchase_price', 'REAL');
 addColumn('birds', 'sale_price', 'REAL');
 addColumn('birds', 'notes', 'TEXT');
 addColumn('species', 'show_in_dropdown', 'INTEGER NOT NULL DEFAULT 0');
+addColumn('species', 'ring_size', 'TEXT');
+addColumn('bands', 'ring_size', 'TEXT');
 
 db.exec(`
   CREATE UNIQUE INDEX IF NOT EXISTS idx_birds_user_band_unique

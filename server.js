@@ -114,7 +114,7 @@ function nextBirdUniqueId(userId) {
 }
 
 function seedSpeciesForUser(userId) {
-  const insert = db.prepare('INSERT OR IGNORE INTO species (user_id, name, scientific_name, banding_period, incubation_days, notes, show_in_dropdown) VALUES (?, ?, ?, ?, ?, ?, ?)');
+  const insert = db.prepare('INSERT OR IGNORE INTO species (user_id, name, scientific_name, banding_period, ring_size, incubation_days, notes, show_in_dropdown) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
   const tx = db.transaction(() => {
     for (const item of speciesSeed) {
       insert.run(
@@ -122,6 +122,7 @@ function seedSpeciesForUser(userId) {
         item.name,
         item.other_name || '',
         item.banding_period || '',
+        item.ring_size || '',
         item.incubation_days != null ? String(item.incubation_days) : '',
         [
           item.species_number ? `Species No: ${item.species_number}` : '',
@@ -142,8 +143,8 @@ function exportUserData(userId) {
     user: db.prepare('SELECT email, name, subscription_tier, created_at FROM users WHERE id = ?').get(userId),
     subscriptions: db.prepare('SELECT tier, status, created_at FROM subscriptions WHERE user_id = ? ORDER BY id').all(userId),
     cages: db.prepare('SELECT id, cage_number, location, size, notes, created_at FROM cages WHERE user_id = ? ORDER BY id').all(userId),
-    species: db.prepare('SELECT id, name, scientific_name, banding_period, incubation_days, notes, show_in_dropdown, created_at FROM species WHERE user_id = ? ORDER BY id').all(userId),
-    bands: db.prepare('SELECT id, color, band_text, band_number, notes, created_at FROM bands WHERE user_id = ? ORDER BY id').all(userId),
+    species: db.prepare('SELECT id, name, scientific_name, banding_period, ring_size, incubation_days, notes, show_in_dropdown, created_at FROM species WHERE user_id = ? ORDER BY id').all(userId),
+    bands: db.prepare('SELECT id, color, band_text, band_number, ring_size, notes, created_at FROM bands WHERE user_id = ? ORDER BY id').all(userId),
     birds: db.prepare('SELECT * FROM birds WHERE user_id = ? ORDER BY id').all(userId),
     pairs: db.prepare('SELECT * FROM pairs WHERE user_id = ? ORDER BY id').all(userId),
     clutches: db.prepare('SELECT * FROM clutches WHERE user_id = ? ORDER BY id').all(userId),
@@ -178,11 +179,11 @@ function importUserData(userId, payload) {
     const insertCage = db.prepare('INSERT INTO cages (id, user_id, cage_number, location, size, notes, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
     for (const row of (data.cages || [])) insertCage.run(row.id || null, userId, row.cage_number, row.location || '', row.size || '', row.notes || '', row.created_at || null);
 
-    const insertSpecies = db.prepare('INSERT INTO species (id, user_id, name, scientific_name, banding_period, incubation_days, notes, show_in_dropdown, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    for (const row of (data.species || [])) insertSpecies.run(row.id || null, userId, row.name, row.scientific_name || '', row.banding_period || '', row.incubation_days || '', row.notes || '', row.show_in_dropdown ? 1 : 0, row.created_at || null);
+    const insertSpecies = db.prepare('INSERT INTO species (id, user_id, name, scientific_name, banding_period, ring_size, incubation_days, notes, show_in_dropdown, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.species || [])) insertSpecies.run(row.id || null, userId, row.name, row.scientific_name || '', row.banding_period || '', row.ring_size || '', row.incubation_days || '', row.notes || '', row.show_in_dropdown ? 1 : 0, row.created_at || null);
 
-    const insertBand = db.prepare('INSERT INTO bands (id, user_id, color, band_text, band_number, notes, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
-    for (const row of (data.bands || [])) insertBand.run(row.id || null, userId, row.color, row.band_text || '', row.band_number, row.notes || '', row.created_at || null);
+    const insertBand = db.prepare('INSERT INTO bands (id, user_id, color, band_text, band_number, ring_size, notes, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.bands || [])) insertBand.run(row.id || null, userId, row.color, row.band_text || '', row.band_number, row.ring_size || '', row.notes || '', row.created_at || null);
 
     const insertBird = db.prepare('INSERT INTO birds (id, user_id, unique_id, name, species, band_number, cage_number, clutch_number, gender, dob, mutation, color, genotype, phenotype, breeding_status, breeding_line, show_quality, estimated_value, acquired_date, sold_date, purchase_price, sale_price, photo_url, notes, sire_id, dam_id, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     for (const row of (data.birds || [])) insertBird.run(row.id || null, userId, row.unique_id || '', row.name, row.species || '', row.band_number || '', row.cage_number || '', row.clutch_number || '', row.gender || 'unknown', row.dob || null, row.mutation || '', row.color || '', row.genotype || '', row.phenotype || '', row.breeding_status || '', row.breeding_line || '', row.show_quality || '', row.estimated_value || null, row.acquired_date || null, row.sold_date || null, row.purchase_price || null, row.sale_price || null, row.photo_url || '', row.notes || '', row.sire_id || null, row.dam_id || null, row.status || 'active', row.created_at || null);
@@ -503,11 +504,12 @@ app.get('/api/species', auth, (req, res) => {
 app.post('/api/species', auth, (req, res) => {
   const missing = requireFields(['name'], req.body);
   if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
-  const result = db.prepare('INSERT INTO species (user_id, name, scientific_name, banding_period, incubation_days, notes, show_in_dropdown) VALUES (?, ?, ?, ?, ?, ?, ?)').run(
+  const result = db.prepare('INSERT INTO species (user_id, name, scientific_name, banding_period, ring_size, incubation_days, notes, show_in_dropdown) VALUES (?, ?, ?, ?, ?, ?, ?, ?)').run(
     req.user.id,
     req.body.name,
     req.body.scientific_name || '',
-    req.body.banding_period || '',
+    req.body.ring_period || req.body.banding_period || '',
+    req.body.ring_size || '',
     req.body.incubation_days || '',
     req.body.notes || '',
     req.body.show_in_dropdown ? 1 : 0
@@ -518,10 +520,11 @@ app.post('/api/species', auth, (req, res) => {
 app.put('/api/species/:id', auth, (req, res) => {
   const species = db.prepare('SELECT * FROM species WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
   if (!species) return res.status(404).json({ error: 'Species not found' });
-  db.prepare('UPDATE species SET name = ?, scientific_name = ?, banding_period = ?, incubation_days = ?, notes = ?, show_in_dropdown = ? WHERE id = ? AND user_id = ?').run(
+  db.prepare('UPDATE species SET name = ?, scientific_name = ?, banding_period = ?, ring_size = ?, incubation_days = ?, notes = ?, show_in_dropdown = ? WHERE id = ? AND user_id = ?').run(
     req.body.name || species.name,
     req.body.scientific_name || '',
-    req.body.banding_period || '',
+    req.body.ring_period || req.body.banding_period || '',
+    req.body.ring_size || '',
     req.body.incubation_days || '',
     req.body.notes || '',
     req.body.show_in_dropdown ? 1 : 0,
@@ -544,11 +547,12 @@ app.get('/api/bands', auth, (req, res) => {
 app.post('/api/bands', auth, (req, res) => {
   const missing = requireFields(['color', 'band_number'], req.body);
   if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
-  const result = db.prepare('INSERT INTO bands (user_id, color, band_text, band_number, notes) VALUES (?, ?, ?, ?, ?)').run(
+  const result = db.prepare('INSERT INTO bands (user_id, color, band_text, band_number, ring_size, notes) VALUES (?, ?, ?, ?, ?, ?)').run(
     req.user.id,
     req.body.color,
     req.body.band_text || '',
     req.body.band_number,
+    req.body.ring_size || '',
     req.body.notes || ''
   );
   res.json({ id: result.lastInsertRowid });
@@ -565,13 +569,13 @@ app.post('/api/bands/series', auth, (req, res) => {
   }
 
   const width = String(req.body.band_number).length;
-  const insert = db.prepare('INSERT INTO bands (user_id, color, band_text, band_number, notes) VALUES (?, ?, ?, ?, ?)');
+  const insert = db.prepare('INSERT INTO bands (user_id, color, band_text, band_number, ring_size, notes) VALUES (?, ?, ?, ?, ?, ?)');
   const created = [];
 
   const tx = db.transaction(() => {
     for (let i = 0; i < quantity; i += 1) {
       const ringNumber = String(start + i).padStart(width, '0');
-      insert.run(req.user.id, req.body.color, req.body.band_text || '', ringNumber, req.body.notes || '');
+      insert.run(req.user.id, req.body.color, req.body.band_text || '', ringNumber, req.body.ring_size || '', req.body.notes || '');
       created.push(ringNumber);
     }
   });
@@ -588,10 +592,11 @@ app.post('/api/bands/series', auth, (req, res) => {
 app.put('/api/bands/:id', auth, (req, res) => {
   const band = db.prepare('SELECT * FROM bands WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
   if (!band) return res.status(404).json({ error: 'Band not found' });
-  db.prepare('UPDATE bands SET color = ?, band_text = ?, band_number = ?, notes = ? WHERE id = ? AND user_id = ?').run(
+  db.prepare('UPDATE bands SET color = ?, band_text = ?, band_number = ?, ring_size = ?, notes = ? WHERE id = ? AND user_id = ?').run(
     req.body.color || band.color,
     req.body.band_text || '',
     req.body.band_number || band.band_number,
+    req.body.ring_size || '',
     req.body.notes || '',
     req.params.id,
     req.user.id

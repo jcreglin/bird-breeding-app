@@ -239,7 +239,7 @@
             <div class="grid grid-2">
               <div class="fieldGroup"><label>Bird name</label><input id="birdName" /></div>
               <div class="fieldGroup"><label>Species</label><select id="birdSpecies"></select></div>
-              <div class="fieldGroup"><label>Ring number</label><select id="birdBand"></select></div>
+              <div class="fieldGroup"><label>Ring number</label><select id="birdBand"></select><div id="birdRingHint" class="muted" style="margin-top:6px;">Showing all available rings</div></div>
               <div class="fieldGroup"><label>Cage number</label><select id="birdCage"></select></div>
               <div class="fieldGroup"><label>Clutch number</label><input id="birdClutchNumber" /></div>
               <div class="fieldGroup"><label>Sex</label><select id="birdGender"><option value="unknown">Unknown</option><option value="male">Male</option><option value="female">Female</option></select></div>
@@ -357,7 +357,7 @@
             <div class="inline" style="width:auto;"><button class="ghost" style="width:auto;" onclick="seedSpeciesDefaults()">Seed Starter Species</button></div>
           </div>
           <table>
-            <thead><tr><th>Show</th><th>Name</th><th>Scientific Name</th><th>Banding Period</th><th>Incubation Days</th><th>Notes</th></tr></thead>
+            <thead><tr><th>Show</th><th>Name</th><th>Scientific Name</th><th>Ring Period</th><th>Ring Size</th><th>Incubation Days</th><th>Notes</th></tr></thead>
             <tbody id="speciesTable"></tbody>
           </table>
         </div>
@@ -370,7 +370,8 @@
           <div class="grid grid-2">
             <div class="fieldGroup"><label>Species name</label><input id="speciesName" /></div>
             <div class="fieldGroup"><label>Scientific name</label><input id="speciesScientificName" /></div>
-            <div class="fieldGroup"><label>Banding period</label><input id="speciesBandingPeriod" /></div>
+            <div class="fieldGroup"><label>Ring period</label><input id="speciesBandingPeriod" /></div>
+            <div class="fieldGroup"><label>Ring size</label><input id="speciesRingSize" /></div>
             <div class="fieldGroup"><label>Incubation days</label><input id="speciesIncubationDays" /></div>
             <div class="fieldGroup"><label>Show in dropdown</label><input id="speciesShowInDropdown" type="checkbox" style="width:auto;" /></div>
             <div class="fieldGroup"><label>Notes</label><textarea id="speciesNotes"></textarea></div>
@@ -393,7 +394,7 @@
             <div class="muted">Click a row to edit</div>
           </div>
           <table>
-            <thead><tr><th>Color</th><th>Text</th><th>Number</th><th>Notes</th></tr></thead>
+            <thead><tr><th>Color</th><th>Text</th><th>Number</th><th>Size</th><th>Notes</th></tr></thead>
             <tbody id="bandsTable"></tbody>
           </table>
         </div>
@@ -407,6 +408,7 @@
             <div class="fieldGroup"><label>Ring color</label><input id="bandColor" /></div>
             <div class="fieldGroup"><label>Ring text</label><input id="bandText" /></div>
             <div class="fieldGroup"><label>Ring number</label><input id="bandNumber" /></div>
+            <div class="fieldGroup"><label>Ring size</label><input id="bandRingSize" /></div>
             <div class="fieldGroup"><label>Series quantity</label><input id="bandSeriesQty" type="number" min="1" /></div>
             <div class="fieldGroup"><label>Notes</label><textarea id="bandNotes"></textarea></div>
           </div>
@@ -658,7 +660,11 @@
     function bandDisplay(value) {
       const match = bands.find(b => String(b.id) === String(value) || b.band_number === value);
       if (!match) return value || '';
-      return [match.color, match.band_text, match.band_number].filter(Boolean).join(' · ');
+      return [match.color, match.band_text, match.band_number, match.ring_size ? `size ${match.ring_size}` : ''].filter(Boolean).join(' · ');
+    }
+
+    function selectedSpeciesRecord() {
+      return speciesRecords.find(s => s.name === birdSpecies.value || String(s.id) === String(birdSpecies.value));
     }
 
     function ageDisplay(dob) {
@@ -699,13 +705,20 @@
       const editingBirdId = birdId?.value ? Number(birdId.value) : null;
       const currentBird = editingBirdId ? birds.find(x => x.id === editingBirdId) : null;
       const currentBirdBandNumber = currentBird ? bandNumberValue(currentBird.band_number) : '';
+      const species = selectedSpeciesRecord();
+      const requiredRingSize = species?.ring_size || '';
       const usedBands = new Set(birds.filter(b => !editingBirdId || b.id !== editingBirdId).map(b => bandNumberValue(b.band_number)).filter(Boolean));
-      const availableBands = bands.filter(b => !usedBands.has(b.band_number) || (currentBirdBandNumber && currentBirdBandNumber === b.band_number));
+      const availableBands = bands.filter(b => {
+        const sizeOk = !requiredRingSize || !b.ring_size || String(b.ring_size) === String(requiredRingSize);
+        const availableOk = !usedBands.has(b.band_number) || (currentBirdBandNumber && currentBirdBandNumber === b.band_number);
+        return sizeOk && availableOk;
+      });
+      birdRingHint.textContent = requiredRingSize ? `Showing available rings for size ${requiredRingSize}` : 'Showing all available rings';
       birdSire.innerHTML = optionMarkup(males, b => `${b.name} (${b.band_number || 'no band'})`);
       birdDam.innerHTML = optionMarkup(females, b => `${b.name} (${b.band_number || 'no band'})`);
       const visibleSpecies = speciesRecords.filter(s => Number(s.show_in_dropdown) === 1);
       birdSpecies.innerHTML = optionMarkup(visibleSpecies, s => s.name, false, s => s.name);
-      birdBand.innerHTML = optionMarkup(availableBands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}`, false, b => b.band_number);
+      birdBand.innerHTML = optionMarkup(availableBands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}${b.ring_size ? ' · size ' + b.ring_size : ''}`, false, b => b.band_number);
       birdCage.innerHTML = optionMarkup(cages, c => `${c.cage_number}${c.location ? ' · ' + c.location : ''}`, false, c => c.cage_number);
       pairSire.innerHTML = optionMarkup(males, b => b.name, false);
       pairDam.innerHTML = optionMarkup(females, b => b.name, false);
@@ -852,6 +865,10 @@
     }
 
     birdDob.addEventListener('change', updateBirdAgeDisplay);
+    birdSpecies.addEventListener('change', () => {
+      syncSelectors();
+      birdBand.value = '';
+    });
     birdPhotoUpload.addEventListener('change', async (event) => {
       const file = event.target.files?.[0];
       if (!file) {
@@ -950,7 +967,7 @@
         <div class="statChip"><div class="k">Total Species</div><div class="v">${speciesRecords.length}</div></div>
         <div class="statChip"><div class="k">Shown In Dropdown</div><div class="v">${speciesRecords.filter(s => Number(s.show_in_dropdown) === 1).length}</div></div>
       `;
-      speciesTable.innerHTML = speciesRecords.map(s => `<tr onclick="editSpeciesById(${s.id})" style="cursor:pointer;"><td><input type="checkbox" ${Number(s.show_in_dropdown) === 1 ? 'checked' : ''} onclick="event.stopPropagation(); toggleSpeciesShow(${s.id}, this.checked)" /></td><td>${s.name}</td><td>${s.scientific_name || ''}</td><td>${s.banding_period || ''}</td><td>${s.incubation_days || ''}</td><td>${s.notes || ''}</td></tr>`).join('');
+      speciesTable.innerHTML = speciesRecords.map(s => `<tr onclick="editSpeciesById(${s.id})" style="cursor:pointer;"><td><input type="checkbox" ${Number(s.show_in_dropdown) === 1 ? 'checked' : ''} onclick="event.stopPropagation(); toggleSpeciesShow(${s.id}, this.checked)" /></td><td>${s.name}</td><td>${s.scientific_name || ''}</td><td>${s.banding_period || ''}</td><td>${s.ring_size || ''}</td><td>${s.incubation_days || ''}</td><td>${s.notes || ''}</td></tr>`).join('');
     }
 
     function renderBands() {
@@ -958,7 +975,7 @@
         <div class="statChip"><div class="k">Total Rings</div><div class="v">${bands.length}</div></div>
         <div class="statChip"><div class="k">Available</div><div class="v">${Math.max(0, bands.length - birds.filter(b => bandNumberValue(b.band_number)).length)}</div></div>
       `;
-      bandsTable.innerHTML = bands.map(b => `<tr onclick="editBandById(${b.id})" style="cursor:pointer;"><td>${b.color}</td><td>${b.band_text || ''}</td><td>${b.band_number}</td><td>${b.notes || ''}</td></tr>`).join('');
+      bandsTable.innerHTML = bands.map(b => `<tr onclick="editBandById(${b.id})" style="cursor:pointer;"><td>${b.color}</td><td>${b.band_text || ''}</td><td>${b.band_number}</td><td>${b.ring_size || ''}</td><td>${b.notes || ''}</td></tr>`).join('');
     }
 
     async function loadCages() {
@@ -1032,6 +1049,7 @@
       speciesName.value = species.name || '';
       speciesScientificName.value = species.scientific_name || '';
       speciesBandingPeriod.value = species.banding_period || '';
+      speciesRingSize.value = species.ring_size || '';
       speciesIncubationDays.value = species.incubation_days || '';
       speciesShowInDropdown.checked = Number(species.show_in_dropdown) === 1;
       speciesNotes.value = species.notes || '';
@@ -1047,6 +1065,7 @@
       speciesName.value = '';
       speciesScientificName.value = '';
       speciesBandingPeriod.value = '';
+      speciesRingSize.value = '';
       speciesIncubationDays.value = '';
       speciesShowInDropdown.checked = false;
       speciesNotes.value = '';
@@ -1057,7 +1076,8 @@
         const payload = {
           name: speciesName.value,
           scientific_name: speciesScientificName.value,
-          banding_period: speciesBandingPeriod.value,
+          ring_period: speciesBandingPeriod.value,
+          ring_size: speciesRingSize.value,
           incubation_days: speciesIncubationDays.value,
           show_in_dropdown: speciesShowInDropdown.checked,
           notes: speciesNotes.value
@@ -1078,7 +1098,8 @@
         await api(`/api/species/${id}`, { method: 'PUT', body: JSON.stringify({
           name: species.name,
           scientific_name: species.scientific_name,
-          banding_period: species.banding_period,
+          ring_period: species.banding_period,
+          ring_size: species.ring_size,
           incubation_days: species.incubation_days,
           notes: species.notes,
           show_in_dropdown: checked
@@ -1103,6 +1124,7 @@
       bandColor.value = band.color || '';
       bandText.value = band.band_text || '';
       bandNumber.value = band.band_number || '';
+      bandRingSize.value = band.ring_size || '';
       bandNotes.value = band.notes || '';
     }
 
@@ -1116,6 +1138,7 @@
       bandColor.value = '';
       bandText.value = '';
       bandNumber.value = '';
+      bandRingSize.value = '';
       bandSeriesQty.value = '';
       bandNotes.value = '';
     }
@@ -1126,6 +1149,7 @@
           color: bandColor.value,
           band_text: bandText.value,
           band_number: bandNumber.value,
+          ring_size: bandRingSize.value,
           notes: bandNotes.value
         };
         if (bandId.value) await api(`/api/bands/${bandId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
@@ -1143,6 +1167,7 @@
           color: bandColor.value,
           band_text: bandText.value,
           band_number: bandNumber.value,
+          ring_size: bandRingSize.value,
           quantity: bandSeriesQty.value,
           notes: bandNotes.value
         };
