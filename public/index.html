@@ -253,8 +253,8 @@
               <div class="fieldGroup"><label>Show quality</label><input id="birdShowQuality" /></div>
               <div class="fieldGroup"><label>Estimated value</label><input id="birdEstimatedValue" type="number" step="0.01" /></div>
               <div class="fieldGroup"><label>Photo</label><div class="photoUploadRow"><input id="birdPhotoUpload" type="file" accept="image/*" /><img id="birdPhotoPreview" class="photoPreview" alt="Bird photo preview" /><input id="birdPhoto" type="hidden" /><div id="birdPhotoStatus" class="muted">Upload an image for this bird record</div></div></div>
-              <div class="fieldGroup"><label>Sire</label><select id="birdSire"></select></div>
-              <div class="fieldGroup"><label>Dam</label><select id="birdDam"></select></div>
+              <div class="fieldGroup"><label>Father</label><select id="birdSire"></select></div>
+              <div class="fieldGroup"><label>Mother</label><select id="birdDam"></select></div>
               <div class="fieldGroup"><label>Status</label><select id="birdStatus"><option value="active">Active</option><option value="sold">Sold</option><option value="deceased">Deceased</option></select></div>
               <div class="fieldGroup"><label>Calculated age</label><div id="birdAgeDisplay" class="ageBadge">Age will appear once hatch date is set</div></div>
             </div>
@@ -461,10 +461,10 @@
           <div class="dashboardSectionTitle"><div><div class="muted">Pair record popup</div><h3 id="pairModalTitle">Pair</h3></div><button class="secondary" style="width:auto;" onclick="closePairModal()">Close</button></div>
           <input type="hidden" id="pairId" />
           <div class="grid grid-2">
-            <select id="pairSire"></select>
-            <select id="pairDam"></select>
-            <input id="pairDate" type="date" />
-            <select id="pairStatus"><option value="active">Active</option><option value="retired">Retired</option></select>
+            <div class="fieldGroup"><label>Father</label><select id="pairSire" aria-label="Father"></select></div>
+            <div class="fieldGroup"><label>Mother</label><select id="pairDam" aria-label="Mother"></select></div>
+            <div class="fieldGroup"><label>Pair date</label><input id="pairDate" type="date" /></div>
+            <div class="fieldGroup"><label>Status</label><select id="pairStatus"><option value="active">Active</option><option value="retired">Retired</option></select></div>
           </div>
           <div style="margin-top:12px;" class="inline"><button onclick="savePair()">Save Pair</button><button class="secondary" onclick="closePairModal()">Close</button></div>
         </div>
@@ -526,8 +526,8 @@
         <div class="card">
           <h3>Genetics Predictor</h3>
           <div class="grid grid-2">
-            <select id="genSire"></select>
-            <select id="genDam"></select>
+            <div class="fieldGroup"><label>Father</label><select id="genSire" aria-label="Father"></select></div>
+            <div class="fieldGroup"><label>Mother</label><select id="genDam" aria-label="Mother"></select></div>
           </div>
           <div style="margin-top:12px;"><button onclick="runGenetics()">Predict Offspring</button></div>
           <div id="geneticsResult" style="margin-top:12px;"></div>
@@ -789,8 +789,8 @@
         return sizeOk && availableOk;
       });
       birdRingHint.textContent = requiredRingSize ? `Showing available rings for size ${requiredRingSize}` : 'Showing all available rings';
-      birdSire.innerHTML = optionMarkup(males, b => `${b.name} (${b.band_number || 'no band'})`);
-      birdDam.innerHTML = optionMarkup(females, b => `${b.name} (${b.band_number || 'no band'})`);
+      birdSire.innerHTML = optionMarkup(males, b => `${b.name} (${b.band_number || 'no ring'})`);
+      birdDam.innerHTML = optionMarkup(females, b => `${b.name} (${b.band_number || 'no ring'})`);
       const visibleSpecies = speciesRecords.filter(s => Number(s.show_in_dropdown) === 1);
       birdSpecies.innerHTML = optionMarkup(visibleSpecies, s => s.name, false, s => s.name);
       birdBand.innerHTML = optionMarkup(availableBands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}${b.ring_size ? ' · size ' + b.ring_size : ''}`, false, b => b.band_number);
