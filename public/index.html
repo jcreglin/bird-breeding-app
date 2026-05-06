@@ -409,8 +409,23 @@
             <div class="fieldGroup"><label>Ring text</label><input id="bandText" /></div>
             <div class="fieldGroup"><label>Ring number</label><input id="bandNumber" /></div>
             <div class="fieldGroup"><label>Ring size</label><input id="bandRingSize" /></div>
+            <div class="fieldGroup">
+              <label>Material</label>
+              <div class="inline" style="gap:12px; flex-wrap:wrap;">
+                <label><input id="bandMaterialAluminium" type="checkbox" style="width:auto;" onchange="syncRingNotes()" /> Aluminium</label>
+                <label><input id="bandMaterialStainless" type="checkbox" style="width:auto;" onchange="syncRingNotes()" /> Stainless steel</label>
+                <label><input id="bandMaterialPlastic" type="checkbox" style="width:auto;" onchange="syncRingNotes()" /> Plastic</label>
+              </div>
+            </div>
+            <div class="fieldGroup">
+              <label>Type</label>
+              <div class="inline" style="gap:12px; flex-wrap:wrap;">
+                <label><input id="bandTypeSplit" type="checkbox" style="width:auto;" onchange="syncRingNotes()" /> Split</label>
+                <label><input id="bandTypeClosed" type="checkbox" style="width:auto;" onchange="syncRingNotes()" /> Closed</label>
+              </div>
+            </div>
             <div class="fieldGroup"><label>Series quantity</label><input id="bandSeriesQty" type="number" min="1" /></div>
-            <div class="fieldGroup"><label>Notes</label><textarea id="bandNotes"></textarea></div>
+            <div class="fieldGroup"><label>Notes</label><textarea id="bandNotes" readonly></textarea></div>
           </div>
           <div class="inline"><button onclick="saveBand()">Save Ring</button><button onclick="saveBandSeries()">Save Series</button><button class="secondary" onclick="closeBandModal()">Close</button><button class="ghost" onclick="resetBandForm()">Clear</button></div>
         </div>
@@ -665,6 +680,30 @@
 
     function selectedSpeciesRecord() {
       return speciesRecords.find(s => s.name === birdSpecies.value || String(s.id) === String(birdSpecies.value));
+    }
+
+    function composeRingNotes() {
+      const parts = [];
+      if (bandMaterialAluminium.checked) parts.push('aluminium');
+      if (bandMaterialStainless.checked) parts.push('stainless steel');
+      if (bandMaterialPlastic.checked) parts.push('plastic');
+      if (bandTypeSplit.checked) parts.push('split');
+      if (bandTypeClosed.checked) parts.push('closed');
+      return parts.length ? `${parts.join(', ')} ring` : '';
+    }
+
+    function syncRingNotes() {
+      bandNotes.value = composeRingNotes();
+    }
+
+    function applyRingNotesToCheckboxes(notes) {
+      const text = String(notes || '').toLowerCase();
+      bandMaterialAluminium.checked = text.includes('aluminium');
+      bandMaterialStainless.checked = text.includes('stainless steel');
+      bandMaterialPlastic.checked = text.includes('plastic');
+      bandTypeSplit.checked = text.includes('split');
+      bandTypeClosed.checked = text.includes('closed');
+      syncRingNotes();
     }
 
     function ageDisplay(dob) {
@@ -1139,7 +1178,7 @@
       bandText.value = band.band_text || '';
       bandNumber.value = band.band_number || '';
       bandRingSize.value = band.ring_size || '';
-      bandNotes.value = band.notes || '';
+      applyRingNotesToCheckboxes(band.notes || '');
     }
 
     function openBandModal() { bandModal.classList.remove('hidden'); }
@@ -1153,8 +1192,13 @@
       bandText.value = '';
       bandNumber.value = '';
       bandRingSize.value = '';
+      bandMaterialAluminium.checked = false;
+      bandMaterialStainless.checked = false;
+      bandMaterialPlastic.checked = false;
+      bandTypeSplit.checked = false;
+      bandTypeClosed.checked = false;
       bandSeriesQty.value = '';
-      bandNotes.value = '';
+      syncRingNotes();
     }
 
     async function saveBand() {
