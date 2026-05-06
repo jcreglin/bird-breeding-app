@@ -723,7 +723,7 @@
         <div class="statChip"><div class="k">Females</div><div class="v">${females}</div></div>
       `;
       birdsTable.innerHTML = birds.map(b => `
-        <tr>
+        <tr onclick="editBirdById(${b.id})" style="cursor:pointer;">
           <td class="thumbCell">${b.photo_url ? `<img class="birdThumb" src="${b.photo_url}" alt="${b.name || 'Bird'}" />` : ''}</td>
           <td>${speciesDisplay(b.species)}</td>
           <td>${b.name}</td>
@@ -732,8 +732,7 @@
           <td>${b.gender || ''}</td>
           <td>${ageDisplay(b.dob)}</td>
           <td>
-            <button style="width:auto;" onclick='editBirdById(${b.id})'>Edit</button>
-            <button style="width:auto;" class="danger" onclick='deleteBird(${b.id})'>Delete</button>
+            <button style="width:auto;" class="danger" onclick="event.stopPropagation(); deleteBird(${b.id})">Delete</button>
           </td>
         </tr>
       `).join('');
