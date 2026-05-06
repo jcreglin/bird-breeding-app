@@ -555,31 +555,31 @@ app.post('/api/bands', auth, (req, res) => {
 });
 
 app.post('/api/bands/series', auth, (req, res) => {
-  const missing = requireFields(['color', 'start_number', 'end_number'], req.body);
+  const missing = requireFields(['color', 'band_number', 'quantity'], req.body);
   if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
 
-  const start = Number(req.body.start_number);
-  const end = Number(req.body.end_number);
-  if (!Number.isInteger(start) || !Number.isInteger(end) || end < start) {
-    return res.status(400).json({ error: 'Invalid series range' });
+  const start = Number(req.body.band_number);
+  const quantity = Number(req.body.quantity);
+  if (!Number.isInteger(start) || !Number.isInteger(quantity) || quantity < 1) {
+    return res.status(400).json({ error: 'Invalid starting number or quantity' });
   }
 
-  const width = String(req.body.start_number).length;
+  const width = String(req.body.band_number).length;
   const insert = db.prepare('INSERT INTO bands (user_id, color, band_text, band_number, notes) VALUES (?, ?, ?, ?, ?)');
   const created = [];
 
   const tx = db.transaction(() => {
-    for (let n = start; n <= end; n += 1) {
-      const bandNumber = String(n).padStart(width, '0');
-      insert.run(req.user.id, req.body.color, req.body.band_text || '', bandNumber, req.body.notes || '');
-      created.push(bandNumber);
+    for (let i = 0; i < quantity; i += 1) {
+      const ringNumber = String(start + i).padStart(width, '0');
+      insert.run(req.user.id, req.body.color, req.body.band_text || '', ringNumber, req.body.notes || '');
+      created.push(ringNumber);
     }
   });
 
   try {
     tx();
   } catch (error) {
-    return res.status(400).json({ error: 'Could not create band series, one or more numbers may already exist' });
+    return res.status(400).json({ error: 'Could not create ring series, one or more numbers may already exist' });
   }
 
   res.json({ ok: true, created: created.length, first: created[0], last: created[created.length - 1] });
