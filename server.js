@@ -554,6 +554,37 @@ app.post('/api/bands', auth, (req, res) => {
   res.json({ id: result.lastInsertRowid });
 });
 
+app.post('/api/bands/series', auth, (req, res) => {
+  const missing = requireFields(['color', 'start_number', 'end_number'], req.body);
+  if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
+
+  const start = Number(req.body.start_number);
+  const end = Number(req.body.end_number);
+  if (!Number.isInteger(start) || !Number.isInteger(end) || end < start) {
+    return res.status(400).json({ error: 'Invalid series range' });
+  }
+
+  const width = String(req.body.start_number).length;
+  const insert = db.prepare('INSERT INTO bands (user_id, color, band_text, band_number, notes) VALUES (?, ?, ?, ?, ?)');
+  const created = [];
+
+  const tx = db.transaction(() => {
+    for (let n = start; n <= end; n += 1) {
+      const bandNumber = String(n).padStart(width, '0');
+      insert.run(req.user.id, req.body.color, req.body.band_text || '', bandNumber, req.body.notes || '');
+      created.push(bandNumber);
+    }
+  });
+
+  try {
+    tx();
+  } catch (error) {
+    return res.status(400).json({ error: 'Could not create band series, one or more numbers may already exist' });
+  }
+
+  res.json({ ok: true, created: created.length, first: created[0], last: created[created.length - 1] });
+});
+
 app.put('/api/bands/:id', auth, (req, res) => {
   const band = db.prepare('SELECT * FROM bands WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
   if (!band) return res.status(404).json({ error: 'Band not found' });

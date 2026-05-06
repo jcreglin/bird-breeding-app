@@ -407,9 +407,11 @@
             <div class="fieldGroup"><label>Band color</label><input id="bandColor" /></div>
             <div class="fieldGroup"><label>Band text</label><input id="bandText" /></div>
             <div class="fieldGroup"><label>Band number</label><input id="bandNumber" /></div>
+            <div class="fieldGroup"><label>Series start</label><input id="bandSeriesStart" /></div>
+            <div class="fieldGroup"><label>Series end</label><input id="bandSeriesEnd" /></div>
             <div class="fieldGroup"><label>Notes</label><textarea id="bandNotes"></textarea></div>
           </div>
-          <div class="inline"><button onclick="saveBand()">Save Band</button><button class="secondary" onclick="closeBandModal()">Close</button><button class="ghost" onclick="resetBandForm()">Clear</button></div>
+          <div class="inline"><button onclick="saveBand()">Save Band</button><button onclick="saveBandSeries()">Save Series</button><button class="secondary" onclick="closeBandModal()">Close</button><button class="ghost" onclick="resetBandForm()">Clear</button></div>
         </div>
       </div>
 
@@ -1115,6 +1117,8 @@
       bandColor.value = '';
       bandText.value = '';
       bandNumber.value = '';
+      bandSeriesStart.value = '';
+      bandSeriesEnd.value = '';
       bandNotes.value = '';
     }
 
@@ -1132,6 +1136,23 @@
         closeBandModal();
         await loadBands();
         showMessage('Band saved');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function saveBandSeries() {
+      try {
+        const payload = {
+          color: bandColor.value,
+          band_text: bandText.value,
+          start_number: bandSeriesStart.value,
+          end_number: bandSeriesEnd.value,
+          notes: bandNotes.value
+        };
+        const data = await api('/api/bands/series', { method: 'POST', body: JSON.stringify(payload) });
+        resetBandForm();
+        closeBandModal();
+        await loadBands();
+        showMessage(`Created ${data.created} bands (${data.first} to ${data.last})`);
       } catch (e) { showMessage(e.message, 'error'); }
     }
 
