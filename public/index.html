@@ -409,23 +409,28 @@
             <div class="fieldGroup"><label>Ring text</label><input id="bandText" /></div>
             <div class="fieldGroup"><label>Ring number</label><input id="bandNumber" /></div>
             <div class="fieldGroup"><label>Ring size</label><input id="bandRingSize" /></div>
-            <div class="fieldGroup">
-              <label>Material</label>
-              <div class="inline" style="gap:12px; flex-wrap:wrap;">
-                <label><input id="bandMaterialAluminium" type="checkbox" style="width:auto;" onchange="syncRingNotes()" /> Aluminium</label>
-                <label><input id="bandMaterialStainless" type="checkbox" style="width:auto;" onchange="syncRingNotes()" /> Stainless steel</label>
-                <label><input id="bandMaterialPlastic" type="checkbox" style="width:auto;" onchange="syncRingNotes()" /> Plastic</label>
-              </div>
-            </div>
-            <div class="fieldGroup">
-              <label>Type</label>
-              <div class="inline" style="gap:12px; flex-wrap:wrap;">
-                <label><input id="bandTypeSplit" type="checkbox" style="width:auto;" onchange="syncRingNotes()" /> Split</label>
-                <label><input id="bandTypeClosed" type="checkbox" style="width:auto;" onchange="syncRingNotes()" /> Closed</label>
+            <div class="fieldGroup" style="grid-column:1 / -1;">
+              <div class="grid grid-2" style="gap:18px;">
+                <div>
+                  <label>Material</label>
+                  <div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:10px 16px; margin-top:8px;">
+                    <label style="display:flex; align-items:center; gap:8px;"><input id="bandMaterialAluminium" type="checkbox" style="width:auto; margin:0;" onchange="syncRingNotes()" /> <span>Aluminium</span></label>
+                    <label style="display:flex; align-items:center; gap:8px;"><input id="bandMaterialStainless" type="checkbox" style="width:auto; margin:0;" onchange="syncRingNotes()" /> <span>Stainless steel</span></label>
+                    <label style="display:flex; align-items:center; gap:8px;"><input id="bandMaterialPlastic" type="checkbox" style="width:auto; margin:0;" onchange="syncRingNotes()" /> <span>Plastic</span></label>
+                  </div>
+                </div>
+                <div>
+                  <label>Type</label>
+                  <div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px 16px; margin-top:8px;">
+                    <label style="display:flex; align-items:center; gap:8px;"><input id="bandTypeSplit" type="checkbox" style="width:auto; margin:0;" onchange="syncRingNotes()" /> <span>Split</span></label>
+                    <label style="display:flex; align-items:center; gap:8px;"><input id="bandTypeClosed" type="checkbox" style="width:auto; margin:0;" onchange="syncRingNotes()" /> <span>Closed</span></label>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="fieldGroup"><label>Series quantity</label><input id="bandSeriesQty" type="number" min="1" /></div>
-            <div class="fieldGroup"><label>Notes</label><textarea id="bandNotes" readonly></textarea></div>
+            <div class="fieldGroup"><label>Ring spec</label><input id="bandSpecPreview" readonly /></div>
+            <div class="fieldGroup" style="grid-column:1 / -1;"><label>Notes</label><textarea id="bandNotes" placeholder="Add any extra notes here"></textarea></div>
           </div>
           <div class="inline"><button onclick="saveBand()">Save Ring</button><button onclick="saveBandSeries()">Save Series</button><button class="secondary" onclick="closeBandModal()">Close</button><button class="ghost" onclick="resetBandForm()">Clear</button></div>
         </div>
@@ -682,7 +687,7 @@
       return speciesRecords.find(s => s.name === birdSpecies.value || String(s.id) === String(birdSpecies.value));
     }
 
-    function composeRingNotes() {
+    function composeRingSpec() {
       const parts = [];
       if (bandMaterialAluminium.checked) parts.push('aluminium');
       if (bandMaterialStainless.checked) parts.push('stainless steel');
@@ -692,17 +697,48 @@
       return parts.length ? `${parts.join(', ')} ring` : '';
     }
 
+    function splitRingNotes(notes) {
+      const text = String(notes || '').trim();
+      const prefixes = [
+        'aluminium, split ring',
+        'aluminium, closed ring',
+        'stainless steel, split ring',
+        'stainless steel, closed ring',
+        'plastic, split ring',
+        'plastic, closed ring',
+        'aluminium ring',
+        'stainless steel ring',
+        'plastic ring',
+        'split ring',
+        'closed ring'
+      ];
+      const match = prefixes.find(prefix => text.toLowerCase() === prefix || text.toLowerCase().startsWith(prefix + ' | ') || text.toLowerCase().startsWith(prefix + '\n'));
+      if (!match) return { spec: '', manual: text };
+      const remainder = text.slice(match.length).replace(/^\s*[|\n]\s*/, '');
+      return { spec: match, manual: remainder };
+    }
+
     function syncRingNotes() {
-      bandNotes.value = composeRingNotes();
+      const spec = composeRingSpec();
+      bandSpecPreview.value = spec;
+    }
+
+    function combinedRingNotes() {
+      const spec = composeRingSpec();
+      const manual = String(bandNotes.value || '').trim();
+      if (spec && manual) return `${spec} | ${manual}`;
+      return spec || manual;
     }
 
     function applyRingNotesToCheckboxes(notes) {
-      const text = String(notes || '').toLowerCase();
+      const { spec, manual } = splitRingNotes(notes);
+      const text = spec.toLowerCase();
       bandMaterialAluminium.checked = text.includes('aluminium');
       bandMaterialStainless.checked = text.includes('stainless steel');
       bandMaterialPlastic.checked = text.includes('plastic');
       bandTypeSplit.checked = text.includes('split');
       bandTypeClosed.checked = text.includes('closed');
+      bandNotes.value = manual;
       syncRingNotes();
     }
 
@@ -1198,6 +1234,7 @@
       bandTypeSplit.checked = false;
       bandTypeClosed.checked = false;
       bandSeriesQty.value = '';
+      bandNotes.value = '';
       syncRingNotes();
     }
 
@@ -1208,7 +1245,7 @@
           band_text: bandText.value,
           band_number: bandNumber.value,
           ring_size: bandRingSize.value,
-          notes: bandNotes.value
+          notes: combinedRingNotes()
         };
         if (bandId.value) await api(`/api/bands/${bandId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
         else await api('/api/bands', { method: 'POST', body: JSON.stringify(payload) });
@@ -1227,7 +1264,7 @@
           band_number: bandNumber.value,
           ring_size: bandRingSize.value,
           quantity: bandSeriesQty.value,
-          notes: bandNotes.value
+          notes: combinedRingNotes()
         };
         const data = await api('/api/bands/series', { method: 'POST', body: JSON.stringify(payload) });
         resetBandForm();
