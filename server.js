@@ -113,6 +113,32 @@ function nextBirdUniqueId(userId) {
   return `B${String(next).padStart(5, '0')}`;
 }
 
+function getBirdPedigree(userId, birdId) {
+  return db.prepare('SELECT relation_key, linked_bird_id, ring_number, phenotype FROM bird_pedigree WHERE user_id = ? AND bird_id = ? ORDER BY relation_key').all(userId, birdId);
+}
+
+function saveBirdPedigree(userId, birdId, entries = []) {
+  const allowed = new Set(['father', 'mother', 'father_father', 'father_mother', 'mother_father', 'mother_mother']);
+  const replace = db.prepare(`
+    INSERT INTO bird_pedigree (user_id, bird_id, relation_key, linked_bird_id, ring_number, phenotype, updated_at)
+    VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+    ON CONFLICT(user_id, bird_id, relation_key)
+    DO UPDATE SET linked_bird_id = excluded.linked_bird_id, ring_number = excluded.ring_number, phenotype = excluded.phenotype, updated_at = CURRENT_TIMESTAMP
+  `);
+  const clearMissing = db.prepare('DELETE FROM bird_pedigree WHERE user_id = ? AND bird_id = ?');
+  const tx = db.transaction(() => {
+    clearMissing.run(userId, birdId);
+    for (const row of entries) {
+      if (!row || !allowed.has(row.relation_key)) continue;
+      const linkedId = row.linked_bird_id || null;
+      if (linkedId && !ensureBirdOwnedByUser(userId, linkedId)) continue;
+      if (!linkedId && !row.ring_number && !row.phenotype) continue;
+      replace.run(userId, birdId, row.relation_key, linkedId, row.ring_number || '', row.phenotype || '');
+    }
+  });
+  tx();
+}
+
 function seedSpeciesForUser(userId) {
   const insert = db.prepare('INSERT OR IGNORE INTO species (user_id, name, scientific_name, banding_period, ring_size, incubation_days, notes, show_in_dropdown) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
   const tx = db.transaction(() => {
@@ -146,6 +172,7 @@ function exportUserData(userId) {
     species: db.prepare('SELECT id, name, scientific_name, banding_period, ring_size, incubation_days, notes, show_in_dropdown, created_at FROM species WHERE user_id = ? ORDER BY id').all(userId),
     bands: db.prepare('SELECT id, color, band_text, band_number, ring_size, notes, created_at FROM bands WHERE user_id = ? ORDER BY id').all(userId),
     birds: db.prepare('SELECT * FROM birds WHERE user_id = ? ORDER BY id').all(userId),
+    bird_pedigree: db.prepare('SELECT bird_id, relation_key, linked_bird_id, ring_number, phenotype, created_at, updated_at FROM bird_pedigree WHERE user_id = ? ORDER BY bird_id, relation_key').all(userId),
     pairs: db.prepare('SELECT * FROM pairs WHERE user_id = ? ORDER BY id').all(userId),
     clutches: db.prepare('SELECT * FROM clutches WHERE user_id = ? ORDER BY id').all(userId),
     eggs: db.prepare('SELECT * FROM eggs WHERE user_id = ? ORDER BY id').all(userId),
@@ -159,6 +186,7 @@ function importUserData(userId, payload) {
     db.prepare('DELETE FROM eggs WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM clutches WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM pairs WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM bird_pedigree WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM birds WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM bands WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM species WHERE user_id = ?').run(userId);
@@ -187,6 +215,9 @@ function importUserData(userId, payload) {
 
     const insertBird = db.prepare('INSERT INTO birds (id, user_id, unique_id, name, species, band_number, cage_number, clutch_number, gender, dob, mutation, color, genotype, phenotype, breeding_status, breeding_line, show_quality, estimated_value, acquired_date, sold_date, purchase_price, sale_price, photo_url, notes, sire_id, dam_id, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     for (const row of (data.birds || [])) insertBird.run(row.id || null, userId, row.unique_id || '', row.name, row.species || '', row.band_number || '', row.cage_number || '', row.clutch_number || '', row.gender || 'unknown', row.dob || null, row.mutation || '', row.color || '', row.genotype || '', row.phenotype || '', row.breeding_status || '', row.breeding_line || '', row.show_quality || '', row.estimated_value || null, row.acquired_date || null, row.sold_date || null, row.purchase_price || null, row.sale_price || null, row.photo_url || '', row.notes || '', row.sire_id || null, row.dam_id || null, row.status || 'active', row.created_at || null);
+
+    const insertPedigree = db.prepare('INSERT INTO bird_pedigree (user_id, bird_id, relation_key, linked_bird_id, ring_number, phenotype, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.bird_pedigree || [])) insertPedigree.run(userId, row.bird_id, row.relation_key, row.linked_bird_id || null, row.ring_number || '', row.phenotype || '', row.created_at || null, row.updated_at || null);
 
     const insertPair = db.prepare('INSERT INTO pairs (id, user_id, sire_id, dam_id, pair_date, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
     for (const row of (data.pairs || [])) insertPair.run(row.id || null, userId, row.sire_id, row.dam_id, row.pair_date || null, row.status || 'active', row.created_at || null);
@@ -370,6 +401,19 @@ app.put('/api/birds/:id', auth, (req, res) => {
     req.params.id,
     req.user.id
   );
+  res.json({ ok: true });
+});
+
+app.get('/api/birds/:id/pedigree', auth, (req, res) => {
+  const bird = ensureBirdOwnedByUser(req.user.id, req.params.id);
+  if (!bird) return res.status(404).json({ error: 'Bird not found' });
+  res.json(getBirdPedigree(req.user.id, req.params.id));
+});
+
+app.put('/api/birds/:id/pedigree', auth, (req, res) => {
+  const bird = ensureBirdOwnedByUser(req.user.id, req.params.id);
+  if (!bird) return res.status(404).json({ error: 'Bird not found' });
+  saveBirdPedigree(req.user.id, req.params.id, Array.isArray(req.body?.entries) ? req.body.entries : []);
   res.json({ ok: true });
 });
 

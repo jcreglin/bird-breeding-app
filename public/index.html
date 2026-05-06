@@ -257,6 +257,23 @@
               <div class="fieldGroup"><label>Mother</label><select id="birdDam"></select></div>
               <div class="fieldGroup"><label>Status</label><select id="birdStatus"><option value="active">Active</option><option value="sold">Sold</option><option value="deceased">Deceased</option></select></div>
               <div class="fieldGroup"><label>Calculated age</label><div id="birdAgeDisplay" class="ageBadge">Age will appear once hatch date is set</div></div>
+              <div class="fieldGroup" style="grid-column:1 / -1;"><button class="ghost" style="width:auto;" onclick="openPedigreeModal()">Add Pedigree</button></div>
+            </div>
+          </div>
+
+          <div id="pedigreeModal" class="modalOverlay hidden" onclick="if(event.target===this) closePedigreeModal()">
+            <div class="modalCard" style="max-width:980px;">
+              <div class="dashboardSectionTitle"><div><div class="muted">Pedigree popup</div><h3 id="pedigreeModalTitle">Pedigree</h3></div><button class="secondary" style="width:auto;" onclick="closePedigreeModal()">Close</button></div>
+              <div class="grid grid-2">
+                <div class="card"><h3>Father</h3><div class="grid grid-2"><div class="fieldGroup" style="grid-column:1 / -1;"><label>Linked bird</label><select id="pedigree_father_linked" onchange="syncPedigreeLinkedFields()"></select></div><div class="fieldGroup"><label>Ring No.</label><input id="pedigree_father_ring" /></div><div class="fieldGroup"><label>Phenotype</label><input id="pedigree_father_phenotype" /></div></div></div>
+                <div class="card"><h3>Mother</h3><div class="grid grid-2"><div class="fieldGroup" style="grid-column:1 / -1;"><label>Linked bird</label><select id="pedigree_mother_linked" onchange="syncPedigreeLinkedFields()"></select></div><div class="fieldGroup"><label>Ring No.</label><input id="pedigree_mother_ring" /></div><div class="fieldGroup"><label>Phenotype</label><input id="pedigree_mother_phenotype" /></div></div></div>
+                <div class="card"><h3>Father's Father</h3><div class="grid grid-2"><div class="fieldGroup" style="grid-column:1 / -1;"><label>Linked bird</label><select id="pedigree_father_father_linked" onchange="syncPedigreeLinkedFields()"></select></div><div class="fieldGroup"><label>Ring No.</label><input id="pedigree_father_father_ring" /></div><div class="fieldGroup"><label>Phenotype</label><input id="pedigree_father_father_phenotype" /></div></div></div>
+                <div class="card"><h3>Father's Mother</h3><div class="grid grid-2"><div class="fieldGroup" style="grid-column:1 / -1;"><label>Linked bird</label><select id="pedigree_father_mother_linked" onchange="syncPedigreeLinkedFields()"></select></div><div class="fieldGroup"><label>Ring No.</label><input id="pedigree_father_mother_ring" /></div><div class="fieldGroup"><label>Phenotype</label><input id="pedigree_father_mother_phenotype" /></div></div></div>
+                <div class="card"><h3>Mother's Father</h3><div class="grid grid-2"><div class="fieldGroup" style="grid-column:1 / -1;"><label>Linked bird</label><select id="pedigree_mother_father_linked" onchange="syncPedigreeLinkedFields()"></select></div><div class="fieldGroup"><label>Ring No.</label><input id="pedigree_mother_father_ring" /></div><div class="fieldGroup"><label>Phenotype</label><input id="pedigree_mother_father_phenotype" /></div></div></div>
+                <div class="card"><h3>Mother's Mother</h3><div class="grid grid-2"><div class="fieldGroup" style="grid-column:1 / -1;"><label>Linked bird</label><select id="pedigree_mother_mother_linked" onchange="syncPedigreeLinkedFields()"></select></div><div class="fieldGroup"><label>Ring No.</label><input id="pedigree_mother_mother_ring" /></div><div class="fieldGroup"><label>Phenotype</label><input id="pedigree_mother_mother_phenotype" /></div></div></div>
+              </div>
+              <div class="inline" style="margin-top:12px;"><button onclick="savePedigree()">Save Pedigree</button><button class="secondary" onclick="closePedigreeModal()">Close</button></div>
+            </div>
             </div>
           </div>
 
@@ -580,6 +597,7 @@
     let pairs = [];
     let clutches = [];
     let calendarItems = [];
+    const pedigreeRelationKeys = ['father', 'mother', 'father_father', 'father_mother', 'mother_father', 'mother_mother'];
 
     const messageEl = document.getElementById('message');
     const el = (id) => document.getElementById(id);
@@ -772,6 +790,67 @@
 
     function updateBirdAgeDisplay() {
       birdAgeDisplay.textContent = ageDisplay(birdDob.value) || 'Age will appear once hatch date is set';
+    }
+
+    function pedigreeField(key, part) {
+      return document.getElementById(`pedigree_${key}_${part}`);
+    }
+
+    function populatePedigreeBirdOptions() {
+      const choices = optionMarkup(birds, b => `${b.name || 'Unnamed'}${b.band_number ? ' · ' + b.band_number : ''}`, true);
+      pedigreeRelationKeys.forEach(key => {
+        pedigreeField(key, 'linked').innerHTML = choices;
+      });
+    }
+
+    function syncPedigreeLinkedFields() {
+      pedigreeRelationKeys.forEach(key => {
+        const linkedId = pedigreeField(key, 'linked').value;
+        const linkedBird = birds.find(b => String(b.id) === String(linkedId));
+        if (linkedBird) {
+          pedigreeField(key, 'ring').value = linkedBird.band_number || '';
+          pedigreeField(key, 'phenotype').value = linkedBird.phenotype || '';
+        }
+      });
+    }
+
+    async function openPedigreeModal() {
+      if (!birdId.value) {
+        showMessage('Save the bird first, then add pedigree', 'error');
+        return;
+      }
+      populatePedigreeBirdOptions();
+      pedigreeRelationKeys.forEach(key => {
+        pedigreeField(key, 'linked').value = '';
+        pedigreeField(key, 'ring').value = '';
+        pedigreeField(key, 'phenotype').value = '';
+      });
+      const rows = await api(`/api/birds/${birdId.value}/pedigree`);
+      rows.forEach(row => {
+        if (!pedigreeRelationKeys.includes(row.relation_key)) return;
+        pedigreeField(row.relation_key, 'linked').value = row.linked_bird_id || '';
+        pedigreeField(row.relation_key, 'ring').value = row.ring_number || '';
+        pedigreeField(row.relation_key, 'phenotype').value = row.phenotype || '';
+      });
+      pedigreeModalTitle.textContent = `Pedigree for ${birdName.value || 'bird'}`;
+      pedigreeModal.classList.remove('hidden');
+    }
+
+    function closePedigreeModal() {
+      pedigreeModal.classList.add('hidden');
+    }
+
+    async function savePedigree() {
+      if (!birdId.value) return;
+      const entries = pedigreeRelationKeys.map(key => ({
+        relation_key: key,
+        linked_bird_id: pedigreeField(key, 'linked').value || null,
+        ring_number: pedigreeField(key, 'ring').value || '',
+        phenotype: pedigreeField(key, 'phenotype').value || ''
+      }));
+      await api(`/api/birds/${birdId.value}/pedigree`, { method: 'PUT', body: JSON.stringify({ entries }) });
+      closePedigreeModal();
+      showMessage('Pedigree saved');
     }
 
     function syncSelectors() {

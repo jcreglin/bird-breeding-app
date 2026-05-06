@@ -149,6 +149,21 @@ db.exec(`
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
   );
 
+  CREATE TABLE IF NOT EXISTS bird_pedigree (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    bird_id INTEGER NOT NULL,
+    relation_key TEXT NOT NULL,
+    linked_bird_id INTEGER,
+    ring_number TEXT,
+    phenotype TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (bird_id) REFERENCES birds(id) ON DELETE CASCADE,
+    FOREIGN KEY (linked_bird_id) REFERENCES birds(id) ON DELETE SET NULL
+  );
+
   CREATE INDEX IF NOT EXISTS idx_birds_user_id ON birds(user_id);
   CREATE INDEX IF NOT EXISTS idx_pairs_user_id ON pairs(user_id);
   CREATE INDEX IF NOT EXISTS idx_clutches_user_id ON clutches(user_id);
@@ -158,6 +173,8 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_cages_user_id ON cages(user_id);
   CREATE INDEX IF NOT EXISTS idx_species_user_id ON species(user_id);
   CREATE INDEX IF NOT EXISTS idx_bands_user_id ON bands(user_id);
+  CREATE INDEX IF NOT EXISTS idx_bird_pedigree_user_bird_id ON bird_pedigree(user_id, bird_id);
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_bird_pedigree_unique_relation ON bird_pedigree(user_id, bird_id, relation_key);
 `);
 
 addColumn('birds', 'unique_id', 'TEXT');
