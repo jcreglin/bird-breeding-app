@@ -202,7 +202,6 @@
           <div class="statStrip" id="birdStatsStrip"></div>
         </div>
         <div class="card">
-          <input type="hidden" id="birdId" />
           <div class="panelToolbar">
             <div>
               <div class="muted">Bird Tracker record list</div>
@@ -211,6 +210,23 @@
             <div class="muted">Edit opens the full record popup</div>
           </div>
           <table>
+            <thead><tr><th>Photo</th><th>Species</th><th>Name</th><th>Band</th><th>Cage</th><th>Sex</th><th>Age</th><th></th></tr></thead>
+            <tbody id="birdsTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div id="birdModal" class="modalOverlay hidden" onclick="if(event.target===this) closeBirdModal()">
+        <div class="modalCard">
+          <div class="dashboardSectionTitle">
+            <div>
+              <div class="muted">Bird Tracker record popup</div>
+              <h3 id="birdModalTitle">Flock Record</h3>
+            </div>
+            <button class="secondary" style="width:auto;" onclick="closeBirdModal()">Close</button>
+          </div>
+          <input type="hidden" id="birdId" />
+          <div class="subtabs">
             <button class="subtab active" onclick="showBirdSubtab('profile', event)">Profile</button>
             <button class="subtab" onclick="showBirdSubtab('sales', event)">Receipt / Sales</button>
             <button class="subtab" onclick="showBirdSubtab('health', event)">Health Record</button>
@@ -290,19 +306,6 @@
             <button class="secondary" onclick="closeBirdModal()">Close</button>
             <button class="ghost" onclick="resetBirdForm()">Clear</button>
           </div>
-        </div>
-      </section>
-
-      <div id="birdModal" class="modalOverlay hidden" onclick="if(event.target===this) closeBirdModal()">
-        <div class="modalCard">
-          <div class="dashboardSectionTitle">
-            <div>
-              <div class="muted">Bird Tracker record popup</div>
-              <h3 id="birdModalTitle">Flock Record</h3>
-            </div>
-            <button class="secondary" style="width:auto;" onclick="closeBirdModal()">Close</button>
-          </div>
-          <div id="birdModalContent"></div>
         </div>
       </div>
 
@@ -713,8 +716,6 @@
     }
 
     function openBirdModal() {
-      const editor = document.getElementById('bird-subtab-profile').closest('.card');
-      birdModalContent.appendChild(editor);
       birdModal.classList.remove('hidden');
     }
 
