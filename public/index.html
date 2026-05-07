@@ -704,7 +704,7 @@
     function bandDisplay(value) {
       const match = bands.find(b => String(b.id) === String(value) || b.band_number === value);
       if (!match) return value || '';
-      return [match.color, match.band_text, match.band_number, match.ring_size ? `size ${match.ring_size}` : ''].filter(Boolean).join(' · ');
+      return [match.color, match.band_text, match.band_number].filter(Boolean).join(' ');
     }
 
     function selectedSpeciesRecord() {
@@ -815,7 +815,7 @@
     }
 
     function pedigreeBirdLabel(bird) {
-      return [bird.name || 'Unnamed', bandDisplay(bird.band_number)].filter(Boolean).join(' · ');
+      return bandDisplay(bird.band_number) || bird.band_number || 'No ring';
     }
 
     function populatePedigreeBirdOptions() {
@@ -895,8 +895,8 @@
         return sizeOk && availableOk;
       });
       birdRingHint.textContent = requiredRingSize ? `Showing available rings for size ${requiredRingSize}` : 'Showing all available rings';
-      birdSire.innerHTML = optionMarkup(males, b => `${b.name} (${b.band_number || 'no ring'})`);
-      birdDam.innerHTML = optionMarkup(females, b => `${b.name} (${b.band_number || 'no ring'})`);
+      birdSire.innerHTML = optionMarkup(males, b => bandDisplay(b.band_number) || 'No ring');
+      birdDam.innerHTML = optionMarkup(females, b => bandDisplay(b.band_number) || 'No ring');
       const visibleSpecies = speciesRecords.filter(s => Number(s.show_in_dropdown) === 1);
       birdSpecies.innerHTML = optionMarkup(visibleSpecies, s => s.name, false, s => s.name);
       birdBand.innerHTML = optionMarkup(availableBands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}${b.ring_size ? ' · size ' + b.ring_size : ''}`, false, b => b.band_number);
