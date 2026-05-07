@@ -231,11 +231,11 @@ function importUserData(userId, payload) {
     const insertPair = db.prepare('INSERT INTO pairs (id, user_id, sire_id, dam_id, pair_date, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
     for (const row of (data.pairs || [])) insertPair.run(row.id || null, userId, row.sire_id, row.dam_id, row.pair_date || null, row.status || 'active', row.created_at || null);
 
-    const insertClutch = db.prepare('INSERT INTO clutches (id, user_id, pair_id, lay_date, hatch_date, created_at) VALUES (?, ?, ?, ?, ?, ?)');
-    for (const row of (data.clutches || [])) insertClutch.run(row.id || null, userId, row.pair_id, row.lay_date || null, row.hatch_date || null, row.created_at || null);
+    const insertClutch = db.prepare('INSERT INTO clutches (id, user_id, pair_id, species, cage_number, nest_box, clutch_code, lay_date, hatch_date, incubation_start_date, status, total_eggs, notes, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.clutches || [])) insertClutch.run(row.id || null, userId, row.pair_id, row.species || '', row.cage_number || '', row.nest_box || '', row.clutch_code || '', row.lay_date || null, row.hatch_date || null, row.incubation_start_date || null, row.status || 'active', row.total_eggs || null, row.notes || '', row.created_at || null);
 
-    const insertEgg = db.prepare('INSERT INTO eggs (id, user_id, clutch_id, egg_number, outcome, created_at) VALUES (?, ?, ?, ?, ?, ?)');
-    for (const row of (data.eggs || [])) insertEgg.run(row.id || null, userId, row.clutch_id, row.egg_number || null, row.outcome || 'pending', row.created_at || null);
+    const insertEgg = db.prepare('INSERT INTO eggs (id, user_id, clutch_id, egg_number, lay_date, hatch_date, outcome, fertility, colour_notes, comments, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.eggs || [])) insertEgg.run(row.id || null, userId, row.clutch_id, row.egg_number || null, row.lay_date || null, row.hatch_date || null, row.outcome || 'pending', row.fertility || '', row.colour_notes || '', row.comments || '', row.created_at || null);
 
     const insertContact = db.prepare('INSERT INTO contacts (id, user_id, name, email, phone, type, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
     for (const row of (data.contacts || [])) insertContact.run(row.id || null, userId, row.name, row.email || '', row.phone || '', row.type || 'other', row.created_at || null);
@@ -468,7 +468,7 @@ app.delete('/api/pairs/:id', auth, (req, res) => {
 app.get('/api/clutches', auth, (req, res) => {
   const clutches = db.prepare(`
     SELECT c.*, p.sire_id, p.dam_id, s.name AS sire_name, d.name AS dam_name,
-      (SELECT COUNT(*) FROM eggs e WHERE e.clutch_id = c.id AND e.user_id = c.user_id) AS egg_count
+      COALESCE(c.total_eggs, (SELECT COUNT(*) FROM eggs e WHERE e.clutch_id = c.id AND e.user_id = c.user_id)) AS egg_count
     FROM clutches c
     JOIN pairs p ON p.id = c.pair_id AND p.user_id = c.user_id
     JOIN birds s ON s.id = p.sire_id AND s.user_id = c.user_id
@@ -480,29 +480,57 @@ app.get('/api/clutches', auth, (req, res) => {
 });
 
 app.post('/api/clutches', auth, (req, res) => {
-  const pair = db.prepare('SELECT * FROM pairs WHERE id = ? AND user_id = ?').get(req.body.pair_id, req.user.id);
+  const pair = db.prepare('SELECT p.*, s.species AS sire_species, d.species AS dam_species FROM pairs p LEFT JOIN birds s ON s.id = p.sire_id AND s.user_id = p.user_id LEFT JOIN birds d ON d.id = p.dam_id AND d.user_id = p.user_id WHERE p.id = ? AND p.user_id = ?').get(req.body.pair_id, req.user.id);
   if (!pair) return res.status(400).json({ error: 'Invalid pair' });
-  const result = db.prepare('INSERT INTO clutches (user_id, pair_id, lay_date, hatch_date) VALUES (?, ?, ?, ?)').run(req.user.id, req.body.pair_id, req.body.lay_date || null, req.body.hatch_date || null);
+  const result = db.prepare('INSERT INTO clutches (user_id, pair_id, species, cage_number, nest_box, clutch_code, lay_date, hatch_date, incubation_start_date, status, total_eggs, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)').run(
+    req.user.id,
+    req.body.pair_id,
+    req.body.species || pair.sire_species || pair.dam_species || '',
+    req.body.cage_number || '',
+    req.body.nest_box || '',
+    req.body.clutch_code || '',
+    req.body.lay_date || null,
+    req.body.hatch_date || null,
+    req.body.incubation_start_date || null,
+    req.body.status || 'active',
+    req.body.total_eggs || null,
+    req.body.notes || ''
+  );
   res.json({ id: result.lastInsertRowid });
 });
 
 app.put('/api/clutches/:id', auth, (req, res) => {
   const clutch = db.prepare('SELECT * FROM clutches WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
   if (!clutch) return res.status(404).json({ error: 'Clutch not found' });
-  db.prepare('UPDATE clutches SET lay_date = ?, hatch_date = ? WHERE id = ? AND user_id = ?').run(req.body.lay_date || clutch.lay_date, req.body.hatch_date || clutch.hatch_date, req.params.id, req.user.id);
+  db.prepare('UPDATE clutches SET pair_id = ?, species = ?, cage_number = ?, nest_box = ?, clutch_code = ?, lay_date = ?, hatch_date = ?, incubation_start_date = ?, status = ?, total_eggs = ?, notes = ? WHERE id = ? AND user_id = ?').run(
+    req.body.pair_id || clutch.pair_id,
+    req.body.species ?? clutch.species,
+    req.body.cage_number ?? clutch.cage_number,
+    req.body.nest_box ?? clutch.nest_box,
+    req.body.clutch_code ?? clutch.clutch_code,
+    req.body.lay_date || clutch.lay_date,
+    req.body.hatch_date || clutch.hatch_date,
+    req.body.incubation_start_date || clutch.incubation_start_date,
+    req.body.status || clutch.status,
+    req.body.total_eggs ?? clutch.total_eggs,
+    req.body.notes ?? clutch.notes,
+    req.params.id,
+    req.user.id
+  );
   res.json({ ok: true });
 });
 
 app.get('/api/eggs', auth, (req, res) => {
   const eggs = db.prepare(`
-    SELECT e.*, c.pair_id, c.hatch_date, c.lay_date,
-      p.sire_id AS father_id, p.dam_id AS mother_id, b.species
+    SELECT e.*, c.pair_id, c.hatch_date AS clutch_hatch_date, c.lay_date AS clutch_lay_date, c.clutch_code, c.species,
+      p.sire_id AS father_id, p.dam_id AS mother_id,
+      o.id AS offspring_id, o.name AS offspring_name, o.band_number AS offspring_band_number
     FROM eggs e
     JOIN clutches c ON c.id = e.clutch_id AND c.user_id = e.user_id
     JOIN pairs p ON p.id = c.pair_id AND p.user_id = e.user_id
-    LEFT JOIN birds b ON b.id = p.sire_id AND b.user_id = e.user_id
+    LEFT JOIN offspring o ON o.source_egg_id = e.id AND o.user_id = e.user_id
     WHERE e.user_id = ?
-    ORDER BY e.clutch_id DESC, e.egg_number ASC
+    ORDER BY COALESCE(e.lay_date, c.lay_date, e.created_at) DESC, e.egg_number ASC
   `).all(req.user.id);
   res.json(eggs);
 });
@@ -510,14 +538,35 @@ app.get('/api/eggs', auth, (req, res) => {
 app.post('/api/eggs', auth, (req, res) => {
   const clutch = db.prepare('SELECT * FROM clutches WHERE id = ? AND user_id = ?').get(req.body.clutch_id, req.user.id);
   if (!clutch) return res.status(400).json({ error: 'Invalid clutch' });
-  const result = db.prepare('INSERT INTO eggs (user_id, clutch_id, egg_number, outcome) VALUES (?, ?, ?, ?)').run(req.user.id, req.body.clutch_id, req.body.egg_number || null, req.body.outcome || 'pending');
+  const result = db.prepare('INSERT INTO eggs (user_id, clutch_id, egg_number, lay_date, hatch_date, outcome, fertility, colour_notes, comments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)').run(
+    req.user.id,
+    req.body.clutch_id,
+    req.body.egg_number || null,
+    req.body.lay_date || null,
+    req.body.hatch_date || null,
+    req.body.outcome || 'pending',
+    req.body.fertility || '',
+    req.body.colour_notes || '',
+    req.body.comments || ''
+  );
   res.json({ id: result.lastInsertRowid });
 });
 
 app.put('/api/eggs/:id', auth, (req, res) => {
   const egg = db.prepare('SELECT * FROM eggs WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
   if (!egg) return res.status(404).json({ error: 'Egg not found' });
-  db.prepare('UPDATE eggs SET egg_number = ?, outcome = ? WHERE id = ? AND user_id = ?').run(req.body.egg_number || egg.egg_number, req.body.outcome || egg.outcome, req.params.id, req.user.id);
+  db.prepare('UPDATE eggs SET clutch_id = ?, egg_number = ?, lay_date = ?, hatch_date = ?, outcome = ?, fertility = ?, colour_notes = ?, comments = ? WHERE id = ? AND user_id = ?').run(
+    req.body.clutch_id || egg.clutch_id,
+    req.body.egg_number ?? egg.egg_number,
+    req.body.lay_date || egg.lay_date,
+    req.body.hatch_date || egg.hatch_date,
+    req.body.outcome || egg.outcome,
+    req.body.fertility ?? egg.fertility,
+    req.body.colour_notes ?? egg.colour_notes,
+    req.body.comments ?? egg.comments,
+    req.params.id,
+    req.user.id
+  );
   res.json({ ok: true });
 });
 

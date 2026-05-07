@@ -515,7 +515,7 @@
             <div class="muted">Click a row to edit clutch</div>
           </div>
           <table>
-            <thead><tr><th>Pair</th><th>Lay Date</th><th>Hatch Date</th><th>Eggs</th></tr></thead>
+            <thead><tr><th>Clutch</th><th>Pair</th><th>Status</th><th>Lay Date</th><th>Eggs</th></tr></thead>
             <tbody id="clutchesTable"></tbody>
           </table>
         </div>
@@ -577,9 +577,17 @@
           <div class="dashboardSectionTitle"><div><div class="muted">Clutch record popup</div><h3 id="clutchModalTitle">Clutch</h3></div><button class="secondary" style="width:auto;" onclick="closeClutchModal()">Close</button></div>
           <input type="hidden" id="clutchId" />
           <div class="grid grid-2">
-            <select id="clutchPair"></select>
-            <input id="clutchLayDate" type="date" />
-            <input id="clutchHatchDate" type="date" />
+            <div class="fieldGroup"><label>Pair</label><select id="clutchPair"></select></div>
+            <div class="fieldGroup"><label>Clutch code</label><input id="clutchCode" placeholder="Clutch 1" /></div>
+            <div class="fieldGroup"><label>Species</label><input id="clutchSpecies" /></div>
+            <div class="fieldGroup"><label>Cage number</label><select id="clutchCage"></select></div>
+            <div class="fieldGroup"><label>Nest box</label><input id="clutchNestBox" /></div>
+            <div class="fieldGroup"><label>Status</label><select id="clutchStatus"><option value="active">Active</option><option value="completed">Completed</option><option value="archived">Archived</option></select></div>
+            <div class="fieldGroup"><label>Lay date</label><input id="clutchLayDate" type="date" /></div>
+            <div class="fieldGroup"><label>Expected hatch / hatch date</label><input id="clutchHatchDate" type="date" /></div>
+            <div class="fieldGroup"><label>Incubation start</label><input id="clutchIncubationStart" type="date" /></div>
+            <div class="fieldGroup"><label>Total eggs</label><input id="clutchTotalEggs" type="number" min="0" /></div>
+            <div class="fieldGroup" style="grid-column:1 / -1;"><label>Notes</label><textarea id="clutchNotes"></textarea></div>
           </div>
           <div style="margin-top:12px;" class="inline"><button onclick="saveClutch()">Save Clutch</button><button class="secondary" onclick="closeClutchModal()">Close</button></div>
         </div>
@@ -588,10 +596,16 @@
       <div id="eggModal" class="modalOverlay hidden" onclick="if(event.target===this) closeEggModal()">
         <div class="modalCard">
           <div class="dashboardSectionTitle"><div><div class="muted">Egg record popup</div><h3 id="eggModalTitle">Egg</h3></div><button class="secondary" style="width:auto;" onclick="closeEggModal()">Close</button></div>
+          <input type="hidden" id="eggId" />
           <div class="grid grid-2">
-            <select id="eggClutch"></select>
-            <input id="eggNumber" type="number" placeholder="Egg number" />
-            <select id="eggOutcome"><option value="pending">Pending</option><option value="hatched">Hatched</option><option value="infertile">Infertile</option><option value="addled">Addled</option><option value="dead">Dead in shell</option></select>
+            <div class="fieldGroup"><label>Clutch</label><select id="eggClutch"></select></div>
+            <div class="fieldGroup"><label>Egg number</label><input id="eggNumber" type="number" placeholder="Egg number" /></div>
+            <div class="fieldGroup"><label>Lay date</label><input id="eggLayDate" type="date" /></div>
+            <div class="fieldGroup"><label>Hatch date</label><input id="eggHatchDate" type="date" /></div>
+            <div class="fieldGroup"><label>Outcome</label><select id="eggOutcome"><option value="pending">Pending</option><option value="hatched">Hatched</option><option value="infertile">Infertile</option><option value="addled">Addled</option><option value="dead">Dead in shell</option></select></div>
+            <div class="fieldGroup"><label>Fertility</label><select id="eggFertility"><option value="">Unknown</option><option value="fertile">Fertile</option><option value="infertile">Infertile</option><option value="questionable">Questionable</option></select></div>
+            <div class="fieldGroup"><label>Colours produced</label><input id="eggColourNotes" /></div>
+            <div class="fieldGroup"><label>Comments</label><textarea id="eggComments"></textarea></div>
           </div>
           <div style="margin-top:12px;" class="inline"><button onclick="saveEgg()">Save Egg</button><button class="secondary" onclick="closeEggModal()">Close</button></div>
         </div>
@@ -848,7 +862,7 @@
     }
 
     function eggDisplay(egg) {
-      return [`Clutch ${egg.clutch_id}`, egg.egg_number ? `Egg ${egg.egg_number}` : '', egg.outcome || ''].filter(Boolean).join(' · ');
+      return [egg.clutch_code || `Clutch ${egg.clutch_id}`, egg.egg_number ? `Egg ${egg.egg_number}` : '', egg.outcome || ''].filter(Boolean).join(' · ');
     }
 
     function applyEggToOffspringForm() {
@@ -987,7 +1001,8 @@
       genDam.innerHTML = optionMarkup(females, b => b.name, false);
       coiBird.innerHTML = optionMarkup(birds, b => b.name, false);
       clutchPair.innerHTML = optionMarkup(pairs, p => `${p.sire_name} x ${p.dam_name}`, false);
-      eggClutch.innerHTML = optionMarkup(clutches, c => `${c.sire_name} x ${c.dam_name} (${c.lay_date || 'no lay date'})`, false);
+      clutchCage.innerHTML = optionMarkup(cages, c => c.cage_number, true, c => c.cage_number);
+      eggClutch.innerHTML = optionMarkup(clutches, c => `${c.clutch_code || 'Clutch'} • ${c.sire_name} x ${c.dam_name}`, false);
       if (currentBird) {
         birdSpecies.value = speciesDisplay(currentBird.species);
         birdBand.value = bandNumberValue(currentBird.band_number);
@@ -1629,9 +1644,10 @@
       `;
       clutchesTable.innerHTML = clutches.map(c => `
         <tr onclick="editClutchById(${c.id})" style="cursor:pointer;">
+          <td>${c.clutch_code || 'Clutch'}</td>
           <td>${c.sire_name} x ${c.dam_name}</td>
+          <td>${c.status || 'active'}</td>
           <td>${c.lay_date || ''}</td>
-          <td>${c.hatch_date || ''}</td>
           <td>${c.egg_count}</td>
         </tr>
       `).join('');
@@ -1639,21 +1655,55 @@
 
     function openClutchModal() { clutchModal.classList.remove('hidden'); }
     function closeClutchModal() { clutchModal.classList.add('hidden'); }
-    function openClutchModalForNew() { clutchId.value=''; clutchModalTitle.textContent='Add Clutch'; clutchLayDate.value=''; clutchHatchDate.value=''; openClutchModal(); }
+    function openClutchModalForNew() {
+      clutchId.value='';
+      clutchModalTitle.textContent='Add Clutch';
+      clutchCode.value='';
+      clutchSpecies.value='';
+      clutchCage.value='';
+      clutchNestBox.value='';
+      clutchStatus.value='active';
+      clutchLayDate.value='';
+      clutchHatchDate.value='';
+      clutchIncubationStart.value='';
+      clutchTotalEggs.value='';
+      clutchNotes.value='';
+      openClutchModal();
+    }
     function editClutchById(id) {
       const clutch = clutches.find(c => c.id === id);
       if (!clutch) return;
       clutchId.value = clutch.id;
       clutchPair.value = clutch.pair_id || '';
+      clutchCode.value = clutch.clutch_code || '';
+      clutchSpecies.value = clutch.species || '';
+      clutchCage.value = clutch.cage_number || '';
+      clutchNestBox.value = clutch.nest_box || '';
+      clutchStatus.value = clutch.status || 'active';
       clutchLayDate.value = clutch.lay_date || '';
       clutchHatchDate.value = clutch.hatch_date || '';
+      clutchIncubationStart.value = clutch.incubation_start_date || '';
+      clutchTotalEggs.value = clutch.total_eggs || '';
+      clutchNotes.value = clutch.notes || '';
       clutchModalTitle.textContent = `Edit ${clutch.sire_name} x ${clutch.dam_name}`;
       openClutchModal();
     }
 
     async function saveClutch() {
       try {
-        const payload = { pair_id: clutchPair.value, lay_date: clutchLayDate.value, hatch_date: clutchHatchDate.value };
+        const payload = {
+          pair_id: clutchPair.value,
+          clutch_code: clutchCode.value,
+          species: clutchSpecies.value,
+          cage_number: clutchCage.value,
+          nest_box: clutchNestBox.value,
+          status: clutchStatus.value,
+          lay_date: clutchLayDate.value,
+          hatch_date: clutchHatchDate.value,
+          incubation_start_date: clutchIncubationStart.value,
+          total_eggs: clutchTotalEggs.value,
+          notes: clutchNotes.value
+        };
         if (clutchId.value) await api(`/api/clutches/${clutchId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
         else await api('/api/clutches', { method: 'POST', body: JSON.stringify(payload) });
         closeClutchModal();
@@ -1666,18 +1716,53 @@
 
     function openEggModal() { eggModal.classList.remove('hidden'); }
     function closeEggModal() { eggModal.classList.add('hidden'); }
-    function openEggModalForNew() { eggNumber.value=''; eggOutcome.value='pending'; eggModalTitle.textContent='Add Egg'; openEggModal(); }
+    function openEggModalForNew() {
+      eggId.value='';
+      eggNumber.value='';
+      eggLayDate.value='';
+      eggHatchDate.value='';
+      eggOutcome.value='pending';
+      eggFertility.value='';
+      eggColourNotes.value='';
+      eggComments.value='';
+      eggModalTitle.textContent='Add Egg';
+      openEggModal();
+    }
+
+    function editEggById(id) {
+      const egg = eggs.find(e => e.id === id);
+      if (!egg) return;
+      eggId.value = egg.id;
+      eggClutch.value = egg.clutch_id || '';
+      eggNumber.value = egg.egg_number || '';
+      eggLayDate.value = egg.lay_date || egg.clutch_lay_date || '';
+      eggHatchDate.value = egg.hatch_date || egg.clutch_hatch_date || '';
+      eggOutcome.value = egg.outcome || 'pending';
+      eggFertility.value = egg.fertility || '';
+      eggColourNotes.value = egg.colour_notes || '';
+      eggComments.value = egg.comments || '';
+      eggModalTitle.textContent = `Edit Egg ${egg.egg_number || ''}`.trim();
+      openEggModal();
+    }
 
     async function saveEgg() {
       try {
-        await api('/api/eggs', { method: 'POST', body: JSON.stringify({
+        const payload = {
           clutch_id: eggClutch.value,
           egg_number: eggNumber.value,
-          outcome: eggOutcome.value
-        })});
+          lay_date: eggLayDate.value,
+          hatch_date: eggHatchDate.value,
+          outcome: eggOutcome.value,
+          fertility: eggFertility.value,
+          colour_notes: eggColourNotes.value,
+          comments: eggComments.value
+        };
+        if (eggId.value) await api(`/api/eggs/${eggId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
+        else await api('/api/eggs', { method: 'POST', body: JSON.stringify(payload) });
         eggNumber.value = '';
         closeEggModal();
         await loadClutches();
+        await loadEggs();
         await loadStats();
         showMessage('Egg saved');
       } catch (e) { showMessage(e.message, 'error'); }

@@ -77,8 +77,16 @@ db.exec(`
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     pair_id INTEGER NOT NULL,
+    species TEXT,
+    cage_number TEXT,
+    nest_box TEXT,
+    clutch_code TEXT,
     lay_date TEXT,
     hatch_date TEXT,
+    incubation_start_date TEXT,
+    status TEXT DEFAULT 'active',
+    total_eggs INTEGER,
+    notes TEXT,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (pair_id) REFERENCES pairs(id) ON DELETE CASCADE
@@ -89,7 +97,12 @@ db.exec(`
     user_id INTEGER NOT NULL,
     clutch_id INTEGER NOT NULL,
     egg_number INTEGER,
+    lay_date TEXT,
+    hatch_date TEXT,
     outcome TEXT,
+    fertility TEXT,
+    colour_notes TEXT,
+    comments TEXT,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (clutch_id) REFERENCES clutches(id) ON DELETE CASCADE
@@ -236,6 +249,19 @@ addColumn('offspring', 'mother_id', 'INTEGER');
 addColumn('offspring', 'breeding_line', 'TEXT');
 addColumn('offspring', 'notes', 'TEXT');
 addColumn('offspring', 'status', "TEXT DEFAULT 'active'");
+addColumn('clutches', 'species', 'TEXT');
+addColumn('clutches', 'cage_number', 'TEXT');
+addColumn('clutches', 'nest_box', 'TEXT');
+addColumn('clutches', 'clutch_code', 'TEXT');
+addColumn('clutches', 'incubation_start_date', 'TEXT');
+addColumn('clutches', 'status', "TEXT DEFAULT 'active'");
+addColumn('clutches', 'total_eggs', 'INTEGER');
+addColumn('clutches', 'notes', 'TEXT');
+addColumn('eggs', 'lay_date', 'TEXT');
+addColumn('eggs', 'hatch_date', 'TEXT');
+addColumn('eggs', 'fertility', 'TEXT');
+addColumn('eggs', 'colour_notes', 'TEXT');
+addColumn('eggs', 'comments', 'TEXT');
 
 db.exec(`
   CREATE UNIQUE INDEX IF NOT EXISTS idx_birds_user_band_unique
