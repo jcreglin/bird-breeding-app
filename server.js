@@ -52,6 +52,10 @@ function ensureBirdOwnedByUser(userId, birdId) {
   return db.prepare('SELECT * FROM birds WHERE id = ? AND user_id = ?').get(birdId, userId);
 }
 
+function ensureOffspringOwnedByUser(userId, offspringId) {
+  return db.prepare('SELECT * FROM offspring WHERE id = ? AND user_id = ?').get(offspringId, userId);
+}
+
 function getBirdAncestors(userId, birdId, depth = 4, seen = new Set()) {
   if (!birdId || depth < 0 || seen.has(`${birdId}-${depth}`)) return [];
   seen.add(`${birdId}-${depth}`);
@@ -172,6 +176,7 @@ function exportUserData(userId) {
     species: db.prepare('SELECT id, name, scientific_name, banding_period, ring_size, incubation_days, notes, show_in_dropdown, created_at FROM species WHERE user_id = ? ORDER BY id').all(userId),
     bands: db.prepare('SELECT id, color, band_text, band_number, ring_size, notes, created_at FROM bands WHERE user_id = ? ORDER BY id').all(userId),
     birds: db.prepare('SELECT * FROM birds WHERE user_id = ? ORDER BY id').all(userId),
+    offspring: db.prepare('SELECT * FROM offspring WHERE user_id = ? ORDER BY id').all(userId),
     bird_pedigree: db.prepare('SELECT bird_id, relation_key, linked_bird_id, ring_number, phenotype, created_at, updated_at FROM bird_pedigree WHERE user_id = ? ORDER BY bird_id, relation_key').all(userId),
     pairs: db.prepare('SELECT * FROM pairs WHERE user_id = ? ORDER BY id').all(userId),
     clutches: db.prepare('SELECT * FROM clutches WHERE user_id = ? ORDER BY id').all(userId),
@@ -186,6 +191,7 @@ function importUserData(userId, payload) {
     db.prepare('DELETE FROM eggs WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM clutches WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM pairs WHERE user_id = ?').run(userId);
+    db.prepare('DELETE FROM offspring WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM bird_pedigree WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM birds WHERE user_id = ?').run(userId);
     db.prepare('DELETE FROM bands WHERE user_id = ?').run(userId);
@@ -215,6 +221,9 @@ function importUserData(userId, payload) {
 
     const insertBird = db.prepare('INSERT INTO birds (id, user_id, unique_id, name, species, band_number, cage_number, clutch_number, gender, dob, mutation, color, genotype, phenotype, breeding_status, breeding_line, show_quality, estimated_value, acquired_date, sold_date, purchase_price, sale_price, photo_url, notes, sire_id, dam_id, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     for (const row of (data.birds || [])) insertBird.run(row.id || null, userId, row.unique_id || '', row.name, row.species || '', row.band_number || '', row.cage_number || '', row.clutch_number || '', row.gender || 'unknown', row.dob || null, row.mutation || '', row.color || '', row.genotype || '', row.phenotype || '', row.breeding_status || '', row.breeding_line || '', row.show_quality || '', row.estimated_value || null, row.acquired_date || null, row.sold_date || null, row.purchase_price || null, row.sale_price || null, row.photo_url || '', row.notes || '', row.sire_id || null, row.dam_id || null, row.status || 'active', row.created_at || null);
+
+    const insertOffspring = db.prepare('INSERT INTO offspring (id, user_id, source_egg_id, name, species, band_number, cage_number, clutch_number, gender, dob, band_date, fledge_date, handfed, feeding, phenotype, genotype, carrier_genes, father_id, mother_id, breeding_line, notes, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    for (const row of (data.offspring || [])) insertOffspring.run(row.id || null, userId, row.source_egg_id || null, row.name, row.species || '', row.band_number || '', row.cage_number || '', row.clutch_number || '', row.gender || 'unknown', row.dob || null, row.band_date || null, row.fledge_date || null, row.handfed || '', row.feeding || '', row.phenotype || '', row.genotype || '', row.carrier_genes || '', row.father_id || null, row.mother_id || null, row.breeding_line || '', row.notes || '', row.status || 'active', row.created_at || null);
 
     const insertPedigree = db.prepare('INSERT INTO bird_pedigree (user_id, bird_id, relation_key, linked_bird_id, ring_number, phenotype, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
     for (const row of (data.bird_pedigree || [])) insertPedigree.run(userId, row.bird_id, row.relation_key, row.linked_bird_id || null, row.ring_number || '', row.phenotype || '', row.created_at || null, row.updated_at || null);
@@ -272,12 +281,13 @@ app.get('/api/me', auth, (req, res) => {
 app.get('/api/stats', auth, (req, res) => {
   const user = getAuthenticatedUser(req);
   const totalBirds = birdCountStmt.get(req.user.id).count;
+  const totalOffspring = db.prepare('SELECT COUNT(*) AS count FROM offspring WHERE user_id = ?').get(req.user.id).count;
   const maleBirds = db.prepare("SELECT COUNT(*) AS count FROM birds WHERE user_id = ? AND gender = 'male'").get(req.user.id).count;
   const femaleBirds = db.prepare("SELECT COUNT(*) AS count FROM birds WHERE user_id = ? AND gender = 'female'").get(req.user.id).count;
   const activePairs = db.prepare("SELECT COUNT(*) AS count FROM pairs WHERE user_id = ? AND status = 'active'").get(req.user.id).count;
   const totalClutches = db.prepare('SELECT COUNT(*) AS count FROM clutches WHERE user_id = ?').get(req.user.id).count;
   const eggsTracked = db.prepare('SELECT COUNT(*) AS count FROM eggs WHERE user_id = ?').get(req.user.id).count;
-  res.json({ totalBirds, maleBirds, femaleBirds, activePairs, totalClutches, eggsTracked, tier: user.subscription_tier, birdLimit: getTierLimit(user.subscription_tier) });
+  res.json({ totalBirds, totalOffspring, maleBirds, femaleBirds, activePairs, totalClutches, eggsTracked, tier: user.subscription_tier, birdLimit: getTierLimit(user.subscription_tier) });
 });
 
 app.get('/api/birds', auth, (req, res) => {
@@ -505,6 +515,105 @@ app.put('/api/eggs/:id', auth, (req, res) => {
   const egg = db.prepare('SELECT * FROM eggs WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
   if (!egg) return res.status(404).json({ error: 'Egg not found' });
   db.prepare('UPDATE eggs SET egg_number = ?, outcome = ? WHERE id = ? AND user_id = ?').run(req.body.egg_number || egg.egg_number, req.body.outcome || egg.outcome, req.params.id, req.user.id);
+  res.json({ ok: true });
+});
+
+app.get('/api/offspring', auth, (req, res) => {
+  const rows = db.prepare(`
+    SELECT o.*, f.band_number AS father_band_number, m.band_number AS mother_band_number
+    FROM offspring o
+    LEFT JOIN birds f ON f.id = o.father_id AND f.user_id = o.user_id
+    LEFT JOIN birds m ON m.id = o.mother_id AND m.user_id = o.user_id
+    WHERE o.user_id = ?
+    ORDER BY COALESCE(o.dob, o.created_at) DESC, o.id DESC
+  `).all(req.user.id);
+  res.json(rows);
+});
+
+app.post('/api/offspring', auth, (req, res) => {
+  const missing = requireFields(['name'], req.body);
+  if (missing.length) return res.status(400).json({ error: `Missing fields: ${missing.join(', ')}` });
+  for (const parentField of ['father_id', 'mother_id']) {
+    if (req.body[parentField] && !ensureBirdOwnedByUser(req.user.id, req.body[parentField])) {
+      return res.status(400).json({ error: `${parentField} does not belong to this account` });
+    }
+  }
+  if (req.body.source_egg_id) {
+    const egg = db.prepare('SELECT * FROM eggs WHERE id = ? AND user_id = ?').get(req.body.source_egg_id, req.user.id);
+    if (!egg) return res.status(400).json({ error: 'Invalid source egg' });
+  }
+  const result = db.prepare(`
+    INSERT INTO offspring (user_id, source_egg_id, name, species, band_number, cage_number, clutch_number, gender, dob, band_date, fledge_date, handfed, feeding, phenotype, genotype, carrier_genes, father_id, mother_id, breeding_line, notes, status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).run(
+    req.user.id,
+    req.body.source_egg_id || null,
+    req.body.name,
+    req.body.species || '',
+    req.body.band_number || '',
+    req.body.cage_number || '',
+    req.body.clutch_number || '',
+    req.body.gender || 'unknown',
+    req.body.dob || null,
+    req.body.band_date || null,
+    req.body.fledge_date || null,
+    req.body.handfed || '',
+    req.body.feeding || '',
+    req.body.phenotype || '',
+    req.body.genotype || '',
+    req.body.carrier_genes || '',
+    req.body.father_id || null,
+    req.body.mother_id || null,
+    req.body.breeding_line || '',
+    req.body.notes || '',
+    req.body.status || 'active'
+  );
+  res.json({ id: result.lastInsertRowid });
+});
+
+app.put('/api/offspring/:id', auth, (req, res) => {
+  const offspring = ensureOffspringOwnedByUser(req.user.id, req.params.id);
+  if (!offspring) return res.status(404).json({ error: 'Offspring not found' });
+  for (const parentField of ['father_id', 'mother_id']) {
+    if (req.body[parentField] && !ensureBirdOwnedByUser(req.user.id, req.body[parentField])) {
+      return res.status(400).json({ error: `${parentField} does not belong to this account` });
+    }
+  }
+  db.prepare(`
+    UPDATE offspring
+    SET source_egg_id = ?, name = ?, species = ?, band_number = ?, cage_number = ?, clutch_number = ?,
+        gender = ?, dob = ?, band_date = ?, fledge_date = ?, handfed = ?, feeding = ?, phenotype = ?,
+        genotype = ?, carrier_genes = ?, father_id = ?, mother_id = ?, breeding_line = ?, notes = ?, status = ?
+    WHERE id = ? AND user_id = ?
+  `).run(
+    req.body.source_egg_id || null,
+    req.body.name || offspring.name,
+    req.body.species || '',
+    req.body.band_number || '',
+    req.body.cage_number || '',
+    req.body.clutch_number || '',
+    req.body.gender || 'unknown',
+    req.body.dob || null,
+    req.body.band_date || null,
+    req.body.fledge_date || null,
+    req.body.handfed || '',
+    req.body.feeding || '',
+    req.body.phenotype || '',
+    req.body.genotype || '',
+    req.body.carrier_genes || '',
+    req.body.father_id || null,
+    req.body.mother_id || null,
+    req.body.breeding_line || '',
+    req.body.notes || '',
+    req.body.status || offspring.status,
+    req.params.id,
+    req.user.id
+  );
+  res.json({ ok: true });
+});
+
+app.delete('/api/offspring/:id', auth, (req, res) => {
+  db.prepare('DELETE FROM offspring WHERE id = ? AND user_id = ?').run(req.params.id, req.user.id);
   res.json({ ok: true });
 });
 

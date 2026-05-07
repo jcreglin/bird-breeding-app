@@ -95,6 +95,36 @@ db.exec(`
     FOREIGN KEY (clutch_id) REFERENCES clutches(id) ON DELETE CASCADE
   );
 
+  CREATE TABLE IF NOT EXISTS offspring (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    source_egg_id INTEGER,
+    name TEXT NOT NULL,
+    species TEXT,
+    band_number TEXT,
+    cage_number TEXT,
+    clutch_number TEXT,
+    gender TEXT DEFAULT 'unknown',
+    dob TEXT,
+    band_date TEXT,
+    fledge_date TEXT,
+    handfed TEXT,
+    feeding TEXT,
+    phenotype TEXT,
+    genotype TEXT,
+    carrier_genes TEXT,
+    father_id INTEGER,
+    mother_id INTEGER,
+    breeding_line TEXT,
+    notes TEXT,
+    status TEXT DEFAULT 'active',
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (source_egg_id) REFERENCES eggs(id) ON DELETE SET NULL,
+    FOREIGN KEY (father_id) REFERENCES birds(id) ON DELETE SET NULL,
+    FOREIGN KEY (mother_id) REFERENCES birds(id) ON DELETE SET NULL
+  );
+
   CREATE TABLE IF NOT EXISTS contacts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
@@ -168,6 +198,7 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_pairs_user_id ON pairs(user_id);
   CREATE INDEX IF NOT EXISTS idx_clutches_user_id ON clutches(user_id);
   CREATE INDEX IF NOT EXISTS idx_eggs_user_id ON eggs(user_id);
+  CREATE INDEX IF NOT EXISTS idx_offspring_user_id ON offspring(user_id);
   CREATE INDEX IF NOT EXISTS idx_contacts_user_id ON contacts(user_id);
   CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id);
   CREATE INDEX IF NOT EXISTS idx_cages_user_id ON cages(user_id);
@@ -194,6 +225,17 @@ addColumn('birds', 'notes', 'TEXT');
 addColumn('species', 'show_in_dropdown', 'INTEGER NOT NULL DEFAULT 0');
 addColumn('species', 'ring_size', 'TEXT');
 addColumn('bands', 'ring_size', 'TEXT');
+addColumn('offspring', 'source_egg_id', 'INTEGER');
+addColumn('offspring', 'band_date', 'TEXT');
+addColumn('offspring', 'fledge_date', 'TEXT');
+addColumn('offspring', 'handfed', 'TEXT');
+addColumn('offspring', 'feeding', 'TEXT');
+addColumn('offspring', 'carrier_genes', 'TEXT');
+addColumn('offspring', 'father_id', 'INTEGER');
+addColumn('offspring', 'mother_id', 'INTEGER');
+addColumn('offspring', 'breeding_line', 'TEXT');
+addColumn('offspring', 'notes', 'TEXT');
+addColumn('offspring', 'status', "TEXT DEFAULT 'active'");
 
 db.exec(`
   CREATE UNIQUE INDEX IF NOT EXISTS idx_birds_user_band_unique
@@ -212,6 +254,10 @@ db.exec(`
 
   CREATE UNIQUE INDEX IF NOT EXISTS idx_bands_user_band_number_unique
   ON bands(user_id, band_number);
+
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_offspring_user_band_number_unique
+  ON offspring(user_id, band_number)
+  WHERE band_number IS NOT NULL AND band_number <> '';
 `);
 
 module.exports = db;

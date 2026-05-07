@@ -128,6 +128,7 @@
         <button class="tab" onclick="showTab('bands', event)">Rings</button>
         <button class="tab" onclick="showTab('pairs', event)">Pairs</button>
         <button class="tab" onclick="showTab('breeding', event)">Breeding</button>
+        <button class="tab" onclick="showTab('offspring', event)">Offspring</button>
         <button class="tab" onclick="showTab('genetics', event)">Genetics</button>
         <button class="tab" onclick="showTab('subscription', event)">Subscription</button>
       </div>
@@ -520,6 +521,55 @@
         </div>
       </section>
 
+      <section id="tab-offspring" class="tab-panel hidden">
+        <div class="card">
+          <div class="panelToolbar">
+            <div><div class="muted">Young bird workspace</div><h3 style="margin:4px 0 0;">Offspring Records</h3></div>
+            <button style="width:auto;" onclick="openOffspringModalForNew()">Add New Offspring</button>
+          </div>
+          <div class="statStrip" id="offspringStatsStrip"></div>
+        </div>
+        <div class="card">
+          <div class="panelToolbar">
+            <div><div class="muted">Juvenile record list</div><h3 style="margin:4px 0 0;">Offspring</h3></div>
+            <div class="muted">Separate from permanent flock stock</div>
+          </div>
+          <table>
+            <thead><tr><th>Species</th><th>Name</th><th>Ring</th><th>Sex</th><th>Clutch</th><th>Hatch Date</th><th>Status</th><th></th></tr></thead>
+            <tbody id="offspringTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div id="offspringModal" class="modalOverlay hidden" onclick="if(event.target===this) closeOffspringModal()">
+        <div class="modalCard">
+          <div class="dashboardSectionTitle"><div><div class="muted">Offspring record popup</div><h3 id="offspringModalTitle">Offspring</h3></div><button class="secondary" style="width:auto;" onclick="closeOffspringModal()">Close</button></div>
+          <input type="hidden" id="offspringId" />
+          <div class="grid grid-2">
+            <div class="fieldGroup"><label>Name</label><input id="offspringName" /></div>
+            <div class="fieldGroup"><label>Species</label><select id="offspringSpecies"></select></div>
+            <div class="fieldGroup"><label>Ring number</label><input id="offspringBandNumber" /></div>
+            <div class="fieldGroup"><label>Cage number</label><select id="offspringCage"></select></div>
+            <div class="fieldGroup"><label>Clutch number</label><input id="offspringClutchNumber" /></div>
+            <div class="fieldGroup"><label>Sex</label><select id="offspringGender"><option value="unknown">Unknown</option><option value="male">Male</option><option value="female">Female</option></select></div>
+            <div class="fieldGroup"><label>Hatch date</label><input id="offspringDob" type="date" /></div>
+            <div class="fieldGroup"><label>Ring date</label><input id="offspringBandDate" type="date" /></div>
+            <div class="fieldGroup"><label>Fledge date</label><input id="offspringFledgeDate" type="date" /></div>
+            <div class="fieldGroup"><label>Handfed</label><input id="offspringHandfed" /></div>
+            <div class="fieldGroup"><label>Feeding</label><input id="offspringFeeding" /></div>
+            <div class="fieldGroup"><label>Phenotype</label><input id="offspringPhenotype" /></div>
+            <div class="fieldGroup"><label>Genotype</label><input id="offspringGenotype" /></div>
+            <div class="fieldGroup"><label>Possible carrier genes</label><input id="offspringCarrierGenes" /></div>
+            <div class="fieldGroup"><label>Breeding line</label><input id="offspringBreedingLine" /></div>
+            <div class="fieldGroup"><label>Father</label><select id="offspringFather"></select></div>
+            <div class="fieldGroup"><label>Mother</label><select id="offspringMother"></select></div>
+            <div class="fieldGroup"><label>Status</label><select id="offspringStatus"><option value="active">Active</option><option value="retained">Retained</option><option value="sold">Sold</option></select></div>
+            <div class="fieldGroup"><label>Notes</label><textarea id="offspringNotes"></textarea></div>
+          </div>
+          <div class="inline"><button onclick="saveOffspring()">Save Offspring</button><button class="secondary" onclick="closeOffspringModal()">Close</button><button class="ghost" onclick="resetOffspringForm()">Clear</button></div>
+        </div>
+      </div>
+
       <div id="clutchModal" class="modalOverlay hidden" onclick="if(event.target===this) closeClutchModal()">
         <div class="modalCard">
           <div class="dashboardSectionTitle"><div><div class="muted">Clutch record popup</div><h3 id="clutchModalTitle">Clutch</h3></div><button class="secondary" style="width:auto;" onclick="closeClutchModal()">Close</button></div>
@@ -602,6 +652,7 @@
     let bands = [];
     let pairs = [];
     let clutches = [];
+    let offspring = [];
     let calendarItems = [];
     const pedigreeRelationKeys = ['father', 'mother', 'father_father', 'father_mother', 'mother_father', 'mother_mother'];
 
@@ -788,6 +839,11 @@
       return `${Math.max(days, 0)}d`;
     }
 
+    function offspringDisplay(value) {
+      const match = offspring.find(o => String(o.id) === String(value));
+      return match?.name || value || '';
+    }
+
     function setBirdPhotoPreview(src) {
       birdPhotoPreview.style.display = src ? 'block' : 'none';
       birdPhotoPreview.src = src || '';
@@ -899,10 +955,14 @@
       birdDam.innerHTML = optionMarkup(females, b => bandDisplay(b.band_number) || 'No ring');
       const visibleSpecies = speciesRecords.filter(s => Number(s.show_in_dropdown) === 1);
       birdSpecies.innerHTML = optionMarkup(visibleSpecies, s => s.name, false, s => s.name);
+      offspringSpecies.innerHTML = optionMarkup(visibleSpecies, s => s.name, false, s => s.name);
       birdBand.innerHTML = optionMarkup(availableBands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}${b.ring_size ? ' · size ' + b.ring_size : ''}`, false, b => b.band_number);
       birdCage.innerHTML = optionMarkup(cages, c => `${c.cage_number}${c.location ? ' · ' + c.location : ''}`, false, c => c.cage_number);
+      offspringCage.innerHTML = optionMarkup(cages, c => `${c.cage_number}${c.location ? ' · ' + c.location : ''}`, false, c => c.cage_number);
       pairSire.innerHTML = optionMarkup(males, b => b.name, false);
       pairDam.innerHTML = optionMarkup(females, b => b.name, false);
+      offspringFather.innerHTML = optionMarkup(males, b => bandDisplay(b.band_number) || b.name, false);
+      offspringMother.innerHTML = optionMarkup(females, b => bandDisplay(b.band_number) || b.name, false);
       genSire.innerHTML = optionMarkup(males, b => b.name, false);
       genDam.innerHTML = optionMarkup(females, b => b.name, false);
       coiBird.innerHTML = optionMarkup(birds, b => b.name, false);
@@ -913,6 +973,28 @@
         birdBand.value = bandNumberValue(currentBird.band_number);
         birdCage.value = cageDisplay(currentBird.cage_number);
       }
+    }
+
+    function renderOffspring() {
+      const active = offspring.filter(o => (o.status || 'active') === 'active').length;
+      const retained = offspring.filter(o => o.status === 'retained').length;
+      offspringStatsStrip.innerHTML = `
+        <div class="statChip"><div class="k">Total Offspring</div><div class="v">${offspring.length}</div></div>
+        <div class="statChip"><div class="k">Active</div><div class="v">${active}</div></div>
+        <div class="statChip"><div class="k">Retained</div><div class="v">${retained}</div></div>
+      `;
+      offspringTable.innerHTML = offspring.map(o => `
+        <tr onclick="editOffspringById(${o.id})" style="cursor:pointer;">
+          <td>${speciesDisplay(o.species)}</td>
+          <td>${o.name}</td>
+          <td>${bandDisplay(o.band_number) || o.band_number || ''}</td>
+          <td>${o.gender || ''}</td>
+          <td>${o.clutch_number || ''}</td>
+          <td>${o.dob || ''}</td>
+          <td>${o.status || ''}</td>
+          <td><button class="danger" style="width:auto;" onclick="event.stopPropagation(); deleteOffspring(${o.id})">Delete</button></td>
+        </tr>
+      `).join('');
     }
 
     function renderBirds() {
@@ -1204,6 +1286,104 @@
       cageLocation.value = cage.location || '';
       cageSize.value = cage.size || '';
       cageNotes.value = cage.notes || '';
+    }
+
+    function openOffspringModal() { offspringModal.classList.remove('hidden'); }
+    function closeOffspringModal() { offspringModal.classList.add('hidden'); }
+    function openOffspringModalForNew() { resetOffspringForm(); offspringModalTitle.textContent = 'Add New Offspring'; openOffspringModal(); }
+
+    function resetOffspringForm() {
+      offspringModalTitle.textContent = 'Add New Offspring';
+      offspringId.value = '';
+      offspringName.value = '';
+      offspringSpecies.value = '';
+      offspringBandNumber.value = '';
+      offspringCage.value = '';
+      offspringClutchNumber.value = '';
+      offspringGender.value = 'unknown';
+      offspringDob.value = '';
+      offspringBandDate.value = '';
+      offspringFledgeDate.value = '';
+      offspringHandfed.value = '';
+      offspringFeeding.value = '';
+      offspringPhenotype.value = '';
+      offspringGenotype.value = '';
+      offspringCarrierGenes.value = '';
+      offspringBreedingLine.value = '';
+      offspringFather.value = '';
+      offspringMother.value = '';
+      offspringStatus.value = 'active';
+      offspringNotes.value = '';
+    }
+
+    function editOffspringById(id) {
+      const row = offspring.find(o => o.id === id);
+      if (!row) return;
+      openOffspringModal();
+      offspringModalTitle.textContent = `Edit ${row.name}`;
+      offspringId.value = row.id;
+      offspringName.value = row.name || '';
+      offspringSpecies.value = speciesDisplay(row.species);
+      offspringBandNumber.value = row.band_number || '';
+      offspringCage.value = cageDisplay(row.cage_number);
+      offspringClutchNumber.value = row.clutch_number || '';
+      offspringGender.value = row.gender || 'unknown';
+      offspringDob.value = row.dob || '';
+      offspringBandDate.value = row.band_date || '';
+      offspringFledgeDate.value = row.fledge_date || '';
+      offspringHandfed.value = row.handfed || '';
+      offspringFeeding.value = row.feeding || '';
+      offspringPhenotype.value = row.phenotype || '';
+      offspringGenotype.value = row.genotype || '';
+      offspringCarrierGenes.value = row.carrier_genes || '';
+      offspringBreedingLine.value = row.breeding_line || '';
+      offspringFather.value = row.father_id || '';
+      offspringMother.value = row.mother_id || '';
+      offspringStatus.value = row.status || 'active';
+      offspringNotes.value = row.notes || '';
+    }
+
+    async function saveOffspring() {
+      try {
+        const payload = {
+          name: offspringName.value,
+          species: offspringSpecies.value,
+          band_number: offspringBandNumber.value,
+          cage_number: offspringCage.value,
+          clutch_number: offspringClutchNumber.value,
+          gender: offspringGender.value,
+          dob: offspringDob.value,
+          band_date: offspringBandDate.value,
+          fledge_date: offspringFledgeDate.value,
+          handfed: offspringHandfed.value,
+          feeding: offspringFeeding.value,
+          phenotype: offspringPhenotype.value,
+          genotype: offspringGenotype.value,
+          carrier_genes: offspringCarrierGenes.value,
+          breeding_line: offspringBreedingLine.value,
+          father_id: offspringFather.value || null,
+          mother_id: offspringMother.value || null,
+          status: offspringStatus.value,
+          notes: offspringNotes.value
+        };
+        if (offspringId.value) await api(`/api/offspring/${offspringId.value}`, { method: 'PUT', body: JSON.stringify(payload) });
+        else await api('/api/offspring', { method: 'POST', body: JSON.stringify(payload) });
+        closeOffspringModal();
+        resetOffspringForm();
+        await loadOffspring();
+        await loadStats();
+        showMessage('Offspring saved');
+      } catch (e) { showMessage(e.message, 'error'); }
+    }
+
+    async function deleteOffspring(id) {
+      if (!confirm('Delete this offspring record?')) return;
+      try {
+        await api(`/api/offspring/${id}`, { method: 'DELETE' });
+        await loadOffspring();
+        await loadStats();
+        showMessage('Offspring deleted');
+      } catch (e) { showMessage(e.message, 'error'); }
     }
 
     function openCageModal() { cageModal.classList.remove('hidden'); }
@@ -1528,7 +1708,7 @@
       const modules = [
         ['Flock Records', 'Profile-driven bird records with grid access', 'birds'],
         ['Breeding Records', 'Pairs, rounds, dates, nest activity', 'pairs'],
-        ['Offspring Records', 'Young bird records and outcomes', 'birds'],
+        ['Offspring Records', 'Young bird records and outcomes', 'offspring'],
         ['Incubation Records', 'Incubation dates, handling, hatching flow', 'breeding'],
         ['Egg Status', 'Operational egg tracking and breeder snapshot', 'breeding'],
         ['Genetic Predictions', 'Mutation logic and COI tools', 'genetics'],
@@ -1552,6 +1732,7 @@
         ['Active Pairs', stats.activePairs],
         ['Clutches Running', stats.totalClutches],
         ['Eggs Logged', stats.eggsTracked],
+        ['Offspring', stats.totalOffspring],
         ['Bird Capacity Left', Number.isFinite(stats.birdLimit) ? Math.max(0, stats.birdLimit - stats.totalBirds) : '∞']
       ];
       breedingPulseGrid.innerHTML = items.map(([label, value]) => `
@@ -1580,6 +1761,7 @@
       dashboardTierPill.textContent = stats.tier;
       statsGrid.innerHTML = [
         ['Birds', `${stats.totalBirds} / ${stats.birdLimit === null || !isFinite(stats.birdLimit) ? '∞' : stats.birdLimit}`],
+        ['Offspring', stats.totalOffspring],
         ['Males', stats.maleBirds],
         ['Females', stats.femaleBirds],
         ['Active Pairs', stats.activePairs],
@@ -1593,6 +1775,12 @@
     async function loadBirds() {
       birds = await api('/api/birds');
       renderBirds();
+      syncSelectors();
+    }
+
+    async function loadOffspring() {
+      offspring = await api('/api/offspring');
+      renderOffspring();
       syncSelectors();
     }
 
@@ -1648,6 +1836,7 @@
       await loadSubscription();
       await loadStats();
       await loadBirds();
+      await loadOffspring();
       await loadCages();
       await loadSpecies();
       await loadBands();
@@ -1655,6 +1844,7 @@
       await loadClutches();
       await loadCalendar();
       resetBirdForm();
+      resetOffspringForm();
     }
 
     async function boot() {
