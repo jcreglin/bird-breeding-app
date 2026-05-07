@@ -495,9 +495,12 @@ app.put('/api/clutches/:id', auth, (req, res) => {
 
 app.get('/api/eggs', auth, (req, res) => {
   const eggs = db.prepare(`
-    SELECT e.*, c.pair_id
+    SELECT e.*, c.pair_id, c.hatch_date, c.lay_date,
+      p.sire_id AS father_id, p.dam_id AS mother_id, b.species
     FROM eggs e
     JOIN clutches c ON c.id = e.clutch_id AND c.user_id = e.user_id
+    JOIN pairs p ON p.id = c.pair_id AND p.user_id = e.user_id
+    LEFT JOIN birds b ON b.id = p.sire_id AND b.user_id = e.user_id
     WHERE e.user_id = ?
     ORDER BY e.clutch_id DESC, e.egg_number ASC
   `).all(req.user.id);

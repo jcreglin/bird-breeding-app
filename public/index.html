@@ -525,7 +525,7 @@
         <div class="card">
           <div class="panelToolbar">
             <div><div class="muted">Young bird workspace</div><h3 style="margin:4px 0 0;">Offspring Records</h3></div>
-            <button style="width:auto;" onclick="openOffspringModalForNew()">Add New Offspring</button>
+            <button style="width:auto;" onclick="openOffspringModalForEgg()">Create From Hatched Egg</button>
           </div>
           <div class="statStrip" id="offspringStatsStrip"></div>
         </div>
@@ -546,6 +546,8 @@
           <div class="dashboardSectionTitle"><div><div class="muted">Offspring record popup</div><h3 id="offspringModalTitle">Offspring</h3></div><button class="secondary" style="width:auto;" onclick="closeOffspringModal()">Close</button></div>
           <input type="hidden" id="offspringId" />
           <div class="grid grid-2">
+            <div class="fieldGroup"><label>Source hatched egg</label><select id="offspringSourceEgg"></select></div>
+            <div class="fieldGroup"><label>Source process</label><div class="featurePlaceholder">Pairs → Clutch → Egg → Hatched → Offspring</div></div>
             <div class="fieldGroup"><label>Name</label><input id="offspringName" /></div>
             <div class="fieldGroup"><label>Species</label><select id="offspringSpecies"></select></div>
             <div class="fieldGroup"><label>Ring number</label><input id="offspringBandNumber" /></div>
@@ -653,6 +655,7 @@
     let pairs = [];
     let clutches = [];
     let offspring = [];
+    let eggs = [];
     let calendarItems = [];
     const pedigreeRelationKeys = ['father', 'mother', 'father_father', 'father_mother', 'mother_father', 'mother_mother'];
 
@@ -844,6 +847,20 @@
       return match?.name || value || '';
     }
 
+    function eggDisplay(egg) {
+      return [`Clutch ${egg.clutch_id}`, egg.egg_number ? `Egg ${egg.egg_number}` : '', egg.outcome || ''].filter(Boolean).join(' · ');
+    }
+
+    function applyEggToOffspringForm() {
+      const egg = eggs.find(e => String(e.id) === String(offspringSourceEgg.value));
+      if (!egg) return;
+      if (!offspringSpecies.value) offspringSpecies.value = egg.species || '';
+      if (!offspringClutchNumber.value) offspringClutchNumber.value = egg.clutch_id || '';
+      if (!offspringDob.value) offspringDob.value = egg.hatch_date || '';
+      if (!offspringFather.value) offspringFather.value = egg.father_id || '';
+      if (!offspringMother.value) offspringMother.value = egg.mother_id || '';
+    }
+
     function setBirdPhotoPreview(src) {
       birdPhotoPreview.style.display = src ? 'block' : 'none';
       birdPhotoPreview.src = src || '';
@@ -959,6 +976,9 @@
       birdBand.innerHTML = optionMarkup(availableBands, b => `${b.color}${b.band_text ? ' · ' + b.band_text : ''} · ${b.band_number}${b.ring_size ? ' · size ' + b.ring_size : ''}`, false, b => b.band_number);
       birdCage.innerHTML = optionMarkup(cages, c => `${c.cage_number}${c.location ? ' · ' + c.location : ''}`, false, c => c.cage_number);
       offspringCage.innerHTML = optionMarkup(cages, c => `${c.cage_number}${c.location ? ' · ' + c.location : ''}`, false, c => c.cage_number);
+      const usedSourceEggs = new Set(offspring.map(o => String(o.source_egg_id || '')).filter(Boolean));
+      const availableSourceEggs = eggs.filter(e => e.outcome === 'hatched' && (!usedSourceEggs.has(String(e.id)) || String(offspringSourceEgg.value) === String(e.id)));
+      offspringSourceEgg.innerHTML = optionMarkup(availableSourceEggs, e => eggDisplay(e), false, e => e.id);
       pairSire.innerHTML = optionMarkup(males, b => b.name, false);
       pairDam.innerHTML = optionMarkup(females, b => b.name, false);
       offspringFather.innerHTML = optionMarkup(males, b => bandDisplay(b.band_number) || b.name, false);
@@ -1132,6 +1152,7 @@
       syncSelectors();
       birdBand.value = '';
     });
+    offspringSourceEgg.addEventListener('change', applyEggToOffspringForm);
     birdPhotoUpload.addEventListener('change', async (event) => {
       const file = event.target.files?.[0];
       if (!file) {
@@ -1291,10 +1312,12 @@
     function openOffspringModal() { offspringModal.classList.remove('hidden'); }
     function closeOffspringModal() { offspringModal.classList.add('hidden'); }
     function openOffspringModalForNew() { resetOffspringForm(); offspringModalTitle.textContent = 'Add New Offspring'; openOffspringModal(); }
+    function openOffspringModalForEgg() { resetOffspringForm(); offspringModalTitle.textContent = 'Create Offspring From Hatched Egg'; openOffspringModal(); }
 
     function resetOffspringForm() {
       offspringModalTitle.textContent = 'Add New Offspring';
       offspringId.value = '';
+      offspringSourceEgg.value = '';
       offspringName.value = '';
       offspringSpecies.value = '';
       offspringBandNumber.value = '';
@@ -1314,6 +1337,7 @@
       offspringMother.value = '';
       offspringStatus.value = 'active';
       offspringNotes.value = '';
+      syncSelectors();
     }
 
     function editOffspringById(id) {
@@ -1322,6 +1346,7 @@
       openOffspringModal();
       offspringModalTitle.textContent = `Edit ${row.name}`;
       offspringId.value = row.id;
+      offspringSourceEgg.value = row.source_egg_id || '';
       offspringName.value = row.name || '';
       offspringSpecies.value = speciesDisplay(row.species);
       offspringBandNumber.value = row.band_number || '';
@@ -1347,6 +1372,7 @@
       try {
         const payload = {
           name: offspringName.value,
+          source_egg_id: offspringSourceEgg.value || null,
           species: offspringSpecies.value,
           band_number: offspringBandNumber.value,
           cage_number: offspringCage.value,
@@ -1784,6 +1810,11 @@
       syncSelectors();
     }
 
+    async function loadEggs() {
+      eggs = await api('/api/eggs');
+      syncSelectors();
+    }
+
     async function loadPairs() {
       pairs = await api('/api/pairs');
       renderPairs();
@@ -1842,6 +1873,7 @@
       await loadBands();
       await loadPairs();
       await loadClutches();
+      await loadEggs();
       await loadCalendar();
       resetBirdForm();
       resetOffspringForm();
