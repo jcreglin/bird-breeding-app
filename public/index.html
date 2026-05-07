@@ -814,9 +814,13 @@
       });
     }
 
+    function pedigreeBirdLabel(bird) {
+      return [bird.name || 'Unnamed', bandDisplay(bird.band_number)].filter(Boolean).join(' · ');
+    }
+
     function populatePedigreeBirdOptions() {
       pedigreeRelationKeys.forEach(key => {
-        const choices = optionMarkup(pedigreeCandidatesFor(key), b => `${b.name || 'Unnamed'}${b.band_number ? ' · ' + b.band_number : ''}`, true);
+        const choices = optionMarkup(pedigreeCandidatesFor(key), b => pedigreeBirdLabel(b), true);
         pedigreeField(key, 'linked').innerHTML = choices;
       });
     }
@@ -870,8 +874,10 @@
         phenotype: pedigreeField(key, 'phenotype').value || ''
       }));
       await api(`/api/birds/${birdId.value}/pedigree`, { method: 'PUT', body: JSON.stringify({ entries }) });
+      birdSire.value = pedigreeField('father', 'linked').value || '';
+      birdDam.value = pedigreeField('mother', 'linked').value || '';
       closePedigreeModal();
-      showMessage('Pedigree saved');
+      showMessage('Pedigree saved, save the bird record to keep Father and Mother in profile');
     }
 
     function syncSelectors() {
